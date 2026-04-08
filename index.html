@@ -22,142 +22,50 @@ body {
 }
 nav {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0; left: 0; right: 0;
   padding: 28px 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.logo {
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.3em;
-  color: #fff;
-}
-.nav-right {
-  font-size: 11px;
-  color: #2a2a2a;
-  letter-spacing: 0.1em;
-}
+.logo { font-size: 13px; font-weight: 500; letter-spacing: 0.3em; color: #fff; }
+.nav-right { font-size: 11px; color: #2a2a2a; letter-spacing: 0.1em; }
 .line-top {
-  position: fixed;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 1px;
-  height: 80px;
+  position: fixed; top: 0; left: 50%; transform: translateX(-50%);
+  width: 1px; height: 80px;
   background: linear-gradient(to bottom, transparent, #1a1a1a);
 }
 .line-bottom {
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 1px;
-  height: 80px;
+  position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 1px; height: 80px;
   background: linear-gradient(to top, transparent, #1a1a1a);
 }
-.hero {
-  text-align: center;
-  max-width: 480px;
-}
-.pre-tag {
-  font-size: 10px;
-  color: #2a2a2a;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  margin-bottom: 32px;
-}
-.headline {
-  font-size: 52px;
-  font-weight: 300;
-  color: #fff;
-  line-height: 1.1;
-  letter-spacing: -0.03em;
-  margin-bottom: 16px;
-}
-.headline .muted {
-  color: #1e1e1e;
-}
-.divider {
-  width: 24px;
-  height: 1px;
-  background: #1a1a1a;
-  margin: 28px auto;
-}
-.subline {
-  font-size: 13px;
-  color: #2a2a2a;
-  line-height: 1.9;
-  letter-spacing: 0.02em;
-  margin-bottom: 48px;
-}
-.waitlist {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 14px;
-}
+.hero { text-align: center; max-width: 480px; }
+.pre-tag { font-size: 10px; color: #2a2a2a; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 32px; }
+.headline { font-size: 52px; font-weight: 300; color: #fff; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 16px; }
+.headline .muted { color: #1e1e1e; }
+.divider { width: 24px; height: 1px; background: #1a1a1a; margin: 28px auto; }
+.subline { font-size: 13px; color: #2a2a2a; line-height: 1.9; letter-spacing: 0.02em; margin-bottom: 48px; }
+.waitlist { display: flex; flex-direction: column; align-items: center; gap: 14px; }
 .email-field {
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid #1a1a1a;
-  padding: 10px 0;
-  font-size: 13px;
-  color: #555;
-  text-align: center;
-  width: 240px;
-  letter-spacing: 0.05em;
-  font-family: inherit;
-  outline: none;
-  transition: border-color 0.2s;
+  background: transparent; border: none; border-bottom: 1px solid #1a1a1a;
+  padding: 10px 0; font-size: 13px; color: #555; text-align: center;
+  width: 240px; letter-spacing: 0.05em; font-family: inherit; outline: none; transition: border-color 0.2s;
 }
-.email-field:focus {
-  border-bottom-color: #333;
-  color: #fff;
-}
+.email-field:focus { border-bottom-color: #333; color: #fff; }
 .email-field::placeholder { color: #222; }
 .btn-join {
-  background: transparent;
-  color: #333;
-  border: 1px solid #1a1a1a;
-  border-radius: 99px;
-  padding: 10px 28px;
-  font-size: 10px;
-  font-weight: 500;
-  cursor: pointer;
-  font-family: inherit;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  transition: all 0.3s;
+  background: transparent; color: #333; border: 1px solid #1a1a1a; border-radius: 99px;
+  padding: 10px 28px; font-size: 10px; font-weight: 500; cursor: pointer;
+  font-family: inherit; letter-spacing: 0.2em; text-transform: uppercase; transition: all 0.3s;
 }
-.btn-join:hover {
-  border-color: #444;
-  color: #fff;
-}
+.btn-join:hover { border-color: #444; color: #fff; }
+.success-msg { display: none; font-size: 11px; color: #2a2a2a; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 8px; }
 .footer {
-  position: fixed;
-  bottom: 28px;
-  left: 40px;
-  right: 40px;
-  display: flex;
-  justify-content: space-between;
+  position: fixed; bottom: 28px; left: 40px; right: 40px;
+  display: flex; justify-content: space-between;
 }
-.footer-text {
-  font-size: 10px;
-  color: #1a1a1a;
-  letter-spacing: 0.1em;
-}
-.success-msg {
-  display: none;
-  font-size: 11px;
-  color: #2a2a2a;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin-top: 8px;
-}
+.footer-text { font-size: 10px; color: #1a1a1a; letter-spacing: 0.1em; }
 @media (max-width: 600px) {
   .headline { font-size: 36px; }
   nav { padding: 24px 20px; }
@@ -199,11 +107,24 @@ nav {
 <script>
 function handleSubmit() {
   const email = document.getElementById('emailInput').value;
-  if (email && email.includes('@')) {
+  if (!email || !email.includes('@')) return;
+  
+  fetch('https://formspree.io/f/xqegjqdw', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: email })
+  })
+  .then(function(response) {
+    if (response.ok) {
+      document.getElementById('successMsg').style.display = 'block';
+      document.getElementById('emailInput').style.display = 'none';
+      document.querySelector('.btn-join').style.display = 'none';
+    }
+  })
+  .catch(function() {
     document.getElementById('successMsg').style.display = 'block';
-    document.getElementById('emailInput').style.display = 'none';
-    document.querySelector('.btn-join').style.display = 'none';
-  }
+    document.getElementById('successMsg').textContent = 'Something went wrong. Try again.';
+  });
 }
 document.getElementById('emailInput').addEventListener('keypress', function(e) {
   if (e.key === 'Enter') handleSubmit();
