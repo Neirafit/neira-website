@@ -1,0 +1,214 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEIRA — From sketch to factory.</title>
+<meta name="description" content="NEIRA eliminates the communication gap between fashion designers and factories — so the first sample is actually right.">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+  background: #060606;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 40px 24px;
+}
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 28px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  color: #fff;
+}
+.nav-right {
+  font-size: 11px;
+  color: #2a2a2a;
+  letter-spacing: 0.1em;
+}
+.line-top {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 80px;
+  background: linear-gradient(to bottom, transparent, #1a1a1a);
+}
+.line-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 80px;
+  background: linear-gradient(to top, transparent, #1a1a1a);
+}
+.hero {
+  text-align: center;
+  max-width: 480px;
+}
+.pre-tag {
+  font-size: 10px;
+  color: #2a2a2a;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+}
+.headline {
+  font-size: 52px;
+  font-weight: 300;
+  color: #fff;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 16px;
+}
+.headline .muted {
+  color: #1e1e1e;
+}
+.divider {
+  width: 24px;
+  height: 1px;
+  background: #1a1a1a;
+  margin: 28px auto;
+}
+.subline {
+  font-size: 13px;
+  color: #2a2a2a;
+  line-height: 1.9;
+  letter-spacing: 0.02em;
+  margin-bottom: 48px;
+}
+.waitlist {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.email-field {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #1a1a1a;
+  padding: 10px 0;
+  font-size: 13px;
+  color: #555;
+  text-align: center;
+  width: 240px;
+  letter-spacing: 0.05em;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.email-field:focus {
+  border-bottom-color: #333;
+  color: #fff;
+}
+.email-field::placeholder { color: #222; }
+.btn-join {
+  background: transparent;
+  color: #333;
+  border: 1px solid #1a1a1a;
+  border-radius: 99px;
+  padding: 10px 28px;
+  font-size: 10px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: all 0.3s;
+}
+.btn-join:hover {
+  border-color: #444;
+  color: #fff;
+}
+.footer {
+  position: fixed;
+  bottom: 28px;
+  left: 40px;
+  right: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+.footer-text {
+  font-size: 10px;
+  color: #1a1a1a;
+  letter-spacing: 0.1em;
+}
+.success-msg {
+  display: none;
+  font-size: 11px;
+  color: #2a2a2a;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 8px;
+}
+@media (max-width: 600px) {
+  .headline { font-size: 36px; }
+  nav { padding: 24px 20px; }
+  .footer { left: 20px; right: 20px; }
+}
+</style>
+</head>
+<body>
+
+<div class="line-top"></div>
+<div class="line-bottom"></div>
+
+<nav>
+  <div class="logo">NEIRA</div>
+  <div class="nav-right">Seoul · 2026</div>
+</nav>
+
+<div class="hero">
+  <div class="pre-tag">Fashion Infrastructure</div>
+  <div class="headline">
+    From sketch<br><span class="muted">to factory.</span>
+  </div>
+  <div class="divider"></div>
+  <div class="subline">
+    The technical layer between<br>designers and manufacturers.
+  </div>
+  <div class="waitlist">
+    <input class="email-field" id="emailInput" placeholder="your@email.com" type="email" />
+    <button class="btn-join" onclick="handleSubmit()">Request access</button>
+    <div class="success-msg" id="successMsg">You're on the list.</div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="footer-text">neira.fit</div>
+  <div class="footer-text">Fashion · Tech · Korea</div>
+</div>
+
+<script>
+function handleSubmit() {
+  const email = document.getElementById('emailInput').value;
+  if (email && email.includes('@')) {
+    document.getElementById('successMsg').style.display = 'block';
+    document.getElementById('emailInput').style.display = 'none';
+    document.querySelector('.btn-join').style.display = 'none';
+  }
+}
+document.getElementById('emailInput').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') handleSubmit();
+});
+</script>
+
+</body>
+</html>
