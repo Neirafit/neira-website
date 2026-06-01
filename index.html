@@ -4,132 +4,477 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NEIRA — From sketch to factory.</title>
-<meta name="description" content="NEIRA eliminates the communication gap between fashion designers and factories — so the first sample is actually right.">
+<title>NEIRA — Fashion Infrastructure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300&display=swap" rel="stylesheet">
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { height: 100%; }
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
-  background: #060606;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  padding: 40px 24px;
-}
-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  padding: 28px 40px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.logo { font-size: 13px; font-weight: 500; letter-spacing: 0.3em; color: #fff; }
-.nav-right { font-size: 11px; color: #2a2a2a; letter-spacing: 0.1em; }
-.line-top {
-  position: fixed; top: 0; left: 50%; transform: translateX(-50%);
-  width: 1px; height: 80px;
-  background: linear-gradient(to bottom, transparent, #1a1a1a);
-}
-.line-bottom {
-  position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
-  width: 1px; height: 80px;
-  background: linear-gradient(to top, transparent, #1a1a1a);
-}
-.hero { text-align: center; max-width: 480px; }
-.pre-tag { font-size: 10px; color: #2a2a2a; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 32px; }
-.headline { font-size: 52px; font-weight: 300; color: #fff; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 16px; }
-.headline .muted { color: #1e1e1e; }
-.divider { width: 24px; height: 1px; background: #1a1a1a; margin: 28px auto; }
-.subline { font-size: 13px; color: #2a2a2a; line-height: 1.9; letter-spacing: 0.02em; margin-bottom: 48px; }
-.waitlist { display: flex; flex-direction: column; align-items: center; gap: 14px; }
-.email-field {
-  background: transparent; border: none; border-bottom: 1px solid #1a1a1a;
-  padding: 10px 0; font-size: 13px; color: #555; text-align: center;
-  width: 240px; letter-spacing: 0.05em; font-family: inherit; outline: none; transition: border-color 0.2s;
-}
-.email-field:focus { border-bottom-color: #333; color: #fff; }
-.email-field::placeholder { color: #222; }
-.btn-join {
-  background: transparent; color: #333; border: 1px solid #1a1a1a; border-radius: 99px;
-  padding: 10px 28px; font-size: 10px; font-weight: 500; cursor: pointer;
-  font-family: inherit; letter-spacing: 0.2em; text-transform: uppercase; transition: all 0.3s;
-}
-.btn-join:hover { border-color: #444; color: #fff; }
-.success-msg { display: none; font-size: 11px; color: #2a2a2a; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 8px; }
-.footer {
-  position: fixed; bottom: 28px; left: 40px; right: 40px;
-  display: flex; justify-content: space-between;
-}
-.footer-text { font-size: 10px; color: #1a1a1a; letter-spacing: 0.1em; }
-@media (max-width: 600px) {
-  .headline { font-size: 36px; }
-  nav { padding: 24px 20px; }
-  .footer { left: 20px; right: 20px; }
-}
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #000;
+    color: #fff;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+
+  #canvas-bg {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+  }
+
+  .site {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* TOP NAV */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 2.2rem 2.8rem 0;
+  }
+
+  .logo {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 200;
+    letter-spacing: 0.12em;
+    color: #fff;
+    text-transform: uppercase;
+  }
+
+  .nav-right {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    color: rgba(255,255,255,0.45);
+  }
+
+  /* CENTER CONTENT */
+  .hero {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 2rem;
+  }
+
+  .eyebrow {
+    font-size: 0.68rem;
+    letter-spacing: 0.28em;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 2.4rem;
+  }
+
+  .headline {
+    font-size: clamp(3rem, 8vw, 5.8rem);
+    font-weight: 300;
+    line-height: 1.05;
+    margin-bottom: 0;
+  }
+
+  .headline span.dim {
+    color: rgba(255,255,255,0.28);
+  }
+
+  .divider {
+    width: 2rem;
+    height: 1px;
+    background: rgba(255,255,255,0.22);
+    margin: 2.4rem auto;
+  }
+
+  .subline {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.04em;
+    line-height: 1.7;
+    margin-bottom: 3rem;
+  }
+
+  .waitlist {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    max-width: 360px;
+  }
+
+  .waitlist input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255,255,255,0.25);
+    color: #fff;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    padding: 0.7rem 0;
+    text-align: center;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+
+  .waitlist input::placeholder { color: rgba(180,140,255,0.65); }
+  .waitlist input:focus { border-bottom-color: rgba(255,255,255,0.6); }
+
+  .waitlist button {
+    width: 100%;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 999px;
+    color: #fff;
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    padding: 1rem 2rem;
+    cursor: pointer;
+    transition: background 0.3s, border-color 0.3s;
+  }
+
+  .waitlist button:hover {
+    background: rgba(255,255,255,0.07);
+    border-color: rgba(255,255,255,0.6);
+  }
+
+  /* BOTTOM BAR */
+  footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 2.8rem 2rem;
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    color: rgba(255,255,255,0.22);
+  }
+
+  /* Vertical line top decorative */
+  .vert-top {
+    position: fixed;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 90px;
+    background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.12));
+    z-index: 0;
+  }
+  .vert-bottom {
+    position: fixed;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 90px;
+    background: linear-gradient(to top, transparent, rgba(255,255,255,0.12));
+    z-index: 0;
+  }
 </style>
 </head>
 <body>
 
-<div class="line-top"></div>
-<div class="line-bottom"></div>
+<canvas id="canvas-bg"></canvas>
 
-<nav>
-  <div class="logo">NEIRA</div>
-  <div class="nav-right">Seoul · 2026</div>
-</nav>
+<div class="vert-top"></div>
+<div class="vert-bottom"></div>
 
-<div class="hero">
-  <div class="pre-tag">Fashion Infrastructure</div>
-  <div class="headline">
-    From sketch<br><span class="muted">to factory.</span>
-  </div>
-  <div class="divider"></div>
-  <div class="subline">
-    The technical layer between<br>designers and manufacturers.
-  </div>
-  <div class="waitlist">
-    <input class="email-field" id="emailInput" placeholder="your@email.com" type="email" />
-    <button class="btn-join" onclick="handleSubmit()">Request access</button>
-    <div class="success-msg" id="successMsg">You're on the list.</div>
-  </div>
+<div class="site">
+  <nav>
+    <div class="logo">NEIRA</div>
+    <div class="nav-right">Seoul &nbsp; 2026</div>
+  </nav>
+
+  <main class="hero">
+    <p class="eyebrow">FASHION INFRASTRUCTURE</p>
+    <h1 class="headline">
+      From sketch<br>
+      <span class="dim">to factory.</span>
+    </h1>
+    <div class="divider"></div>
+    <p class="subline">The technical layer between<br>designers and manufacturers.</p>
+    <div class="waitlist">
+      <input type="email" placeholder="your@email.com">
+      <button>REQUEST ACCESS</button>
+    </div>
+  </main>
+
+  <footer>
+    <span>neira.fit</span>
+    <span>fashion &nbsp;·&nbsp; tech &nbsp;·&nbsp; NEIRA</span>
+  </footer>
 </div>
 
-<div class="footer">
-  <div class="footer-text">neira.fit</div>
-  <div class="footer-text">Fashion · Tech · Korea</div>
-</div>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-function handleSubmit() {
-  const email = document.getElementById('emailInput').value;
-  if (!email || !email.includes('@')) return;
-  
-  fetch('https://formspree.io/f/xqegjqdw', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email: email })
-  })
-  .then(function(response) {
-    if (response.ok) {
-      document.getElementById('successMsg').style.display = 'block';
-      document.getElementById('emailInput').style.display = 'none';
-      document.querySelector('.btn-join').style.display = 'none';
-    }
-  })
-  .catch(function() {
-    document.getElementById('successMsg').style.display = 'block';
-    document.getElementById('successMsg').textContent = 'Something went wrong. Try again.';
-  });
-}
-document.getElementById('emailInput').addEventListener('keypress', function(e) {
-  if (e.key === 'Enter') handleSubmit();
-});
-</script>
+const canvas = document.getElementById('canvas-bg');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+renderer.setPixelRatio(window.devicePixelRatio);
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setClearColor(0x000000, 1);
 
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+camera.position.set(0, 0, 6);
+
+/* ── SPHERE WIREFRAME (quadrillée) ── */
+const sphereGeo = new THREE.SphereGeometry(1.8, 14, 10);
+const sphereMat = new THREE.MeshBasicMaterial({
+  color: 0xffffff,
+  wireframe: true,
+  opacity: 0.18,
+  transparent: true
+});
+const sphere = new THREE.Mesh(sphereGeo, sphereMat);
+
+/* ── JACKET WIREFRAME ── */
+const jacketMat = new THREE.LineBasicMaterial({ color: 0xffffff, linewidth: 1, opacity: 0.18, transparent: true });
+
+function pts(...coords) {
+  const v = [];
+  for (let i = 0; i < coords.length; i += 3)
+    v.push(new THREE.Vector3(coords[i], coords[i+1], coords[i+2]));
+  return v;
+}
+
+function makeLine(...coords) {
+  const g = new THREE.BufferGeometry().setFromPoints(pts(...coords));
+  return new THREE.Line(g, jacketMat);
+}
+
+function makeLoop(...coords) {
+  const pts2 = pts(...coords);
+  pts2.push(pts2[0].clone());
+  const g = new THREE.BufferGeometry().setFromPoints(pts2);
+  return new THREE.Line(g, jacketMat);
+}
+
+const jacket = new THREE.Group();
+
+/*
+  Jacket scaled so the widest point (sleeve tip) stays inside sphere r=1.8
+  Coordinates are final — no extra scale needed beyond 1.0
+  Body width: ~±0.55  Sleeve tip: ~±1.55  Height: 1.1 top to -1.0 bottom
+  → fits comfortably inside r=1.8
+*/
+
+/* ── BODY FRONT SILHOUETTE ── */
+jacket.add(makeLoop(
+  /* collar left */  -0.12, 1.08, 0,
+  /* shoulder L  */  -0.42, 1.04, 0,
+  /* shoulder tip */ -0.60, 0.98, 0,
+  /* armhole L   */  -0.64, 0.82, 0,
+  /* side L      */  -0.58,-0.02, 0,
+  /* side hem L  */  -0.60,-0.50, 0,
+  /* hem curve L */  -0.50,-0.62, 0,
+  /* hem dip L   */  -0.18,-0.70, 0,
+  /* hem centre  */   0.00,-0.60, 0,
+  /* hem dip R   */   0.18,-0.70, 0,
+  /* hem curve R */   0.50,-0.62, 0,
+  /* side hem R  */   0.60,-0.50, 0,
+  /* side R      */   0.58,-0.02, 0,
+  /* armhole R   */   0.64, 0.82, 0,
+  /* shoulder tip*/   0.60, 0.98, 0,
+  /* shoulder R  */   0.42, 1.04, 0,
+  /* collar right*/   0.12, 1.08, 0
+));
+
+/* ── POINTED SHIRT COLLAR ── */
+/* Left collar leaf – wide spread, sharp point */
+jacket.add(makeLoop(
+  -0.12, 1.08, 0,
+  -0.42, 1.04, 0,   /* shoulder inner */
+  -0.50, 0.96, 0,   /* collar tip – sharp */
+  -0.35, 0.84, 0,   /* collar inner edge */
+  -0.08, 0.90, 0,   /* roll line towards centre */
+   0.00, 0.88, 0    /* centre */
+));
+/* Right collar leaf */
+jacket.add(makeLoop(
+   0.12, 1.08, 0,
+   0.42, 1.04, 0,
+   0.50, 0.96, 0,
+   0.35, 0.84, 0,
+   0.08, 0.90, 0,
+   0.00, 0.88, 0
+));
+/* Collar stand band */
+jacket.add(makeLoop(
+  -0.12, 1.08, 0,
+  -0.28, 1.06, 0,
+  -0.30, 0.96, 0,
+   0.00, 0.88, 0.01,
+   0.30, 0.96, 0,
+   0.28, 1.06, 0,
+   0.12, 1.08, 0
+));
+
+/* ── FRONT ASYMMETRIC CURVED OPENING ── */
+/* Single button at top, then sweeps open to the right */
+jacket.add(makeLine(
+   0.00, 1.08, 0.01,
+   0.02, 0.92, 0.01,
+   0.06, 0.70, 0.01,
+   0.12, 0.42, 0.01,
+   0.24, 0.10, 0.01,
+   0.38,-0.22, 0.01,
+   0.46,-0.52, 0.01,
+   0.50,-0.62, 0.01
+));
+
+/* Single button circle at collar */
+jacket.add(makeLoop(
+  -0.04, 1.03, 0.02,  0.04, 1.03, 0.02,
+   0.04, 0.97, 0.02, -0.04, 0.97, 0.02
+));
+
+/* ── CURVED FRONT PANEL SEAM (decorative arc left side) ── */
+jacket.add(makeLine(
+  -0.50, 0.60, 0.01,
+  -0.46, 0.30, 0.01,
+  -0.38, 0.00, 0.01,
+  -0.34,-0.30, 0.01,
+  -0.36,-0.58, 0.01
+));
+
+/* ── LEFT SLEEVE – wide boxy oversized ── */
+jacket.add(makeLoop(
+  -0.60, 0.98, 0,    /* shoulder tip */
+  -0.64, 0.82, 0,    /* armhole top */
+  -0.96, 0.52, 0.06, /* sleeve outer upper */
+  -1.28, 0.00, 0.10, /* sleeve outer mid */
+  -1.48,-0.38, 0.12, /* sleeve outer lower */
+  -1.42,-0.58, 0.12, /* cuff outer */
+  -1.08,-0.64, 0.08, /* cuff inner */
+  -0.86,-0.36, 0.05,
+  -0.68, 0.00, 0.02,
+  -0.58, 0.62, 0     /* armhole inner / underarm */
+));
+/* Sleeve topstitch / construction seam */
+jacket.add(makeLine(
+  -0.82, 0.68, 0.04,
+  -1.10, 0.18, 0.08,
+  -1.40,-0.30, 0.12
+));
+/* Sleeve underarm seam */
+jacket.add(makeLine(
+  -0.64, 0.82, 0,
+  -0.74, 0.32, 0.03,
+  -0.82,-0.30, 0.05,
+  -1.08,-0.64, 0.08
+));
+/* Left cuff tab */
+jacket.add(makeLoop(
+  -1.42,-0.56, 0.12,
+  -1.10,-0.62, 0.08,
+  -1.08,-0.72, 0.08,
+  -1.40,-0.66, 0.12
+));
+/* Cuff btn 1 */
+jacket.add(makeLoop(-1.38,-0.57,0.13,-1.30,-0.57,0.13,-1.30,-0.63,0.13,-1.38,-0.63,0.13));
+/* Cuff btn 2 */
+jacket.add(makeLoop(-1.26,-0.57,0.13,-1.18,-0.57,0.13,-1.18,-0.63,0.13,-1.26,-0.63,0.13));
+
+/* ── RIGHT SLEEVE ── */
+jacket.add(makeLoop(
+   0.60, 0.98, 0,
+   0.64, 0.82, 0,
+   0.96, 0.52, 0.06,
+   1.28, 0.00, 0.10,
+   1.48,-0.38, 0.12,
+   1.42,-0.58, 0.12,
+   1.08,-0.64, 0.08,
+   0.86,-0.36, 0.05,
+   0.68, 0.00, 0.02,
+   0.58, 0.62, 0
+));
+jacket.add(makeLine(
+   0.82, 0.68, 0.04,
+   1.10, 0.18, 0.08,
+   1.40,-0.30, 0.12
+));
+jacket.add(makeLine(
+   0.64, 0.82, 0,
+   0.74, 0.32, 0.03,
+   0.82,-0.30, 0.05,
+   1.08,-0.64, 0.08
+));
+/* Right cuff tab */
+jacket.add(makeLoop(
+   1.42,-0.56, 0.12,
+   1.10,-0.62, 0.08,
+   1.08,-0.72, 0.08,
+   1.40,-0.66, 0.12
+));
+jacket.add(makeLoop(1.30,-0.57,0.13,1.38,-0.57,0.13,1.38,-0.63,0.13,1.30,-0.63,0.13));
+jacket.add(makeLoop(1.18,-0.57,0.13,1.26,-0.57,0.13,1.26,-0.63,0.13,1.18,-0.63,0.13));
+
+/* ── SHOULDER SEAMS ── */
+jacket.add(makeLine(-0.42,1.04,0, -0.60,0.98,0));
+jacket.add(makeLine( 0.42,1.04,0,  0.60,0.98,0));
+
+/* ── YOKE LINE ── */
+jacket.add(makeLine(-0.60,0.88,-0.02, 0,0.92,-0.03, 0.60,0.88,-0.02));
+
+/* ── SIDE SEAMS ── */
+jacket.add(makeLine(-0.58,-0.02,0, -0.60,-0.50,0));
+jacket.add(makeLine( 0.58,-0.02,0,  0.60,-0.50,0));
+
+/* ── HEM TOPSTITCH ── */
+jacket.add(makeLine(
+  -0.50,-0.64,0.01, -0.18,-0.72,0.01, 0.00,-0.62,0.01, 0.18,-0.72,0.01, 0.50,-0.64,0.01
+));
+
+/* ── WELT POCKETS ── */
+/* Left */
+jacket.add(makeLine(-0.50,-0.30,0.01, -0.18,-0.28,0.01));
+jacket.add(makeLine(-0.50,-0.30,0.01, -0.50,-0.38,0.01, -0.18,-0.36,0.01, -0.18,-0.28,0.01));
+jacket.add(makeLine(-0.50,-0.30,0.01, -0.36,-0.25,0.01, -0.18,-0.28,0.01));
+/* Right (partially hidden by opening) */
+jacket.add(makeLine(0.20,-0.28,0.01, 0.48,-0.30,0.01));
+jacket.add(makeLine(0.20,-0.28,0.01, 0.20,-0.36,0.01, 0.48,-0.38,0.01, 0.48,-0.30,0.01));
+
+/* ── CENTRE BACK SEAM ── */
+jacket.add(makeLine(0, 0.92,-0.03, 0,-0.60,-0.03));
+
+jacket.scale.set(1.0, 1.0, 1.0);
+
+/* ── GROUP sphere + jacket so they rotate together ── */
+const world = new THREE.Group();
+world.add(sphere);
+world.add(jacket);
+scene.add(world);
+
+/* Dim outer material for the sphere */
+const sphereMatOuter = new THREE.MeshBasicMaterial({
+  color: 0xffffff,
+  wireframe: true,
+  opacity: 0.055,
+  transparent: true
+});
+
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+/* ANIMATION – clockwise (sens aiguilles montre vu de face = -Y) */
+let t = 0;
+function animate() {
+  requestAnimationFrame(animate);
+  t += 0.003;
+
+  world.rotation.y = -t;
+  world.rotation.x = Math.sin(t * 0.18) * 0.10;
+
+  renderer.render(scene, camera);
+}
+animate();
+</script>
 </body>
 </html>
