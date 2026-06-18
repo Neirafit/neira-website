@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,7 +33,6 @@
     flex-direction: column;
   }
 
-  /* TOP NAV */
   nav {
     display: flex;
     justify-content: space-between;
@@ -57,7 +55,6 @@
     color: rgba(255,255,255,0.45);
   }
 
-  /* CENTER CONTENT */
   .hero {
     flex: 1;
     display: flex;
@@ -145,7 +142,19 @@
     border-color: rgba(255,255,255,0.6);
   }
 
-  /* BOTTOM BAR */
+  .waitlist button:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  #form-msg {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.45);
+    min-height: 1.2rem;
+    text-align: center;
+  }
+
   footer {
     display: flex;
     justify-content: space-between;
@@ -155,7 +164,6 @@
     color: rgba(255,255,255,0.22);
   }
 
-  /* Vertical line top decorative */
   .vert-top {
     position: fixed;
     top: 0; left: 50%;
@@ -197,15 +205,22 @@
     </h1>
     <div class="divider"></div>
     <p class="subline">The technical layer between<br>designers and manufacturers.</p>
-  <div class="waitlist">
-  <input type="email" id="email-input" placeholder="your@email.com">
-  <button id="submit-btn" onclick="submitWaitlist()">REQUEST ACCESS</button>
-  <p id="form-msg" style="font-size:0.72rem;letter-spacing:0.12em;color:rgba(255,255,255,0.45);min-height:1.2rem;"></p>
+    <div class="waitlist">
+      <input type="email" id="email-input" placeholder="your@email.com">
+      <button id="submit-btn" onclick="submitWaitlist()">REQUEST ACCESS</button>
+      <p id="form-msg"></p>
+    </div>
+  </main>
+
+  <footer>
+    <span>neira.fit</span>
+    <span>fashion &nbsp;·&nbsp; tech &nbsp;·&nbsp; NEIRA</span>
+  </footer>
 </div>
 
 <script>
 async function submitWaitlist() {
-  const email = document.getElementById('email-input').value;
+  const email = document.getElementById('email-input').value.trim();
   const btn = document.getElementById('submit-btn');
   const msg = document.getElementById('form-msg');
 
@@ -216,35 +231,39 @@ async function submitWaitlist() {
 
   btn.textContent = '...';
   btn.disabled = true;
+  msg.textContent = '';
 
   try {
-    const res = await fetch('https://formspree.io/f/TON_FORM_ID', {
+    const res = await fetch('https://formspree.io/f/xqegjqdw', {
       method: 'POST',
-      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({ email })
     });
 
     if (res.ok) {
-      msg.textContent = 'You\'re on the list.';
+      msg.textContent = "You're on the list.";
       document.getElementById('email-input').value = '';
-      btn.textContent = 'REQUEST ACCESS';
-      btn.disabled = false;
     } else {
       throw new Error();
     }
   } catch {
     msg.textContent = 'Something went wrong. Try again.';
-    btn.textContent = 'REQUEST ACCESS';
-    btn.disabled = false;
   }
-}
-</script>
 
-  <footer>
-    <span>neira.fit</span>
-    <span>fashion &nbsp;·&nbsp; tech &nbsp;·&nbsp; NEIRA</span>
-  </footer>
-</div>
+  btn.textContent = 'REQUEST ACCESS';
+  btn.disabled = false;
+}
+
+// Allow Enter key to submit
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('email-input').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') submitWaitlist();
+  });
+});
+</script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
@@ -258,7 +277,6 @@ const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
 camera.position.set(0, 0, 6);
 
-/* ── SPHERE WIREFRAME (quadrillée) ── */
 const sphereGeo = new THREE.SphereGeometry(1.8, 14, 10);
 const sphereMat = new THREE.MeshBasicMaterial({
   color: 0xffffff,
@@ -268,7 +286,6 @@ const sphereMat = new THREE.MeshBasicMaterial({
 });
 const sphere = new THREE.Mesh(sphereGeo, sphereMat);
 
-/* ── JACKET WIREFRAME ── */
 const jacketMat = new THREE.LineBasicMaterial({ color: 0xffffff, linewidth: 1, opacity: 0.18, transparent: true });
 
 function pts(...coords) {
@@ -292,45 +309,34 @@ function makeLoop(...coords) {
 
 const jacket = new THREE.Group();
 
-/*
-  Jacket scaled so the widest point (sleeve tip) stays inside sphere r=1.8
-  Coordinates are final — no extra scale needed beyond 1.0
-  Body width: ~±0.55  Sleeve tip: ~±1.55  Height: 1.1 top to -1.0 bottom
-  → fits comfortably inside r=1.8
-*/
-
-/* ── BODY FRONT SILHOUETTE ── */
-jacket.add(makeLoop(
-  /* collar left */  -0.12, 1.08, 0,
-  /* shoulder L  */  -0.42, 1.04, 0,
-  /* shoulder tip */ -0.60, 0.98, 0,
-  /* armhole L   */  -0.64, 0.82, 0,
-  /* side L      */  -0.58,-0.02, 0,
-  /* side hem L  */  -0.60,-0.50, 0,
-  /* hem curve L */  -0.50,-0.62, 0,
-  /* hem dip L   */  -0.18,-0.70, 0,
-  /* hem centre  */   0.00,-0.60, 0,
-  /* hem dip R   */   0.18,-0.70, 0,
-  /* hem curve R */   0.50,-0.62, 0,
-  /* side hem R  */   0.60,-0.50, 0,
-  /* side R      */   0.58,-0.02, 0,
-  /* armhole R   */   0.64, 0.82, 0,
-  /* shoulder tip*/   0.60, 0.98, 0,
-  /* shoulder R  */   0.42, 1.04, 0,
-  /* collar right*/   0.12, 1.08, 0
-));
-
-/* ── POINTED SHIRT COLLAR ── */
-/* Left collar leaf – wide spread, sharp point */
 jacket.add(makeLoop(
   -0.12, 1.08, 0,
-  -0.42, 1.04, 0,   /* shoulder inner */
-  -0.50, 0.96, 0,   /* collar tip – sharp */
-  -0.35, 0.84, 0,   /* collar inner edge */
-  -0.08, 0.90, 0,   /* roll line towards centre */
-   0.00, 0.88, 0    /* centre */
+  -0.42, 1.04, 0,
+  -0.60, 0.98, 0,
+  -0.64, 0.82, 0,
+  -0.58,-0.02, 0,
+  -0.60,-0.50, 0,
+  -0.50,-0.62, 0,
+  -0.18,-0.70, 0,
+   0.00,-0.60, 0,
+   0.18,-0.70, 0,
+   0.50,-0.62, 0,
+   0.60,-0.50, 0,
+   0.58,-0.02, 0,
+   0.64, 0.82, 0,
+   0.60, 0.98, 0,
+   0.42, 1.04, 0,
+   0.12, 1.08, 0
 ));
-/* Right collar leaf */
+
+jacket.add(makeLoop(
+  -0.12, 1.08, 0,
+  -0.42, 1.04, 0,
+  -0.50, 0.96, 0,
+  -0.35, 0.84, 0,
+  -0.08, 0.90, 0,
+   0.00, 0.88, 0
+));
 jacket.add(makeLoop(
    0.12, 1.08, 0,
    0.42, 1.04, 0,
@@ -339,7 +345,6 @@ jacket.add(makeLoop(
    0.08, 0.90, 0,
    0.00, 0.88, 0
 ));
-/* Collar stand band */
 jacket.add(makeLoop(
   -0.12, 1.08, 0,
   -0.28, 1.06, 0,
@@ -350,8 +355,6 @@ jacket.add(makeLoop(
    0.12, 1.08, 0
 ));
 
-/* ── FRONT ASYMMETRIC CURVED OPENING ── */
-/* Single button at top, then sweeps open to the right */
 jacket.add(makeLine(
    0.00, 1.08, 0.01,
    0.02, 0.92, 0.01,
@@ -363,13 +366,11 @@ jacket.add(makeLine(
    0.50,-0.62, 0.01
 ));
 
-/* Single button circle at collar */
 jacket.add(makeLoop(
   -0.04, 1.03, 0.02,  0.04, 1.03, 0.02,
    0.04, 0.97, 0.02, -0.04, 0.97, 0.02
 ));
 
-/* ── CURVED FRONT PANEL SEAM (decorative arc left side) ── */
 jacket.add(makeLine(
   -0.50, 0.60, 0.01,
   -0.46, 0.30, 0.01,
@@ -378,45 +379,38 @@ jacket.add(makeLine(
   -0.36,-0.58, 0.01
 ));
 
-/* ── LEFT SLEEVE – wide boxy oversized ── */
 jacket.add(makeLoop(
-  -0.60, 0.98, 0,    /* shoulder tip */
-  -0.64, 0.82, 0,    /* armhole top */
-  -0.96, 0.52, 0.06, /* sleeve outer upper */
-  -1.28, 0.00, 0.10, /* sleeve outer mid */
-  -1.48,-0.38, 0.12, /* sleeve outer lower */
-  -1.42,-0.58, 0.12, /* cuff outer */
-  -1.08,-0.64, 0.08, /* cuff inner */
+  -0.60, 0.98, 0,
+  -0.64, 0.82, 0,
+  -0.96, 0.52, 0.06,
+  -1.28, 0.00, 0.10,
+  -1.48,-0.38, 0.12,
+  -1.42,-0.58, 0.12,
+  -1.08,-0.64, 0.08,
   -0.86,-0.36, 0.05,
   -0.68, 0.00, 0.02,
-  -0.58, 0.62, 0     /* armhole inner / underarm */
+  -0.58, 0.62, 0
 ));
-/* Sleeve topstitch / construction seam */
 jacket.add(makeLine(
   -0.82, 0.68, 0.04,
   -1.10, 0.18, 0.08,
   -1.40,-0.30, 0.12
 ));
-/* Sleeve underarm seam */
 jacket.add(makeLine(
   -0.64, 0.82, 0,
   -0.74, 0.32, 0.03,
   -0.82,-0.30, 0.05,
   -1.08,-0.64, 0.08
 ));
-/* Left cuff tab */
 jacket.add(makeLoop(
   -1.42,-0.56, 0.12,
   -1.10,-0.62, 0.08,
   -1.08,-0.72, 0.08,
   -1.40,-0.66, 0.12
 ));
-/* Cuff btn 1 */
 jacket.add(makeLoop(-1.38,-0.57,0.13,-1.30,-0.57,0.13,-1.30,-0.63,0.13,-1.38,-0.63,0.13));
-/* Cuff btn 2 */
 jacket.add(makeLoop(-1.26,-0.57,0.13,-1.18,-0.57,0.13,-1.18,-0.63,0.13,-1.26,-0.63,0.13));
 
-/* ── RIGHT SLEEVE ── */
 jacket.add(makeLoop(
    0.60, 0.98, 0,
    0.64, 0.82, 0,
@@ -440,7 +434,6 @@ jacket.add(makeLine(
    0.82,-0.30, 0.05,
    1.08,-0.64, 0.08
 ));
-/* Right cuff tab */
 jacket.add(makeLoop(
    1.42,-0.56, 0.12,
    1.10,-0.62, 0.08,
@@ -450,49 +443,28 @@ jacket.add(makeLoop(
 jacket.add(makeLoop(1.30,-0.57,0.13,1.38,-0.57,0.13,1.38,-0.63,0.13,1.30,-0.63,0.13));
 jacket.add(makeLoop(1.18,-0.57,0.13,1.26,-0.57,0.13,1.26,-0.63,0.13,1.18,-0.63,0.13));
 
-/* ── SHOULDER SEAMS ── */
 jacket.add(makeLine(-0.42,1.04,0, -0.60,0.98,0));
 jacket.add(makeLine( 0.42,1.04,0,  0.60,0.98,0));
-
-/* ── YOKE LINE ── */
 jacket.add(makeLine(-0.60,0.88,-0.02, 0,0.92,-0.03, 0.60,0.88,-0.02));
-
-/* ── SIDE SEAMS ── */
 jacket.add(makeLine(-0.58,-0.02,0, -0.60,-0.50,0));
 jacket.add(makeLine( 0.58,-0.02,0,  0.60,-0.50,0));
-
-/* ── HEM TOPSTITCH ── */
 jacket.add(makeLine(
   -0.50,-0.64,0.01, -0.18,-0.72,0.01, 0.00,-0.62,0.01, 0.18,-0.72,0.01, 0.50,-0.64,0.01
 ));
 
-/* ── WELT POCKETS ── */
-/* Left */
 jacket.add(makeLine(-0.50,-0.30,0.01, -0.18,-0.28,0.01));
 jacket.add(makeLine(-0.50,-0.30,0.01, -0.50,-0.38,0.01, -0.18,-0.36,0.01, -0.18,-0.28,0.01));
 jacket.add(makeLine(-0.50,-0.30,0.01, -0.36,-0.25,0.01, -0.18,-0.28,0.01));
-/* Right (partially hidden by opening) */
 jacket.add(makeLine(0.20,-0.28,0.01, 0.48,-0.30,0.01));
 jacket.add(makeLine(0.20,-0.28,0.01, 0.20,-0.36,0.01, 0.48,-0.38,0.01, 0.48,-0.30,0.01));
-
-/* ── CENTRE BACK SEAM ── */
 jacket.add(makeLine(0, 0.92,-0.03, 0,-0.60,-0.03));
 
 jacket.scale.set(1.0, 1.0, 1.0);
 
-/* ── GROUP sphere + jacket so they rotate together ── */
 const world = new THREE.Group();
 world.add(sphere);
 world.add(jacket);
 scene.add(world);
-
-/* Dim outer material for the sphere */
-const sphereMatOuter = new THREE.MeshBasicMaterial({
-  color: 0xffffff,
-  wireframe: true,
-  opacity: 0.055,
-  transparent: true
-});
 
 window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight;
@@ -500,15 +472,12 @@ window.addEventListener('resize', () => {
   renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
-/* ANIMATION – clockwise (sens aiguilles montre vu de face = -Y) */
 let t = 0;
 function animate() {
   requestAnimationFrame(animate);
   t += 0.003;
-
   world.rotation.y = -t;
   world.rotation.x = Math.sin(t * 0.18) * 0.10;
-
   renderer.render(scene, camera);
 }
 animate();
