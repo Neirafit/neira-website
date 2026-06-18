@@ -197,11 +197,48 @@
     </h1>
     <div class="divider"></div>
     <p class="subline">The technical layer between<br>designers and manufacturers.</p>
-    <div class="waitlist">
-      <input type="email" placeholder="your@email.com">
-      <button>REQUEST ACCESS</button>
-    </div>
-  </main>
+  <div class="waitlist">
+  <input type="email" id="email-input" placeholder="your@email.com">
+  <button id="submit-btn" onclick="submitWaitlist()">REQUEST ACCESS</button>
+  <p id="form-msg" style="font-size:0.72rem;letter-spacing:0.12em;color:rgba(255,255,255,0.45);min-height:1.2rem;"></p>
+</div>
+
+<script>
+async function submitWaitlist() {
+  const email = document.getElementById('email-input').value;
+  const btn = document.getElementById('submit-btn');
+  const msg = document.getElementById('form-msg');
+
+  if (!email || !email.includes('@')) {
+    msg.textContent = 'Please enter a valid email.';
+    return;
+  }
+
+  btn.textContent = '...';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch('https://formspree.io/f/TON_FORM_ID', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email })
+    });
+
+    if (res.ok) {
+      msg.textContent = 'You\'re on the list.';
+      document.getElementById('email-input').value = '';
+      btn.textContent = 'REQUEST ACCESS';
+      btn.disabled = false;
+    } else {
+      throw new Error();
+    }
+  } catch {
+    msg.textContent = 'Something went wrong. Try again.';
+    btn.textContent = 'REQUEST ACCESS';
+    btn.disabled = false;
+  }
+}
+</script>
 
   <footer>
     <span>neira.fit</span>
