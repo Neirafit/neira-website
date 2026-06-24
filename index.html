@@ -5,8 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NEIRA — Fashion Infrastructure</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 <style>
+  /* ── RESET ── */
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
@@ -14,9 +15,10 @@
     color: #fff;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     min-height: 100vh;
-    overflow: hidden;
+    overflow-x: hidden;
   }
 
+  /* ── CANVAS ── */
   #canvas-bg {
     position: fixed;
     top: 0; left: 0;
@@ -24,6 +26,7 @@
     z-index: 0;
   }
 
+  /* ── SITE WRAPPER ── */
   .site {
     position: relative;
     z-index: 1;
@@ -33,6 +36,7 @@
     flex-direction: column;
   }
 
+  /* ── NAV ── */
   nav {
     display: flex;
     justify-content: space-between;
@@ -47,6 +51,7 @@
     letter-spacing: 0.12em;
     color: #fff;
     text-transform: uppercase;
+    cursor: pointer;
   }
 
   .nav-right {
@@ -55,6 +60,7 @@
     color: rgba(255,255,255,0.45);
   }
 
+  /* ── HERO ── */
   .hero {
     flex: 1;
     display: flex;
@@ -63,6 +69,7 @@
     justify-content: center;
     text-align: center;
     padding: 0 2rem;
+    min-height: 100vh;
   }
 
   .eyebrow {
@@ -135,6 +142,7 @@
     padding: 1rem 2rem;
     cursor: pointer;
     transition: background 0.3s, border-color 0.3s;
+    font-family: inherit;
   }
 
   .waitlist button:hover {
@@ -142,34 +150,51 @@
     border-color: rgba(255,255,255,0.6);
   }
 
-  .waitlist button:disabled {
-    opacity: 0.5;
-    cursor: default;
-  }
+  .waitlist button:disabled { opacity: 0.4; cursor: default; }
 
-  #form-msg {
+  #wl-msg {
     font-size: 0.72rem;
-    letter-spacing: 0.12em;
-    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.4);
     min-height: 1.2rem;
-    text-align: center;
   }
 
-  footer {
+  /* scroll hint */
+  .scroll-hint {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 2rem 0 1rem;
+    cursor: pointer;
+    opacity: 0.3;
+    transition: opacity 0.2s;
+  }
+  .scroll-hint:hover { opacity: 0.7; }
+  .scroll-hint span { font-size: 0.58rem; letter-spacing: 0.24em; color: #fff; }
+  .scroll-line { width: 0.5px; height: 28px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.6)); animation: pulse 2.2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:0.2} 50%{opacity:1} }
+
+  /* ── FOOTER HERO ── */
+  footer.hero-footer {
     display: flex;
     justify-content: space-between;
     padding: 0 2.8rem 2rem;
     font-size: 0.62rem;
     letter-spacing: 0.16em;
     color: rgba(255,255,255,0.22);
+    position: relative;
+    z-index: 1;
   }
 
+  /* ── VERTICAL LINES ── */
   .vert-top {
     position: fixed;
     top: 0; left: 50%;
     transform: translateX(-50%);
-    width: 1px;
-    height: 90px;
+    width: 1px; height: 90px;
     background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.12));
     z-index: 0;
   }
@@ -177,21 +202,347 @@
     position: fixed;
     bottom: 0; left: 50%;
     transform: translateX(-50%);
-    width: 1px;
-    height: 90px;
+    width: 1px; height: 90px;
     background: linear-gradient(to top, transparent, rgba(255,255,255,0.12));
     z-index: 0;
+  }
+
+  /* ══════════════════════════════
+     BETA SECTION
+  ══════════════════════════════ */
+  #beta {
+    position: relative;
+    z-index: 2;
+    background: #f8f7f3;
+    color: #1a1a1a;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 200;
+  }
+
+  /* BETA HERO */
+  .beta-hero {
+    max-width: 1060px;
+    margin: 0 auto;
+    padding: 9rem 3rem 6rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    border-bottom: 0.5px solid rgba(0,0,0,0.07);
+  }
+
+  .bh-eye {
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    color: rgba(0,0,0,0.28);
+    display: block;
+    margin-bottom: 1.6rem;
+  }
+
+  .bh-h {
+    font-family: 'EB Garamond', serif;
+    font-size: clamp(2.6rem, 4.5vw, 4rem);
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: 1.4rem;
+    color: #1a1a1a;
+  }
+  .bh-h em { font-style: italic; color: #7c5cbf; }
+
+  .bh-p {
+    font-size: 0.78rem;
+    color: rgba(0,0,0,0.42);
+    line-height: 1.9;
+    margin-bottom: 2.8rem;
+    letter-spacing: 0.02em;
+  }
+
+  .bh-stats {
+    display: flex;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  .bs-n {
+    font-family: 'EB Garamond', serif;
+    font-size: 3.6rem;
+    color: #1a1a1a;
+    display: block;
+    line-height: 1;
+  }
+  .bs-l {
+    font-size: 0.52rem;
+    letter-spacing: 0.22em;
+    color: rgba(0,0,0,0.26);
+    display: block;
+    margin-top: 5px;
+  }
+
+  .bh-btn {
+    display: inline-block;
+    background: #1a1a1a;
+    color: #fff;
+    border: none;
+    padding: 14px 40px;
+    font-size: 0.6rem;
+    letter-spacing: 0.26em;
+    cursor: pointer;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 200;
+    transition: background 0.2s;
+  }
+  .bh-btn:hover { background: #333; }
+
+  .bh-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #beta-canvas {
+    width: 280px;
+    height: 280px;
+    display: block;
+  }
+
+  /* WHO */
+  .who-section {
+    padding: 5rem 3rem;
+    border-bottom: 0.5px solid rgba(0,0,0,0.07);
+    background: #fff;
+  }
+  .who-inner { max-width: 860px; margin: 0 auto; }
+  .sec-eye {
+    font-size: 0.52rem;
+    letter-spacing: 0.26em;
+    color: rgba(0,0,0,0.22);
+    display: block;
+    margin-bottom: 2.8rem;
+  }
+  .profiles-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .prof-col { padding-right: 3rem; }
+  .prof-col:last-child {
+    padding-right: 0;
+    padding-left: 3rem;
+    border-left: 0.5px solid rgba(0,0,0,0.07);
+  }
+  .prof-tag {
+    font-size: 0.52rem;
+    letter-spacing: 0.22em;
+    color: rgba(0,0,0,0.28);
+    display: block;
+    margin-bottom: 1rem;
+  }
+  .prof-col h3 {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 1.25;
+    margin-bottom: 0.9rem;
+    color: #1a1a1a;
+  }
+  .prof-col p {
+    font-size: 0.78rem;
+    color: rgba(0,0,0,0.42);
+    line-height: 1.85;
+    margin-bottom: 1.4rem;
+  }
+  .prof-list { list-style: none; }
+  .prof-list li {
+    font-size: 0.72rem;
+    color: rgba(0,0,0,0.35);
+    padding: 6px 0;
+    border-bottom: 0.5px solid rgba(0,0,0,0.05);
+    display: flex;
+    gap: 10px;
+    line-height: 1.5;
+  }
+  .prof-list li::before { content: '—'; color: rgba(0,0,0,0.15); flex-shrink: 0; }
+
+  /* OFFER */
+  .offer-section {
+    padding: 5rem 3rem;
+    border-bottom: 0.5px solid rgba(0,0,0,0.07);
+  }
+  .offer-inner { max-width: 860px; margin: 0 auto; }
+  .offer-grid { display: grid; grid-template-columns: repeat(3,1fr); }
+  .offer-item {
+    padding: 2rem 1.8rem;
+    border-right: 0.5px solid rgba(0,0,0,0.07);
+    border-bottom: 0.5px solid rgba(0,0,0,0.07);
+  }
+  .offer-item:nth-child(3n) { border-right: none; }
+  .offer-item:nth-child(n+4) { border-bottom: none; }
+  .offer-num {
+    font-family: 'EB Garamond', serif;
+    font-size: 0.85rem;
+    color: rgba(0,0,0,0.18);
+    display: block;
+    margin-bottom: 0.7rem;
+  }
+  .offer-item h4 {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: #1a1a1a;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+  .offer-item p { font-size: 0.72rem; color: rgba(0,0,0,0.38); line-height: 1.8; }
+
+  /* COMMITMENT */
+  .commit-section {
+    padding: 5rem 3rem;
+    border-bottom: 0.5px solid rgba(0,0,0,0.07);
+    background: #fff;
+  }
+  .commit-inner { max-width: 640px; margin: 0 auto; }
+  .c-item {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    border-top: 0.5px solid rgba(0,0,0,0.06);
+    padding: 2.2rem 0;
+    align-items: start;
+  }
+  .c-item:last-child { border-bottom: 0.5px solid rgba(0,0,0,0.06); }
+  .c-n {
+    font-family: 'EB Garamond', serif;
+    font-size: 4rem;
+    color: rgba(0,0,0,0.06);
+    line-height: 1;
+  }
+  .c-body { padding-top: 0.3rem; }
+  .c-body strong {
+    display: block;
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    color: rgba(0,0,0,0.38);
+    margin-bottom: 0.45rem;
+    font-weight: 200;
+  }
+  .c-body p {
+    font-size: 0.82rem;
+    color: rgba(0,0,0,0.48);
+    line-height: 1.8;
+    font-family: 'EB Garamond', serif;
+  }
+
+  /* FORM */
+  .form-section {
+    padding: 7rem 3rem;
+    background: #f8f7f3;
+  }
+  .form-inner { max-width: 520px; margin: 0 auto; }
+  .form-inner h2 {
+    font-family: 'EB Garamond', serif;
+    font-size: 2.8rem;
+    font-weight: 400;
+    text-align: center;
+    color: #1a1a1a;
+    margin-bottom: 0.4rem;
+    line-height: 1.1;
+  }
+  .form-sub {
+    font-size: 0.52rem;
+    letter-spacing: 0.22em;
+    color: rgba(0,0,0,0.25);
+    text-align: center;
+    display: block;
+    margin-bottom: 3.5rem;
+  }
+  .fg { margin-bottom: 1.8rem; }
+  .fg label {
+    display: block;
+    font-size: 0.52rem;
+    letter-spacing: 0.2em;
+    color: rgba(0,0,0,0.3);
+    margin-bottom: 7px;
+  }
+  .fg input, .fg select, .fg textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 0.5px solid rgba(0,0,0,0.15);
+    padding: 0.6rem 0;
+    font-size: 0.88rem;
+    color: #1a1a1a;
+    outline: none;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 200;
+    transition: border-color 0.25s;
+    letter-spacing: 0.04em;
+    border-radius: 0;
+    -webkit-appearance: none;
+  }
+  .fg input:focus, .fg select:focus, .fg textarea:focus { border-bottom-color: rgba(0,0,0,0.5); }
+  .fg textarea { resize: none; height: 80px; line-height: 1.7; }
+  .fg-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .nda-note {
+    font-size: 0.62rem;
+    color: rgba(0,0,0,0.28);
+    line-height: 1.8;
+    border-top: 0.5px solid rgba(0,0,0,0.08);
+    padding-top: 1.2rem;
+    margin-bottom: 2rem;
+  }
+  .submit-wrap { text-align: center; }
+  .beta-submit {
+    display: inline-block;
+    background: #1a1a1a;
+    color: #fff;
+    border: none;
+    padding: 1rem 4rem;
+    font-size: 0.58rem;
+    letter-spacing: 0.28em;
+    cursor: pointer;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 200;
+    transition: background 0.2s;
+  }
+  .beta-submit:hover { background: #333; }
+  .beta-submit:disabled { background: #ccc; cursor: default; }
+  #beta-msg {
+    text-align: center;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    margin-top: 1rem;
+    min-height: 1rem;
+  }
+
+  /* BETA FOOTER */
+  footer.beta-footer {
+    background: #f8f7f3;
+    border-top: 0.5px solid rgba(0,0,0,0.07);
+    padding: 1.8rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.52rem;
+    letter-spacing: 0.18em;
+    color: rgba(0,0,0,0.22);
+  }
+
+  @media(max-width:680px){
+    .beta-hero { grid-template-columns: 1fr; gap: 3rem; padding: 7rem 1.5rem 4rem; }
+    .bh-visual { display: none; }
+    .profiles-grid { grid-template-columns: 1fr; }
+    .prof-col:last-child { padding-left: 0; border-left: none; border-top: 0.5px solid rgba(0,0,0,0.07); padding-top: 2rem; margin-top: 2rem; }
+    .offer-grid { grid-template-columns: 1fr 1fr; }
+    .fg-row { grid-template-columns: 1fr; }
+    .bh-stats { gap: 2rem; }
   }
 </style>
 </head>
 <body>
 
 <canvas id="canvas-bg"></canvas>
-
 <div class="vert-top"></div>
 <div class="vert-bottom"></div>
 
-<div class="site">
+<!-- ══ PAGE WAITLIST (identique à l'originale) ══ -->
+<div class="site" id="hero">
   <nav>
     <div class="logo">NEIRA</div>
     <div class="nav-right">Seoul &nbsp; 2026</div>
@@ -206,67 +557,137 @@
     <div class="divider"></div>
     <p class="subline">The technical layer between<br>designers and manufacturers.</p>
     <div class="waitlist">
-      <input type="email" id="email-input" placeholder="your@email.com">
-      <button id="submit-btn" onclick="submitWaitlist()">REQUEST ACCESS</button>
-      <p id="form-msg"></p>
+      <input type="email" id="wl-email" placeholder="your@email.com">
+      <button id="wl-btn" onclick="submitWaitlist()">REQUEST ACCESS</button>
+      <p id="wl-msg"></p>
     </div>
   </main>
 
-  <footer>
+  <div class="scroll-hint" onclick="document.getElementById('beta').scrollIntoView({behavior:'smooth'})">
+    <span>BETA PROGRAM</span>
+    <div class="scroll-line"></div>
+  </div>
+
+  <footer class="hero-footer">
     <span>neira.fit</span>
     <span>fashion &nbsp;·&nbsp; tech &nbsp;·&nbsp; NEIRA</span>
   </footer>
 </div>
 
-<script>
-async function submitWaitlist() {
-  const email = document.getElementById('email-input').value.trim();
-  const btn = document.getElementById('submit-btn');
-  const msg = document.getElementById('form-msg');
+<!-- ══ BETA SECTION ══ -->
+<section id="beta">
 
-  if (!email || !email.includes('@')) {
-    msg.textContent = 'Please enter a valid email.';
-    return;
-  }
+  <div class="beta-hero">
+    <div>
+      <span class="bh-eye">FOUNDERS CIRCLE — EARLY ACCESS</span>
+      <h2 class="bh-h">Shape the future of<br><em>fashion production.</em></h2>
+      <p class="bh-p">NEIRA is looking for 10 founding beta testers — fashion designers and factory directors — to co-build the technical infrastructure between design and manufacturing.</p>
+      <div class="bh-stats">
+        <div><span class="bs-n">10</span><span class="bs-l">SPOTS TOTAL</span></div>
+        <div><span class="bs-n">∞</span><span class="bs-l">FREE LIFETIME</span></div>
+        <div><span class="bs-n">0</span><span class="bs-l">COST TO JOIN</span></div>
+      </div>
+      <button class="bh-btn" onclick="document.getElementById('beta-form').scrollIntoView({behavior:'smooth'})">APPLY FOR BETA ACCESS</button>
+    </div>
+    <div class="bh-visual">
+      <canvas id="beta-canvas"></canvas>
+    </div>
+  </div>
 
-  btn.textContent = '...';
-  btn.disabled = true;
-  msg.textContent = '';
+  <div class="who-section">
+    <div class="who-inner">
+      <span class="sec-eye">WHO WE'RE LOOKING FOR</span>
+      <div class="profiles-grid">
+        <div class="prof-col">
+          <span class="prof-tag">FASHION DESIGNER</span>
+          <h3>Independent designers &amp; creative directors</h3>
+          <p>You create collections and spend hours building tech packs manually. You know the pain of miscommunication with factories.</p>
+          <ul class="prof-list">
+            <li>Independent brand, 2–50 styles per season</li>
+            <li>Work directly with Korean or Asian factories</li>
+            <li>Frustrated by tech pack errors and back-and-forth</li>
+            <li>Open to testing new tools in your workflow</li>
+          </ul>
+        </div>
+        <div class="prof-col">
+          <span class="prof-tag">FACTORY DIRECTOR</span>
+          <h3>Small textile factory directors &amp; managers</h3>
+          <p>You receive briefs every week that are incomplete or inconsistent. You lose time chasing specs before production starts.</p>
+          <ul class="prof-list">
+            <li>Factory with 10–200 workers</li>
+            <li>Produce for independent or mid-size brands</li>
+            <li>Receive briefs in multiple formats and languages</li>
+            <li>Want standardized, factory-ready documentation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  try {
-    const res = await fetch('https://formspree.io/f/xqegjqdw', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ email })
-    });
+  <div class="offer-section">
+    <div class="offer-inner">
+      <span class="sec-eye">WHAT BETA TESTERS RECEIVE</span>
+      <div class="offer-grid">
+        <div class="offer-item"><span class="offer-num">01</span><h4>Free lifetime access</h4><p>Full access to NEIRA forever. No subscription, no hidden fees — ever.</p></div>
+        <div class="offer-item"><span class="offer-num">02</span><h4>Founding member status</h4><p>Your name in the product as a founding contributor. Early access to all new features.</p></div>
+        <div class="offer-item"><span class="offer-num">03</span><h4>Direct line to the founder</h4><p>Weekly direct access to Cloé. Your feedback shapes the product roadmap.</p></div>
+        <div class="offer-item"><span class="offer-num">04</span><h4>NDA protected</h4><p>Everything shared stays confidential. Your data, your designs, your factory information.</p></div>
+        <div class="offer-item"><span class="offer-num">05</span><h4>Korean market priority</h4><p>NEIRA is built first for Korea. Beta testers get priority factory network access.</p></div>
+        <div class="offer-item"><span class="offer-num">06</span><h4>Co-builder credit</h4><p>Documented contribution to NEIRA's development — useful for your portfolio and network.</p></div>
+      </div>
+    </div>
+  </div>
 
-    if (res.ok) {
-      msg.textContent = "You're on the list.";
-      document.getElementById('email-input').value = '';
-    } else {
-      throw new Error();
-    }
-  } catch {
-    msg.textContent = 'Something went wrong. Try again.';
-  }
+  <div class="commit-section">
+    <div class="commit-inner">
+      <span class="sec-eye">WHAT WE ASK IN RETURN</span>
+      <div class="c-item"><div class="c-n">1</div><div class="c-body"><strong>TEST REAL GARMENTS</strong><p>Test a minimum of 3 tech packs on real garments from your collection or production line</p></div></div>
+      <div class="c-item"><div class="c-n">2</div><div class="c-body"><strong>WEEKLY FEEDBACK</strong><p>Submit structured feedback via simple form — 10 minutes per week maximum</p></div></div>
+      <div class="c-item"><div class="c-n">3</div><div class="c-body"><strong>MONTHLY CALL</strong><p>One 30-minute video call per month with Cloé to review progress and share insights</p></div></div>
+      <div class="c-item"><div class="c-n">4</div><div class="c-body"><strong>SIGN NDA</strong><p>Mutual NDA to protect both your data and NEIRA's proprietary technology</p></div></div>
+    </div>
+  </div>
 
-  btn.textContent = 'REQUEST ACCESS';
-  btn.disabled = false;
-}
+  <div class="form-section" id="beta-form">
+    <div class="form-inner">
+      <h2>Apply to join</h2>
+      <span class="form-sub">10 SPOTS ONLY — REVIEWED PERSONALLY BY CLOÉ</span>
+      <div class="fg-row">
+        <div class="fg"><label>FIRST NAME</label><input type="text" id="b-fname" placeholder="Minji"></div>
+        <div class="fg"><label>LAST NAME</label><input type="text" id="b-lname" placeholder="Kim"></div>
+      </div>
+      <div class="fg"><label>EMAIL</label><input type="email" id="b-email" placeholder="you@studio.com"></div>
+      <div class="fg">
+        <label>PROFILE</label>
+        <select id="b-profile">
+          <option value="">Select your profile</option>
+          <option value="designer-independent">Independent fashion designer</option>
+          <option value="designer-brand">Creative director / brand manager</option>
+          <option value="factory-director">Factory director / owner</option>
+          <option value="factory-manager">Production manager</option>
+        </select>
+      </div>
+      <div class="fg"><label>COMPANY / STUDIO / FACTORY</label><input type="text" id="b-company" placeholder="Studio Ahn / Textile Factory Seoul"></div>
+      <div class="fg"><label>WHY DO YOU WANT TO JOIN?</label><textarea id="b-why" placeholder="Tell us about your current workflow and what you hope NEIRA can solve..."></textarea></div>
+      <div class="nda-note">By applying, you agree to sign a mutual NDA before accessing the product. Your information will never be shared with third parties.</div>
+      <div class="submit-wrap">
+        <button class="beta-submit" id="beta-btn" onclick="submitBeta()">APPLY FOR BETA ACCESS</button>
+        <p id="beta-msg"></p>
+      </div>
+    </div>
+  </div>
 
-// Allow Enter key to submit
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('email-input').addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') submitWaitlist();
-  });
-});
-</script>
+  <footer class="beta-footer">
+    <span>NEIRA · neira.fit · Seoul 2026</span>
+    <span>Fashion · Tech · Infrastructure</span>
+  </footer>
 
+</section>
+
+<!-- THREE.JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
+/* ══ HERO 3D (identique à l'original) ══ */
 const canvas = document.getElementById('canvas-bg');
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
 renderer.setPixelRatio(window.devicePixelRatio);
@@ -278,12 +699,7 @@ const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerH
 camera.position.set(0, 0, 6);
 
 const sphereGeo = new THREE.SphereGeometry(1.8, 14, 10);
-const sphereMat = new THREE.MeshBasicMaterial({
-  color: 0xffffff,
-  wireframe: true,
-  opacity: 0.18,
-  transparent: true
-});
+const sphereMat = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true, opacity: 0.18, transparent: true });
 const sphere = new THREE.Mesh(sphereGeo, sphereMat);
 
 const jacketMat = new THREE.LineBasicMaterial({ color: 0xffffff, linewidth: 1, opacity: 0.18, transparent: true });
@@ -294,12 +710,10 @@ function pts(...coords) {
     v.push(new THREE.Vector3(coords[i], coords[i+1], coords[i+2]));
   return v;
 }
-
 function makeLine(...coords) {
   const g = new THREE.BufferGeometry().setFromPoints(pts(...coords));
   return new THREE.Line(g, jacketMat);
 }
-
 function makeLoop(...coords) {
   const pts2 = pts(...coords);
   pts2.push(pts2[0].clone());
@@ -308,158 +722,37 @@ function makeLoop(...coords) {
 }
 
 const jacket = new THREE.Group();
-
-jacket.add(makeLoop(
-  -0.12, 1.08, 0,
-  -0.42, 1.04, 0,
-  -0.60, 0.98, 0,
-  -0.64, 0.82, 0,
-  -0.58,-0.02, 0,
-  -0.60,-0.50, 0,
-  -0.50,-0.62, 0,
-  -0.18,-0.70, 0,
-   0.00,-0.60, 0,
-   0.18,-0.70, 0,
-   0.50,-0.62, 0,
-   0.60,-0.50, 0,
-   0.58,-0.02, 0,
-   0.64, 0.82, 0,
-   0.60, 0.98, 0,
-   0.42, 1.04, 0,
-   0.12, 1.08, 0
-));
-
-jacket.add(makeLoop(
-  -0.12, 1.08, 0,
-  -0.42, 1.04, 0,
-  -0.50, 0.96, 0,
-  -0.35, 0.84, 0,
-  -0.08, 0.90, 0,
-   0.00, 0.88, 0
-));
-jacket.add(makeLoop(
-   0.12, 1.08, 0,
-   0.42, 1.04, 0,
-   0.50, 0.96, 0,
-   0.35, 0.84, 0,
-   0.08, 0.90, 0,
-   0.00, 0.88, 0
-));
-jacket.add(makeLoop(
-  -0.12, 1.08, 0,
-  -0.28, 1.06, 0,
-  -0.30, 0.96, 0,
-   0.00, 0.88, 0.01,
-   0.30, 0.96, 0,
-   0.28, 1.06, 0,
-   0.12, 1.08, 0
-));
-
-jacket.add(makeLine(
-   0.00, 1.08, 0.01,
-   0.02, 0.92, 0.01,
-   0.06, 0.70, 0.01,
-   0.12, 0.42, 0.01,
-   0.24, 0.10, 0.01,
-   0.38,-0.22, 0.01,
-   0.46,-0.52, 0.01,
-   0.50,-0.62, 0.01
-));
-
-jacket.add(makeLoop(
-  -0.04, 1.03, 0.02,  0.04, 1.03, 0.02,
-   0.04, 0.97, 0.02, -0.04, 0.97, 0.02
-));
-
-jacket.add(makeLine(
-  -0.50, 0.60, 0.01,
-  -0.46, 0.30, 0.01,
-  -0.38, 0.00, 0.01,
-  -0.34,-0.30, 0.01,
-  -0.36,-0.58, 0.01
-));
-
-jacket.add(makeLoop(
-  -0.60, 0.98, 0,
-  -0.64, 0.82, 0,
-  -0.96, 0.52, 0.06,
-  -1.28, 0.00, 0.10,
-  -1.48,-0.38, 0.12,
-  -1.42,-0.58, 0.12,
-  -1.08,-0.64, 0.08,
-  -0.86,-0.36, 0.05,
-  -0.68, 0.00, 0.02,
-  -0.58, 0.62, 0
-));
-jacket.add(makeLine(
-  -0.82, 0.68, 0.04,
-  -1.10, 0.18, 0.08,
-  -1.40,-0.30, 0.12
-));
-jacket.add(makeLine(
-  -0.64, 0.82, 0,
-  -0.74, 0.32, 0.03,
-  -0.82,-0.30, 0.05,
-  -1.08,-0.64, 0.08
-));
-jacket.add(makeLoop(
-  -1.42,-0.56, 0.12,
-  -1.10,-0.62, 0.08,
-  -1.08,-0.72, 0.08,
-  -1.40,-0.66, 0.12
-));
+jacket.add(makeLoop(-0.12,1.08,0,-0.42,1.04,0,-0.60,0.98,0,-0.64,0.82,0,-0.58,-0.02,0,-0.60,-0.50,0,-0.50,-0.62,0,-0.18,-0.70,0,0.00,-0.60,0,0.18,-0.70,0,0.50,-0.62,0,0.60,-0.50,0,0.58,-0.02,0,0.64,0.82,0,0.60,0.98,0,0.42,1.04,0,0.12,1.08,0));
+jacket.add(makeLoop(-0.12,1.08,0,-0.42,1.04,0,-0.50,0.96,0,-0.35,0.84,0,-0.08,0.90,0,0.00,0.88,0));
+jacket.add(makeLoop(0.12,1.08,0,0.42,1.04,0,0.50,0.96,0,0.35,0.84,0,0.08,0.90,0,0.00,0.88,0));
+jacket.add(makeLoop(-0.12,1.08,0,-0.28,1.06,0,-0.30,0.96,0,0.00,0.88,0.01,0.30,0.96,0,0.28,1.06,0,0.12,1.08,0));
+jacket.add(makeLine(0.00,1.08,0.01,0.02,0.92,0.01,0.06,0.70,0.01,0.12,0.42,0.01,0.24,0.10,0.01,0.38,-0.22,0.01,0.46,-0.52,0.01,0.50,-0.62,0.01));
+jacket.add(makeLoop(-0.04,1.03,0.02,0.04,1.03,0.02,0.04,0.97,0.02,-0.04,0.97,0.02));
+jacket.add(makeLine(-0.50,0.60,0.01,-0.46,0.30,0.01,-0.38,0.00,0.01,-0.34,-0.30,0.01,-0.36,-0.58,0.01));
+jacket.add(makeLoop(-0.60,0.98,0,-0.64,0.82,0,-0.96,0.52,0.06,-1.28,0.00,0.10,-1.48,-0.38,0.12,-1.42,-0.58,0.12,-1.08,-0.64,0.08,-0.86,-0.36,0.05,-0.68,0.00,0.02,-0.58,0.62,0));
+jacket.add(makeLine(-0.82,0.68,0.04,-1.10,0.18,0.08,-1.40,-0.30,0.12));
+jacket.add(makeLine(-0.64,0.82,0,-0.74,0.32,0.03,-0.82,-0.30,0.05,-1.08,-0.64,0.08));
+jacket.add(makeLoop(-1.42,-0.56,0.12,-1.10,-0.62,0.08,-1.08,-0.72,0.08,-1.40,-0.66,0.12));
 jacket.add(makeLoop(-1.38,-0.57,0.13,-1.30,-0.57,0.13,-1.30,-0.63,0.13,-1.38,-0.63,0.13));
 jacket.add(makeLoop(-1.26,-0.57,0.13,-1.18,-0.57,0.13,-1.18,-0.63,0.13,-1.26,-0.63,0.13));
-
-jacket.add(makeLoop(
-   0.60, 0.98, 0,
-   0.64, 0.82, 0,
-   0.96, 0.52, 0.06,
-   1.28, 0.00, 0.10,
-   1.48,-0.38, 0.12,
-   1.42,-0.58, 0.12,
-   1.08,-0.64, 0.08,
-   0.86,-0.36, 0.05,
-   0.68, 0.00, 0.02,
-   0.58, 0.62, 0
-));
-jacket.add(makeLine(
-   0.82, 0.68, 0.04,
-   1.10, 0.18, 0.08,
-   1.40,-0.30, 0.12
-));
-jacket.add(makeLine(
-   0.64, 0.82, 0,
-   0.74, 0.32, 0.03,
-   0.82,-0.30, 0.05,
-   1.08,-0.64, 0.08
-));
-jacket.add(makeLoop(
-   1.42,-0.56, 0.12,
-   1.10,-0.62, 0.08,
-   1.08,-0.72, 0.08,
-   1.40,-0.66, 0.12
-));
+jacket.add(makeLoop(0.60,0.98,0,0.64,0.82,0,0.96,0.52,0.06,1.28,0.00,0.10,1.48,-0.38,0.12,1.42,-0.58,0.12,1.08,-0.64,0.08,0.86,-0.36,0.05,0.68,0.00,0.02,0.58,0.62,0));
+jacket.add(makeLine(0.82,0.68,0.04,1.10,0.18,0.08,1.40,-0.30,0.12));
+jacket.add(makeLine(0.64,0.82,0,0.74,0.32,0.03,0.82,-0.30,0.05,1.08,-0.64,0.08));
+jacket.add(makeLoop(1.42,-0.56,0.12,1.10,-0.62,0.08,1.08,-0.72,0.08,1.40,-0.66,0.12));
 jacket.add(makeLoop(1.30,-0.57,0.13,1.38,-0.57,0.13,1.38,-0.63,0.13,1.30,-0.63,0.13));
 jacket.add(makeLoop(1.18,-0.57,0.13,1.26,-0.57,0.13,1.26,-0.63,0.13,1.18,-0.63,0.13));
-
-jacket.add(makeLine(-0.42,1.04,0, -0.60,0.98,0));
-jacket.add(makeLine( 0.42,1.04,0,  0.60,0.98,0));
-jacket.add(makeLine(-0.60,0.88,-0.02, 0,0.92,-0.03, 0.60,0.88,-0.02));
-jacket.add(makeLine(-0.58,-0.02,0, -0.60,-0.50,0));
-jacket.add(makeLine( 0.58,-0.02,0,  0.60,-0.50,0));
-jacket.add(makeLine(
-  -0.50,-0.64,0.01, -0.18,-0.72,0.01, 0.00,-0.62,0.01, 0.18,-0.72,0.01, 0.50,-0.64,0.01
-));
-
-jacket.add(makeLine(-0.50,-0.30,0.01, -0.18,-0.28,0.01));
-jacket.add(makeLine(-0.50,-0.30,0.01, -0.50,-0.38,0.01, -0.18,-0.36,0.01, -0.18,-0.28,0.01));
-jacket.add(makeLine(-0.50,-0.30,0.01, -0.36,-0.25,0.01, -0.18,-0.28,0.01));
-jacket.add(makeLine(0.20,-0.28,0.01, 0.48,-0.30,0.01));
-jacket.add(makeLine(0.20,-0.28,0.01, 0.20,-0.36,0.01, 0.48,-0.38,0.01, 0.48,-0.30,0.01));
-jacket.add(makeLine(0, 0.92,-0.03, 0,-0.60,-0.03));
-
-jacket.scale.set(1.0, 1.0, 1.0);
+jacket.add(makeLine(-0.42,1.04,0,-0.60,0.98,0));
+jacket.add(makeLine(0.42,1.04,0,0.60,0.98,0));
+jacket.add(makeLine(-0.60,0.88,-0.02,0,0.92,-0.03,0.60,0.88,-0.02));
+jacket.add(makeLine(-0.58,-0.02,0,-0.60,-0.50,0));
+jacket.add(makeLine(0.58,-0.02,0,0.60,-0.50,0));
+jacket.add(makeLine(-0.50,-0.64,0.01,-0.18,-0.72,0.01,0.00,-0.62,0.01,0.18,-0.72,0.01,0.50,-0.64,0.01));
+jacket.add(makeLine(-0.50,-0.30,0.01,-0.18,-0.28,0.01));
+jacket.add(makeLine(-0.50,-0.30,0.01,-0.50,-0.38,0.01,-0.18,-0.36,0.01,-0.18,-0.28,0.01));
+jacket.add(makeLine(-0.50,-0.30,0.01,-0.36,-0.25,0.01,-0.18,-0.28,0.01));
+jacket.add(makeLine(0.20,-0.28,0.01,0.48,-0.30,0.01));
+jacket.add(makeLine(0.20,-0.28,0.01,0.20,-0.36,0.01,0.48,-0.38,0.01,0.48,-0.30,0.01));
+jacket.add(makeLine(0,0.92,-0.03,0,-0.60,-0.03));
 
 const world = new THREE.Group();
 world.add(sphere);
@@ -472,6 +765,50 @@ window.addEventListener('resize', () => {
   renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
+/* ══ BETA 3D ══ */
+const betaCanvas = document.getElementById('beta-canvas');
+const betaRenderer = new THREE.WebGLRenderer({ canvas: betaCanvas, antialias: true, alpha: true });
+betaRenderer.setClearColor(0x000000, 0);
+const betaScene = new THREE.Scene();
+const betaCamera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
+betaCamera.position.set(0, 0, 5);
+
+function resizeBeta() {
+  const p = betaCanvas.parentElement;
+  betaRenderer.setSize(p.clientWidth, p.clientHeight);
+  betaCamera.aspect = p.clientWidth / p.clientHeight;
+  betaCamera.updateProjectionMatrix();
+}
+resizeBeta();
+window.addEventListener('resize', resizeBeta);
+
+const bSphereMat = new THREE.MeshBasicMaterial({ color: 0x7c5cbf, wireframe: true, opacity: 0.08, transparent: true });
+const bSphere = new THREE.Mesh(new THREE.SphereGeometry(1.8, 14, 10), bSphereMat);
+const bJMat = new THREE.LineBasicMaterial({ color: 0x1a1a1a, opacity: 0.18, transparent: true });
+const bAccMat = new THREE.LineBasicMaterial({ color: 0x7c5cbf, opacity: 0.5, transparent: true });
+
+function bPts(...c) { const v=[]; for(let i=0;i<c.length;i+=3) v.push(new THREE.Vector3(c[i],c[i+1],c[i+2])); return v; }
+function bLine(m,...c) { return new THREE.Line(new THREE.BufferGeometry().setFromPoints(bPts(...c)), m); }
+function bLoop(m,...c) { const p=bPts(...c); p.push(p[0].clone()); return new THREE.Line(new THREE.BufferGeometry().setFromPoints(p), m); }
+
+const bJacket = new THREE.Group();
+bJacket.add(bLoop(bAccMat,-0.12,1.08,0,-0.42,1.04,0,-0.60,0.98,0,-0.64,0.82,0,-0.58,-0.02,0,-0.60,-0.50,0,-0.50,-0.62,0,-0.18,-0.70,0,0,-0.60,0,0.18,-0.70,0,0.50,-0.62,0,0.60,-0.50,0,0.58,-0.02,0,0.64,0.82,0,0.60,0.98,0,0.42,1.04,0,0.12,1.08,0));
+bJacket.add(bLoop(bAccMat,-0.12,1.08,0,-0.42,1.04,0,-0.50,0.96,0,-0.35,0.84,0,-0.08,0.90,0,0,0.88,0));
+bJacket.add(bLoop(bAccMat,0.12,1.08,0,0.42,1.04,0,0.50,0.96,0,0.35,0.84,0,0.08,0.90,0,0,0.88,0));
+bJacket.add(bLine(bAccMat,0,1.08,0.01,0.06,0.70,0.01,0.24,0.10,0.01,0.46,-0.52,0.01,0.50,-0.62,0.01));
+bJacket.add(bLoop(bJMat,-0.60,0.98,0,-0.64,0.82,0,-0.96,0.52,0.06,-1.28,0,0.10,-1.48,-0.38,0.12,-1.42,-0.58,0.12,-1.08,-0.64,0.08,-0.86,-0.36,0.05,-0.68,0,0.02,-0.58,0.62,0));
+bJacket.add(bLoop(bJMat,0.60,0.98,0,0.64,0.82,0,0.96,0.52,0.06,1.28,0,0.10,1.48,-0.38,0.12,1.42,-0.58,0.12,1.08,-0.64,0.08,0.86,-0.36,0.05,0.68,0,0.02,0.58,0.62,0));
+bJacket.add(bLine(bAccMat,-0.50,-0.30,0.01,-0.18,-0.28,0.01));
+bJacket.add(bLine(bAccMat,-0.50,-0.30,0.01,-0.50,-0.38,0.01,-0.18,-0.36,0.01,-0.18,-0.28,0.01));
+bJacket.add(bLine(bAccMat,0.20,-0.28,0.01,0.48,-0.30,0.01));
+bJacket.add(bLine(bAccMat,0.20,-0.28,0.01,0.20,-0.36,0.01,0.48,-0.38,0.01,0.48,-0.30,0.01));
+
+const betaWorld = new THREE.Group();
+betaWorld.add(bSphere);
+betaWorld.add(bJacket);
+betaScene.add(betaWorld);
+
+/* ══ ANIMATION ══ */
 let t = 0;
 function animate() {
   requestAnimationFrame(animate);
@@ -479,8 +816,58 @@ function animate() {
   world.rotation.y = -t;
   world.rotation.x = Math.sin(t * 0.18) * 0.10;
   renderer.render(scene, camera);
+  betaWorld.rotation.y = -t * 0.7;
+  betaWorld.rotation.x = Math.sin(t * 0.15) * 0.06;
+  betaRenderer.render(betaScene, betaCamera);
 }
 animate();
+
+/* ══ WAITLIST ══ */
+async function submitWaitlist() {
+  const email = document.getElementById('wl-email').value.trim();
+  const btn = document.getElementById('wl-btn');
+  const msg = document.getElementById('wl-msg');
+  if (!email || !email.includes('@')) { msg.textContent = 'Please enter a valid email.'; return; }
+  btn.textContent = '...'; btn.disabled = true; msg.textContent = '';
+  try {
+    const res = await fetch('https://formspree.io/f/xqegjqdw', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, type: 'waitlist' })
+    });
+    if (res.ok) { msg.textContent = "You're on the list."; document.getElementById('wl-email').value = ''; }
+    else throw new Error();
+  } catch { msg.textContent = 'Something went wrong.'; }
+  btn.textContent = 'REQUEST ACCESS'; btn.disabled = false;
+}
+document.getElementById('wl-email').addEventListener('keydown', e => { if (e.key === 'Enter') submitWaitlist(); });
+
+/* ══ BETA FORM ══ */
+async function submitBeta() {
+  const fname = document.getElementById('b-fname').value.trim();
+  const email = document.getElementById('b-email').value.trim();
+  const profile = document.getElementById('b-profile').value;
+  const company = document.getElementById('b-company').value.trim();
+  const why = document.getElementById('b-why').value.trim();
+  const btn = document.getElementById('beta-btn');
+  const msg = document.getElementById('beta-msg');
+  if (!fname || !email || !profile || !company) { msg.textContent = 'Please fill in all required fields.'; msg.style.color = '#999'; return; }
+  btn.disabled = true; btn.textContent = '...'; msg.textContent = '';
+  try {
+    const res = await fetch('https://formspree.io/f/xqegjqdw', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: fname + ' ' + document.getElementById('b-lname').value.trim(), email, profile, company, message: why, type: 'beta', _subject: 'NEIRA Beta — ' + profile })
+    });
+    if (res.ok) {
+      msg.textContent = 'Application received. Cloé will be in touch within 48h.';
+      msg.style.color = '#7c5cbf';
+      ['b-fname','b-lname','b-email','b-company','b-why'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('b-profile').value = '';
+    } else throw new Error();
+  } catch { msg.textContent = 'Something went wrong. Email: cloe@neira.fit'; msg.style.color = '#999'; }
+  btn.disabled = false; btn.textContent = 'APPLY FOR BETA ACCESS';
+}
 </script>
 </body>
 </html>
