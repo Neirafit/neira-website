@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -104,7 +105,7 @@ nav.hero-nav {
   font-size:0.85rem; letter-spacing:0.06em; padding:0.7rem 0;
   text-align:center; outline:none; transition:border-color 0.3s;
 }
-.waitlist input::placeholder { color:rgba(180,140,255,0.65); }
+.waitlist input::placeholder { color:rgba(120,170,230,0.65); }
 .waitlist input:focus { border-bottom-color:rgba(255,255,255,0.6); }
 .waitlist button {
   width:100%; background:transparent;
@@ -147,16 +148,16 @@ footer.hero-footer {
   display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center;
   border-bottom:0.5px solid rgba(0,0,0,0.07);
 }
-.bh-eye { font-size:0.58rem; letter-spacing:0.3em; color:rgba(0,0,0,0.35); display:block; margin-bottom:1.2rem; }
+.bh-eye { font-size:0.58rem; letter-spacing:0.3em; color:rgba(0,0,0,0.48); display:block; margin-bottom:1.2rem; }
 .bh-h {
   font-family:'EB Garamond',serif; font-size:clamp(2.4rem,4vw,3.6rem);
   font-weight:400; line-height:1.1; margin-bottom:1.2rem; color:#1a1a1a;
 }
-.bh-h em { font-style:italic; color:#7c5cbf; }
-.bh-p { font-size:0.82rem; color:rgba(0,0,0,0.5); line-height:1.85; margin-bottom:2.4rem; }
+.bh-h em { font-style:italic; color:#2f5f8f; }
+.bh-p { font-size:0.82rem; color:rgba(0,0,0,0.62); line-height:1.85; margin-bottom:2.4rem; }
 .bh-stats { display:flex; gap:2.5rem; margin-bottom:2.5rem; }
 .bs-n { font-family:'EB Garamond',serif; font-size:3.2rem; color:#1a1a1a; display:block; line-height:1; }
-.bs-l { font-size:0.55rem; letter-spacing:0.22em; color:rgba(0,0,0,0.3); display:block; margin-top:4px; }
+.bs-l { font-size:0.55rem; letter-spacing:0.22em; color:rgba(0,0,0,0.45); display:block; margin-top:4px; }
 .bh-btn {
   background:#1a1a1a; color:#fff; border:none;
   padding:13px 36px; font-size:0.62rem; letter-spacing:0.24em;
@@ -170,45 +171,24 @@ footer.hero-footer {
 /* WHO */
 .who-section { padding:3.5rem 3rem; border-bottom:0.5px solid rgba(0,0,0,0.07); background:#fff; }
 .who-inner { max-width:860px; margin:0 auto; }
-.sec-eye { font-size:0.58rem; letter-spacing:0.26em; color:rgba(0,0,0,0.35); display:block; margin-bottom:2.2rem; font-weight:300; }
+.sec-eye { font-size:0.58rem; letter-spacing:0.26em; color:rgba(0,0,0,0.48); display:block; margin-bottom:2.2rem; font-weight:300; }
 .profiles-grid { display:grid; grid-template-columns:1fr 1fr; }
 .prof-col { padding-right:2.5rem; }
 .prof-col:last-child { padding-right:0; padding-left:2.5rem; border-left:0.5px solid rgba(0,0,0,0.07); }
-.prof-tag { font-size:0.55rem; letter-spacing:0.22em; color:rgba(0,0,0,0.32); display:block; margin-bottom:0.8rem; }
+.prof-tag { font-size:0.55rem; letter-spacing:0.22em; color:rgba(0,0,0,0.68); display:block; margin-bottom:0.8rem; }
 .prof-col h3 { font-family:'EB Garamond',serif; font-size:1.55rem; font-weight:400; line-height:1.25; margin-bottom:0.8rem; color:#1a1a1a; }
 .prof-col p { font-size:0.8rem; color:rgba(0,0,0,0.48); line-height:1.8; margin-bottom:1.2rem; }
 .prof-list { list-style:none; }
-.prof-list li { font-size:0.74rem; color:rgba(0,0,0,0.38); padding:5px 0; border-bottom:0.5px solid rgba(0,0,0,0.05); display:flex; gap:10px; line-height:1.5; }
-.prof-list li::before { content:'—'; color:rgba(0,0,0,0.15); flex-shrink:0; }
-
-/* OFFER */
-.offer-section { padding:3.5rem 3rem; border-bottom:0.5px solid rgba(0,0,0,0.07); }
-.offer-inner { max-width:860px; margin:0 auto; }
-.offer-grid { display:grid; grid-template-columns:repeat(3,1fr); margin-top:2rem; }
-.offer-item { padding:1.6rem 1.5rem; border-right:0.5px solid rgba(0,0,0,0.07); border-bottom:0.5px solid rgba(0,0,0,0.07); }
-.offer-item:nth-child(3n) { border-right:none; }
-.offer-item:nth-child(n+4) { border-bottom:none; }
-.offer-num { font-family:'EB Garamond',serif; font-size:0.82rem; color:rgba(0,0,0,0.2); display:block; margin-bottom:0.5rem; }
-.offer-item h4 { font-family:'EB Garamond',serif; font-size:1.15rem; font-weight:400; color:#1a1a1a; margin-bottom:0.4rem; line-height:1.3; }
-.offer-item p { font-size:0.74rem; color:rgba(0,0,0,0.42); line-height:1.75; }
-
-/* COMMITMENT */
-.commit-section { padding:3.5rem 3rem; border-bottom:0.5px solid rgba(0,0,0,0.07); background:#fff; }
-.commit-inner { max-width:620px; margin:0 auto; }
-.c-item { display:grid; grid-template-columns:64px 1fr; border-top:0.5px solid rgba(0,0,0,0.06); padding:1.8rem 0; align-items:start; }
-.c-item:last-child { border-bottom:0.5px solid rgba(0,0,0,0.06); }
-.c-n { font-family:'EB Garamond',serif; font-size:3.5rem; color:rgba(0,0,0,0.07); line-height:1; }
-.c-body { padding-top:0.3rem; }
-.c-body strong { display:block; font-size:0.6rem; letter-spacing:0.2em; color:rgba(0,0,0,0.4); margin-bottom:0.4rem; font-weight:200; }
-.c-body p { font-size:0.82rem; color:rgba(0,0,0,0.5); line-height:1.75; font-family:'EB Garamond',serif; }
+.prof-list li { font-size:0.8rem; color:#242424; padding:5px 0; border-bottom:0.5px solid rgba(0,0,0,0.05); display:flex; gap:10px; line-height:1.55; }
+.prof-list li::before { content:'—'; color:rgba(0,0,0,0.3); flex-shrink:0; }
 
 /* FORM */
 .form-section { padding:5rem 3rem; background:#f8f7f3; }
 .form-inner { max-width:500px; margin:0 auto; }
 .form-inner h2 { font-family:'EB Garamond',serif; font-size:2.6rem; font-weight:400; text-align:center; color:#1a1a1a; margin-bottom:0.4rem; }
-.form-sub { font-size:0.55rem; letter-spacing:0.22em; color:rgba(0,0,0,0.28); text-align:center; display:block; margin-bottom:3rem; }
+.form-sub { font-size:0.55rem; letter-spacing:0.22em; color:rgba(0,0,0,0.42); text-align:center; display:block; margin-bottom:3rem; }
 .fg { margin-bottom:1.6rem; }
-.fg label { display:block; font-size:0.52rem; letter-spacing:0.2em; color:rgba(0,0,0,0.32); margin-bottom:6px; }
+.fg label { display:block; font-size:0.52rem; letter-spacing:0.2em; color:rgba(0,0,0,0.5); margin-bottom:6px; }
 .fg input,.fg select,.fg textarea {
   width:100%; background:transparent; border:none;
   border-bottom:0.5px solid rgba(0,0,0,0.15);
@@ -220,7 +200,7 @@ footer.hero-footer {
 .fg input:focus,.fg select:focus,.fg textarea:focus { border-bottom-color:rgba(0,0,0,0.5); }
 .fg textarea { resize:none; height:75px; line-height:1.7; }
 .fg-row { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; }
-.nda-note { font-size:0.62rem; color:rgba(0,0,0,0.3); line-height:1.8; border-top:0.5px solid rgba(0,0,0,0.08); padding-top:1rem; margin-bottom:1.8rem; }
+.nda-note { font-size:0.62rem; color:rgba(0,0,0,0.45); line-height:1.8; border-top:0.5px solid rgba(0,0,0,0.08); padding-top:1rem; margin-bottom:1.8rem; }
 .submit-wrap { text-align:center; }
 .beta-submit { background:#1a1a1a; color:#fff; border:none; padding:1rem 3.5rem; font-size:0.6rem; letter-spacing:0.26em; cursor:pointer; font-family:'Josefin Sans',sans-serif; font-weight:200; transition:background 0.2s; }
 .beta-submit:hover { background:#333; }
@@ -231,27 +211,28 @@ footer.hero-footer {
 #about { background:#1a1a1a; color:#fff; font-family:'Josefin Sans',sans-serif; font-weight:200; }
 
 .about-inner {
-  max-width:900px; margin:0 auto;
-  padding:5rem 3rem;
-  display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start;
+  max-width:640px; margin:0 auto;
+  padding:6rem 3rem 2rem;
 }
 .about-left .ab-eye { font-size:0.55rem; letter-spacing:0.28em; color:rgba(255,255,255,0.3); display:block; margin-bottom:1.4rem; }
 .about-left h2 { font-family:'EB Garamond',serif; font-size:clamp(2rem,3.5vw,3rem); font-weight:400; line-height:1.15; color:#fff; margin-bottom:1.4rem; }
-.about-left h2 em { font-style:italic; color:#9b7de0; }
-.about-left p { font-size:0.8rem; color:rgba(255,255,255,0.5); line-height:1.9; margin-bottom:1rem; }
-
-.about-right { padding-top:2.8rem; }
-.ab-block { border-top:0.5px solid rgba(255,255,255,0.08); padding:1.4rem 0; }
-.ab-block:last-child { border-bottom:0.5px solid rgba(255,255,255,0.08); }
-.ab-block-label { font-size:0.52rem; letter-spacing:0.22em; color:rgba(255,255,255,0.28); display:block; margin-bottom:0.5rem; }
-.ab-block-val { font-family:'EB Garamond',serif; font-size:1.1rem; color:rgba(255,255,255,0.8); line-height:1.4; }
+.about-left h2 em { font-style:italic; color:#6fa3d8; }
+.about-left p { font-size:0.85rem; color:rgba(255,255,255,0.5); line-height:1.9; margin-bottom:1.2rem; }
+.about-quote {
+  font-family:'EB Garamond',serif; font-style:italic;
+  font-size:1.35rem; color:#8fbde0; line-height:1.5;
+  margin:2.4rem 0; padding-left:1.3rem;
+  border-left:1px solid rgba(111,163,216,0.4);
+}
+.about-contact { color:#8fbde0; text-decoration:none; border-bottom:0.5px solid rgba(143,189,224,0.4); transition:border-color 0.2s; }
+.about-contact:hover { border-color:rgba(143,189,224,0.9); }
 
 .about-bottom {
-  max-width:900px; margin:0 auto;
+  max-width:640px; margin:0 auto;
   padding:0 3rem 4rem;
   border-top:0.5px solid rgba(255,255,255,0.06);
 }
-.about-bottom p { font-size:0.78rem; color:rgba(255,255,255,0.35); line-height:1.9; max-width:560px; padding-top:2.5rem; }
+.about-bottom p { font-size:0.78rem; color:rgba(255,255,255,0.35); line-height:1.9; padding-top:2.5rem; }
 .about-bottom strong { color:rgba(255,255,255,0.6); font-weight:200; }
 
 /* ── SITE FOOTER ── */
@@ -264,14 +245,13 @@ footer.hero-footer {
 
 @media(max-width:680px){
   #header { padding:0 1.4rem; }
-  .beta-hero,.about-inner { grid-template-columns:1fr; gap:2.5rem; padding:4rem 1.5rem 3rem; }
+  .beta-hero { grid-template-columns:1fr; gap:2.5rem; padding:4rem 1.5rem 3rem; }
+  .about-inner { padding:4rem 1.5rem 1rem; }
   .bh-visual { display:none; }
   .profiles-grid { grid-template-columns:1fr; }
   .prof-col:last-child { padding-left:0; border-left:none; border-top:0.5px solid rgba(0,0,0,0.07); padding-top:1.5rem; margin-top:1.5rem; }
-  .offer-grid { grid-template-columns:1fr 1fr; }
   .fg-row { grid-template-columns:1fr; }
   .bh-stats { gap:1.5rem; }
-  .about-right { padding-top:0; }
 }
 </style>
 </head>
@@ -325,7 +305,7 @@ footer.hero-footer {
     <div>
       <span class="bh-eye">FOUNDERS CIRCLE — EARLY ACCESS</span>
       <h2 class="bh-h">Shape the future of<br><em>fashion production.</em></h2>
-      <p class="bh-p">NEIRA is looking for 10 founding beta testers — fashion designers and factory directors — to co-build the technical infrastructure between design and manufacturing.</p>
+      <p class="bh-p">NEIRA is looking for 10 founding beta testers — designers and factory directors — to help build the technical infrastructure between design and manufacturing.</p>
       <div class="bh-stats">
         <div><span class="bs-n">10</span><span class="bs-l">SPOTS TOTAL</span></div>
         <div><span class="bs-n">∞</span><span class="bs-l">FREE LIFETIME</span></div>
@@ -338,55 +318,27 @@ footer.hero-footer {
 
   <div class="who-section">
     <div class="who-inner">
-      <span class="sec-eye">WHO WE'RE LOOKING FOR</span>
+      <span class="sec-eye">THE DETAILS</span>
       <div class="profiles-grid">
         <div class="prof-col">
-          <span class="prof-tag">FASHION DESIGNER</span>
-          <h3>Independent designers &amp; creative directors</h3>
-          <p>You create collections and spend hours building tech packs manually. You know the pain of miscommunication with factories.</p>
+          <span class="prof-tag">WHO IT'S FOR</span>
+          <h3>Designers &amp; factory directors</h3>
           <ul class="prof-list">
-            <li>Independent brand, 2–50 styles per season</li>
-            <li>Work directly with Korean or Asian factories</li>
-            <li>Frustrated by tech pack errors and back-and-forth</li>
-            <li>Open to testing new tools in your workflow</li>
+            <li>Independent designers, 2–50 styles per season</li>
+            <li>Small factories, 10–200 workers</li>
+            <li>Frustrated by tech pack errors and miscommunication</li>
           </ul>
         </div>
         <div class="prof-col">
-          <span class="prof-tag">FACTORY DIRECTOR</span>
-          <h3>Small textile factory directors &amp; managers</h3>
-          <p>You receive briefs every week that are incomplete or inconsistent. You lose time chasing specs before production starts.</p>
+          <span class="prof-tag">WHAT YOU GET</span>
+          <h3>Free access, real involvement</h3>
           <ul class="prof-list">
-            <li>Factory with 10–200 workers</li>
-            <li>Produce for independent or mid-size brands</li>
-            <li>Receive briefs in multiple formats and languages</li>
-            <li>Want standardized, factory-ready documentation</li>
+            <li>Free lifetime access — no cost, ever</li>
+            <li>Direct monthly line to Cloé</li>
+            <li>In return: 3 tech packs tested, weekly feedback, signed NDA</li>
           </ul>
         </div>
       </div>
-    </div>
-  </div>
-
-  <div class="offer-section">
-    <div class="offer-inner">
-      <span class="sec-eye">WHAT BETA TESTERS RECEIVE</span>
-      <div class="offer-grid">
-        <div class="offer-item"><span class="offer-num">01</span><h4>Free lifetime access</h4><p>Full access to NEIRA forever. No subscription, no hidden fees — ever.</p></div>
-        <div class="offer-item"><span class="offer-num">02</span><h4>Founding member status</h4><p>Your name in the product as a founding contributor. Early access to all new features.</p></div>
-        <div class="offer-item"><span class="offer-num">03</span><h4>Direct line to the founder</h4><p>Weekly direct access to Cloé. Your feedback shapes the product roadmap.</p></div>
-        <div class="offer-item"><span class="offer-num">04</span><h4>NDA protected</h4><p>Everything shared stays confidential. Your data, your designs, your factory information.</p></div>
-        <div class="offer-item"><span class="offer-num">05</span><h4>Korean market priority</h4><p>NEIRA is built first for Korea. Beta testers get priority factory network access.</p></div>
-        <div class="offer-item"><span class="offer-num">06</span><h4>Co-builder credit</h4><p>Documented contribution to NEIRA's development — useful for your portfolio and network.</p></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="commit-section">
-    <div class="commit-inner">
-      <span class="sec-eye">WHAT WE ASK IN RETURN</span>
-      <div class="c-item"><div class="c-n">1</div><div class="c-body"><strong>TEST REAL GARMENTS</strong><p>Test a minimum of 3 tech packs on real garments from your collection or production line</p></div></div>
-      <div class="c-item"><div class="c-n">2</div><div class="c-body"><strong>WEEKLY FEEDBACK</strong><p>Submit structured feedback via simple form — 10 minutes per week maximum</p></div></div>
-      <div class="c-item"><div class="c-n">3</div><div class="c-body"><strong>MONTHLY CALL</strong><p>One 30-minute video call per month with Cloé to review progress and share insights</p></div></div>
-      <div class="c-item"><div class="c-n">4</div><div class="c-body"><strong>SIGN NDA</strong><p>Mutual NDA to protect both your data and NEIRA's proprietary technology</p></div></div>
     </div>
   </div>
 
@@ -394,10 +346,7 @@ footer.hero-footer {
     <div class="form-inner">
       <h2>Apply to join</h2>
       <span class="form-sub">10 SPOTS ONLY — REVIEWED PERSONALLY BY CLOÉ</span>
-      <div class="fg-row">
-        <div class="fg"><label>FIRST NAME</label><input type="text" id="b-fname" placeholder="Minji"></div>
-        <div class="fg"><label>LAST NAME</label><input type="text" id="b-lname" placeholder="Kim"></div>
-      </div>
+      <div class="fg"><label>FULL NAME</label><input type="text" id="b-fname" placeholder="Minji Kim"></div>
       <div class="fg"><label>EMAIL</label><input type="email" id="b-email" placeholder="you@studio.com"></div>
       <div class="fg">
         <label>PROFILE</label>
@@ -410,8 +359,8 @@ footer.hero-footer {
         </select>
       </div>
       <div class="fg"><label>COMPANY / STUDIO / FACTORY</label><input type="text" id="b-company" placeholder="Studio Ahn / Textile Factory Seoul"></div>
-      <div class="fg"><label>WHY DO YOU WANT TO JOIN?</label><textarea id="b-why" placeholder="Tell us about your workflow and what you hope NEIRA can solve..."></textarea></div>
-      <div class="nda-note">By applying, you agree to sign a mutual NDA before accessing the product. Your information will never be shared with third parties.</div>
+      <div class="fg"><label>WHY NEIRA?</label><textarea id="b-why" placeholder="Tell us about your workflow and what you hope NEIRA can solve..."></textarea></div>
+      <div class="nda-note">By applying, you agree to a mutual NDA before accessing the product. Your information is never shared.</div>
       <div class="submit-wrap">
         <button class="beta-submit" id="beta-btn" onclick="submitBeta()">APPLY FOR BETA ACCESS</button>
         <p id="beta-msg"></p>
@@ -426,35 +375,14 @@ footer.hero-footer {
     <div class="about-left">
       <span class="ab-eye">ABOUT NEIRA</span>
       <h2>Fashion meets<br><em>infrastructure.</em></h2>
-      <p>NEIRA was born from a simple frustration: the gap between what a designer imagines and what a factory receives. Miscommunication, failed samples, endless back-and-forth — every fashion brand knows this pain.</p>
-      <p>We built NEIRA to be the technical layer that closes this gap. Not another design tool. Not another PLM. The missing infrastructure between creative intent and factory execution.</p>
-      <p>Based in Seoul, at the intersection of fashion manufacturing and technology — where the problem is most real.</p>
-    </div>
-    <div class="about-right">
-      <div class="ab-block">
-        <span class="ab-block-label">ANALOGY</span>
-        <div class="ab-block-val">Figma fixed the designer–developer gap.<br>NEIRA fixes the designer–factory gap.</div>
-      </div>
-      <div class="ab-block">
-        <span class="ab-block-label">TAGLINE</span>
-        <div class="ab-block-val">Your vision. Their language.</div>
-      </div>
-      <div class="ab-block">
-        <span class="ab-block-label">FOUNDER</span>
-        <div class="ab-block-val">Cloé Silberich — Fashion professional since 2018. Textile design & construction graduate. LVMH certificate. Seoul, Korea.</div>
-      </div>
-      <div class="ab-block">
-        <span class="ab-block-label">STAGE</span>
-        <div class="ab-block-val">Pre-seed · Pre-launch · Seoul 2026</div>
-      </div>
-      <div class="ab-block">
-        <span class="ab-block-label">CONTACT</span>
-        <div class="ab-block-val">cloe@neira.fit</div>
-      </div>
+      <p>NEIRA was born from a simple frustration: the gap between what a designer imagines and what a factory receives — miscommunication, failed samples, endless back-and-forth.</p>
+      <p>We built NEIRA to close that gap. Not another design tool, not another PLM — the missing infrastructure between creative intent and factory execution.</p>
+      <div class="about-quote">"Your vision. Their language."</div>
+      <p>NEIRA is built by Cloé Silberich, a fashion professional since 2018 — textile design &amp; construction graduate, LVMH certificate — based in Seoul, Korea.</p>
     </div>
   </div>
   <div class="about-bottom">
-    <p>NEIRA is currently in private beta. We are building with a small group of <strong>fashion designers and factory directors</strong> who share the belief that the fashion supply chain deserves better infrastructure. If that's you — <strong>we'd like to hear from you.</strong></p>
+    <p>Built in private beta with fashion designers and factory directors. If that's you, <strong>we'd like to hear from you</strong> — <a class="about-contact" href="mailto:cloe@neira.fit">cloe@neira.fit</a></p>
   </div>
 </section>
 
@@ -536,10 +464,10 @@ bcam.position.set(0,0,5);
 function rbeta(){const p=bc.parentElement;br.setSize(p.clientWidth,p.clientHeight);bcam.aspect=p.clientWidth/p.clientHeight;bcam.updateProjectionMatrix();}
 rbeta(); window.addEventListener('resize',rbeta);
 
-const bsm=new THREE.MeshBasicMaterial({color:0x7c5cbf,wireframe:true,opacity:0.08,transparent:true});
+const bsm=new THREE.MeshBasicMaterial({color:0x2f5f8f,wireframe:true,opacity:0.08,transparent:true});
 const bsp=new THREE.Mesh(new THREE.SphereGeometry(1.8,14,10),bsm);
 const bjm=new THREE.LineBasicMaterial({color:0x1a1a1a,opacity:0.18,transparent:true});
-const bam=new THREE.LineBasicMaterial({color:0x7c5cbf,opacity:0.5,transparent:true});
+const bam=new THREE.LineBasicMaterial({color:0x4a90c4,opacity:0.5,transparent:true});
 function bp(...c){const v=[];for(let i=0;i<c.length;i+=3)v.push(new THREE.Vector3(c[i],c[i+1],c[i+2]));return v;}
 function bl(m,...c){return new THREE.Line(new THREE.BufferGeometry().setFromPoints(bp(...c)),m);}
 function blo(m,...c){const p=bp(...c);p.push(p[0].clone());return new THREE.Line(new THREE.BufferGeometry().setFromPoints(p),m);}
@@ -592,11 +520,11 @@ async function submitBeta(){
   if(!fname||!email||!profile||!company){msg.textContent='Please fill in all required fields.';msg.style.color='#999';return;}
   btn.disabled=true; btn.textContent='...'; msg.textContent='';
   try{
-    const res=await fetch('https://formspree.io/f/xqegjqdw',{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify({name:fname+' '+document.getElementById('b-lname').value.trim(),email,profile,company,message:why,type:'beta',_subject:'NEIRA Beta — '+profile})});
+    const res=await fetch('https://formspree.io/f/xqegjqdw',{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify({name:fname,email,profile,company,message:why,type:'beta',_subject:'NEIRA Beta — '+profile})});
     if(res.ok){
       msg.textContent='Application received. Cloé will be in touch within 48h.';
-      msg.style.color='#7c5cbf';
-      ['b-fname','b-lname','b-email','b-company','b-why'].forEach(id=>document.getElementById(id).value='');
+      msg.style.color='#2f5f8f';
+      ['b-fname','b-email','b-company','b-why'].forEach(id=>document.getElementById(id).value='');
       document.getElementById('b-profile').value='';
     }else throw new Error();
   }catch{msg.textContent='Something went wrong. Email: cloe@neira.fit';msg.style.color='#999';}
