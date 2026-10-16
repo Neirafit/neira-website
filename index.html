@@ -1,535 +1,630 @@
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NEIRA — Fashion Infrastructure</title>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>NEIRA Beta</title>
+<meta name="description" content="Describe your garment your way. NEIRA rewrites it in the factory's language, asks what you forgot, and brings back quotes. Private beta, Seoul.">
+<script>document.documentElement.className='js';</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; }
-body { background:#000; color:#fff; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; overflow-x:hidden; }
+:root{
+  --paper:#efeeea; --paper2:#e6e5e0; --card:#fbfaf7; --ink:#121211; --ink2:#53524e; --mute:#8d8c86;
+  --dark:#161615; --cobalt:#2f5f8f; --bordeaux:#7b1e2f; --bordeaux-lt:#c0495f; --line:rgba(18,18,17,.14);
+  --sans:"Geist",-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;
+  --mono:"Geist Mono","SF Mono",ui-monospace,Menlo,Consolas,monospace;
+  --ko:"Pretendard Variable",Pretendard,"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:68px;-webkit-text-size-adjust:100%}
+html{background:var(--paper)}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;opacity:.05;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+::selection{background:var(--bordeaux);color:var(--paper)}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+:focus-visible{outline:2px solid var(--bordeaux);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1160px;margin:0 auto}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase;line-height:1.5}
 
-/* ── HEADER FIXE ── */
-#header {
-  position:fixed; top:0; left:0; right:0; z-index:200;
-  display:flex; justify-content:space-between; align-items:center;
-  padding:0 2.8rem;
-  height:52px;
-  background:rgba(0,0,0,0.85);
-  backdrop-filter:blur(16px);
-  border-bottom:0.5px solid rgba(255,255,255,0.08);
-  transition:background 0.3s, border-color 0.3s;
-}
-#header.light {
-  background:rgba(248,247,243,0.96);
-  border-bottom:0.5px solid rgba(0,0,0,0.08);
-}
-.h-logo {
-  font-family:'Josefin Sans',sans-serif;
-  font-size:0.9rem; font-weight:200;
-  letter-spacing:0.22em; color:#fff; cursor:pointer;
-}
-#header.light .h-logo { color:#1a1a1a; }
+/* nav */
+#nav{position:fixed;top:0;left:0;right:0;z-index:80;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 max(22px,calc((100vw - 1160px)/2));background:rgba(239,238,234,.78);-webkit-backdrop-filter:saturate(160%) blur(18px);backdrop-filter:saturate(160%) blur(18px);border-bottom:1px solid var(--line)}
+.wordmark{display:flex;align-items:center;color:var(--ink);line-height:0}
+.logo{height:26px;width:auto;aspect-ratio:861/317;display:block}
+.nav-r{display:flex;align-items:center;gap:26px}
+.nl{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2);transition:color .15s}
+.nl:hover{color:var(--ink)}
+.lang{font-family:var(--mono);font-size:11.5px;display:flex;gap:2px;align-items:center}
+.lang button{border:none;background:none;font:inherit;color:var(--mute);padding:4px 6px;cursor:pointer;letter-spacing:.06em}
+.lang button.active{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--ink);color:var(--paper);border:none;border-radius:999px;font-size:15px;font-weight:500;padding:10px 20px;cursor:pointer;transition:background .2s,transform .2s;white-space:nowrap}
+.btn:hover{background:var(--bordeaux)}
+.btn:active{transform:scale(.97)}
+.btn:disabled{opacity:.5;cursor:default}
+.btn.lg{font-size:17px;padding:15px 30px}
+.btn.block{width:100%;font-size:16px;padding:16px}
 
-.h-nav { display:flex; align-items:center; gap:2.4rem; }
-.h-link {
-  font-size:0.6rem; letter-spacing:0.2em;
-  color:rgba(255,255,255,0.45);
-  background:none; border:none; cursor:pointer;
-  font-family:'Josefin Sans',sans-serif; font-weight:200;
-  position:relative; padding-bottom:2px;
-  transition:color 0.2s;
-}
-.h-link::after {
-  content:''; position:absolute; bottom:0; left:0;
-  width:0; height:0.5px; background:currentColor;
-  transition:width 0.3s;
-}
-.h-link:hover { color:rgba(255,255,255,0.9); }
-.h-link:hover::after { width:100%; }
-#header.light .h-link { color:rgba(0,0,0,0.38); }
-#header.light .h-link:hover { color:#1a1a1a; }
+/* hero */
+#hero{padding:112px 22px 40px;overflow-x:clip}
+.meta-row{display:flex;justify-content:space-between;gap:20px;color:var(--ink2)}
+.meta-row .mono:last-child{text-align:right}
+.hero-core{position:relative;text-align:center;padding:84px 0 70px}
+.hero-core>*:not(canvas){position:relative;z-index:1}
+#sphere{position:absolute;z-index:0;left:50%;top:50%;width:min(860px,118vw);height:min(860px,118vw);transform:translate(-50%,-50%);pointer-events:none}
+.js #sphere{animation:fadein 1.6s .2s ease both}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+.h1{font-weight:500;font-size:clamp(2.8rem,8vw,6.6rem);line-height:1;letter-spacing:-.055em;max-width:9.4em;margin:0 auto;text-wrap:balance}
+.h1 .g{color:var(--bordeaux)}
+.sub{font-size:clamp(1.05rem,1.8vw,1.3rem);line-height:1.45;color:var(--ink2);max-width:30em;margin:28px auto 36px;letter-spacing:-.01em}
+.capture{display:flex;align-items:center;max-width:470px;margin:0 auto;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px;transition:border-color .2s,box-shadow .2s}
+.capture:focus-within{border-color:var(--ink);box-shadow:0 0 0 4px rgba(18,18,17,.08)}
+.capture input{flex:1;min-width:0;border:none;outline:none;background:transparent;font:inherit;font-size:16px;padding:0 18px;color:var(--ink)}
+.capture input::placeholder{color:var(--mute)}
+.capture .btn{padding:12px 22px}
+.hnote{margin-top:16px;color:var(--mute);min-height:1.4em}
+.js .rise{opacity:0;animation:rise 1s cubic-bezier(.2,.7,.2,1) forwards}
+.r1{animation-delay:.05s!important}.r2{animation-delay:.14s!important}.r3{animation-delay:.26s!important}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 
-/* ── CANVAS ── */
-#canvas-bg {
-  position:fixed; top:0; left:0;
-  width:100%; height:100%; z-index:0;
-}
+/* binder strip of polaroids */
+.strip-wrap{overflow-x:auto;overflow-y:visible;padding:26px 8px 40px;margin:0 -8px;scrollbar-width:none}
+.strip-wrap::-webkit-scrollbar{display:none}
+.strip{display:grid;grid-template-columns:repeat(4,minmax(220px,1fr));gap:40px;min-width:960px;align-items:start}
+.pol{position:relative;background:var(--card);padding:9px 9px 12px;border-radius:3px;box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 14px 30px -12px rgba(18,18,17,.35),0 2px 6px rgba(18,18,17,.12);transform:rotate(var(--rot,0deg)) translateY(var(--dy,0));transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.pol:hover{transform:rotate(0deg) translateY(-8px)}
+.pol:nth-child(1){--rot:-1.6deg;--dy:8px}.pol:nth-child(2){--rot:1deg;--dy:-6px}.pol:nth-child(3){--rot:-.8deg;--dy:4px}.pol:nth-child(4){--rot:1.8deg;--dy:-2px}
+.pol:not(:first-child)::before,.pol:not(:first-child)::after{content:"";position:absolute;left:-30px;width:44px;height:15px;border:2.5px solid #1c1c1b;border-radius:10px;background:transparent;z-index:2;box-shadow:0 1px 2px rgba(0,0,0,.25)}
+.pol:not(:first-child)::before{top:24%}.pol:not(:first-child)::after{top:70%}
+.js .pol{opacity:0;animation:drop .9s cubic-bezier(.2,.7,.2,1) forwards}
+.js .pol:nth-child(1){animation-delay:.45s}.js .pol:nth-child(2){animation-delay:.6s}.js .pol:nth-child(3){animation-delay:.75s}.js .pol:nth-child(4){animation-delay:.9s}
+@keyframes drop{from{opacity:0;transform:rotate(calc(var(--rot,0deg) * 3)) translateY(34px)}to{opacity:1;transform:rotate(var(--rot,0deg)) translateY(var(--dy,0))}}
+.shot{height:300px;border-radius:2px;overflow:hidden;position:relative}
+.shot.paper{background:linear-gradient(180deg,#ebeae5,#e1e0da)}
+.shot.dark{background:radial-gradient(120% 90% at 30% 0%,#4a4a47,#1f1f1e 70%);color:#f3f2ee}
+.cap{display:flex;justify-content:space-between;padding:11px 3px 0;color:var(--ink2)}
+.shot svg{display:block;width:100%;height:100%}
+.hand{font-family:Georgia,"Times New Roman",serif;font-style:italic;fill:#121211;fill-opacity:.7}
+.brief{padding:20px 18px;font-family:var(--mono);font-size:12.5px;line-height:1.65;color:#262624;text-transform:none;letter-spacing:0}
+.brief b{display:block;font-weight:500;color:var(--mute);margin-bottom:12px;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+.brief .att{margin-top:16px;border:1px dashed rgba(18,18,17,.35);border-radius:4px;padding:8px 10px;color:var(--ink2)}
+.tk{padding:14px 15px;height:100%;background:#fff;display:flex;flex-direction:column;font-family:var(--ko)}
+.tk h5{font-size:12.5px;font-weight:700;padding-bottom:9px;border-bottom:1.5px solid var(--ink);display:flex;justify-content:space-between;align-items:baseline}
+.tk h5 span{font-family:var(--mono);font-weight:400;font-size:9.5px;color:var(--mute)}
+.tk .r{display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px solid var(--line);font-size:12.5px}
+.tk .r em{font-style:normal;color:var(--mute)}
+.tk .r b{font-weight:600;text-align:right}
+.tk .fl{margin-top:auto;border:1.5px solid var(--bordeaux);background:rgba(123,30,47,.06);border-radius:6px;padding:8px 10px;font-size:11.5px;line-height:1.35}
+.tk .fl strong{display:block;color:var(--bordeaux);font-weight:700}
+.tk .fl small{display:block;color:var(--ink2);font-size:10.5px;margin-top:3px;font-family:var(--sans)}
+.qs{padding:22px 18px;height:100%;display:flex;flex-direction:column;justify-content:flex-end;gap:2px}
+.qs h5{font-family:var(--mono);font-weight:400;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:rgba(243,242,238,.6);margin-bottom:auto}
+.q{display:flex;justify-content:space-between;align-items:baseline;padding:13px 0;border-top:1px solid rgba(243,242,238,.22);font-size:19px;font-weight:500;letter-spacing:-.02em}
+.q small{font-family:var(--mono);font-size:10.5px;font-weight:400;letter-spacing:.04em;text-transform:uppercase;color:rgba(243,242,238,.65)}
+.q.on small{color:#fff}
+.strip-note{text-align:center;color:var(--mute);margin-top:6px}
 
-/* ── HERO WAITLIST ── */
-#hero {
-  position:relative; z-index:1;
-  min-height:100vh;
-  display:flex; flex-direction:column;
-}
-.vert-top {
-  position:fixed; top:0; left:50%; transform:translateX(-50%);
-  width:1px; height:90px;
-  background:linear-gradient(to bottom,transparent,rgba(255,255,255,0.12)); z-index:0;
-}
-.vert-bottom {
-  position:fixed; bottom:0; left:50%; transform:translateX(-50%);
-  width:1px; height:90px;
-  background:linear-gradient(to top,transparent,rgba(255,255,255,0.12)); z-index:0;
-}
-nav.hero-nav {
-  display:flex; justify-content:space-between; align-items:flex-start;
-  padding:2.2rem 2.8rem 0;
-  visibility:hidden;
-}
-.logo-h {
-  font-family:'Josefin Sans',sans-serif;
-  font-size:1.1rem; font-weight:200;
-  letter-spacing:0.12em; color:#fff; text-transform:uppercase;
-}
-.nav-right { font-size:0.72rem; letter-spacing:0.18em; color:rgba(255,255,255,0.45); }
+/* sections */
+.sec{padding:140px 22px}
+.eyebrow{color:var(--bordeaux)}
+.h2{font-weight:500;font-size:clamp(2.2rem,5.6vw,4.6rem);line-height:1.02;letter-spacing:-.05em;max-width:12.5em}
+.h2 .g{color:var(--bordeaux)}
+.js .reveal{opacity:0;transform:translateY(24px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
+.js .reveal.in{opacity:1;transform:none}
 
-.hero-main {
-  flex:1; display:flex; flex-direction:column;
-  align-items:center; justify-content:center;
-  text-align:center; padding:0 2rem;
-}
-.eyebrow { font-size:0.68rem; letter-spacing:0.28em; color:rgba(255,255,255,0.35); margin-bottom:2.4rem; }
-.headline { font-size:clamp(3rem,8vw,5.8rem); font-weight:300; line-height:1.05; }
-.headline span.dim { color:rgba(255,255,255,0.28); }
-.divider { width:2rem; height:1px; background:rgba(255,255,255,0.22); margin:2.4rem auto; }
-.subline { font-size:0.9rem; color:rgba(255,255,255,0.45); letter-spacing:0.04em; line-height:1.7; margin-bottom:3rem; }
+/* dark editorial panel */
+.dk{position:relative;background:var(--dark);color:#f3f2ee;overflow:hidden;padding:36px 22px 56px;min-height:1020px}
+.dk::before{content:"";position:absolute;inset:0;background:radial-gradient(70% 60% at 72% 42%,rgba(255,255,255,.10),transparent 70%),radial-gradient(50% 50% at 18% 90%,rgba(255,255,255,.05),transparent 70%)}
+.dk .wrap{position:relative;min-height:920px}
+.dk-top{display:flex;justify-content:space-between;color:rgba(243,242,238,.65);gap:20px}
+.dk h2{font-weight:500;font-size:clamp(2.1rem,5.2vw,4.2rem);line-height:1.04;letter-spacing:-.05em;max-width:12em;margin-top:56px;position:relative;z-index:2}
+.dk h2 .g{color:var(--bordeaux-lt)}
+.dk-sil{position:absolute;right:-30px;top:270px;width:min(560px,56vw);opacity:.95;z-index:1}
+.dk-sil svg{display:block;width:100%;height:auto}
+.lb{position:absolute;z-index:3;display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:rgba(243,242,238,.82);white-space:nowrap}
+.lb::before{content:"";width:6px;height:6px;border-radius:50%;background:#f3f2ee;flex:none}
+.lb em{font-style:normal;font-family:var(--ko);color:#fff}
+.js .lb{opacity:0;transition:opacity .9s ease,transform .9s ease;transform:translateY(8px);transition-delay:var(--d,0s)}
+.js .dk.in .lb{opacity:1;transform:none}
+.dk-note{position:absolute;left:0;top:310px;max-width:21em;z-index:3;color:rgba(243,242,238,.85);text-transform:none;font-size:14px;letter-spacing:0;line-height:1.6}
+.dk-bot{position:absolute;left:0;right:0;bottom:0;z-index:3}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;border-top:1px solid rgba(243,242,238,.22);padding-top:26px}
+.stat-n{font-size:clamp(1.9rem,4vw,3rem);font-weight:500;letter-spacing:-.045em;line-height:1}
+.stat-t{margin-top:12px;color:rgba(243,242,238,.68);font-size:15px;line-height:1.4;max-width:17em}
+.src{margin-top:26px;color:rgba(243,242,238,.45);text-transform:none;letter-spacing:0;font-size:11px}
 
-.waitlist { display:flex; flex-direction:column; align-items:center; gap:1rem; width:100%; max-width:360px; }
-.waitlist input {
-  width:100%; background:transparent; border:none;
-  border-bottom:1px solid rgba(255,255,255,0.25); color:#fff;
-  font-size:0.85rem; letter-spacing:0.06em; padding:0.7rem 0;
-  text-align:center; outline:none; transition:border-color 0.3s;
-}
-.waitlist input::placeholder { color:rgba(120,170,230,0.65); }
-.waitlist input:focus { border-bottom-color:rgba(255,255,255,0.6); }
-.waitlist button {
-  width:100%; background:transparent;
-  border:1px solid rgba(255,255,255,0.35); border-radius:999px;
-  color:#fff; font-size:0.7rem; letter-spacing:0.22em;
-  padding:1rem 2rem; cursor:pointer; font-family:inherit;
-  transition:background 0.3s,border-color 0.3s;
-}
-.waitlist button:hover { background:rgba(255,255,255,0.07); border-color:rgba(255,255,255,0.6); }
-.waitlist button:disabled { opacity:0.4; cursor:default; }
-#wl-msg { font-size:0.72rem; letter-spacing:0.1em; color:rgba(255,255,255,0.4); min-height:1.2rem; }
+/* how */
+.how-list{margin-top:80px;border-top:1px solid var(--ink)}
+.how{display:grid;grid-template-columns:90px 1.2fr 1fr;gap:24px;align-items:baseline;padding:40px 0 44px;border-bottom:1px solid var(--line)}
+.how .idx{color:var(--bordeaux)}
+.how h3{font-weight:500;font-size:clamp(1.9rem,4.2vw,3.4rem);letter-spacing:-.05em;line-height:1.02}
+.how p{color:var(--ink2);max-width:25em;font-size:18px;line-height:1.45}
 
-.scroll-hint {
-  display:flex; flex-direction:column; align-items:center; gap:8px;
-  padding:1.5rem 0 0; cursor:pointer; opacity:0.28; transition:opacity 0.2s;
+/* sides */
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:0;border-top:1px solid var(--ink)}
+.side{padding:44px 40px 52px 0}
+.side+.side{padding:44px 0 52px 40px;border-left:1px solid var(--line)}
+.side h3{font-weight:500;font-size:clamp(1.7rem,3vw,2.3rem);letter-spacing:-.04em;line-height:1.08;margin:18px 0 26px;max-width:11em}
+.side ul{list-style:none}
+.side li{padding:13px 0;border-top:1px solid var(--line);font-size:17px;display:flex;gap:12px}
+.side li::before{content:"+";font-family:var(--mono);color:var(--bordeaux)}
+
+/* founder */
+.founder{background:var(--paper2)}
+.f-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:60px;align-items:start}
+.fq{font-weight:500;font-size:clamp(1.9rem,4.2vw,3.2rem);line-height:1.08;letter-spacing:-.045em}
+.fname{font-weight:500;font-size:20px;letter-spacing:-.02em}
+.frole{color:var(--bordeaux);margin-top:2px}
+.fp{margin-top:22px;color:var(--ink2);max-width:30em}
+.fec{margin-top:22px;color:var(--mute)}
+
+/* beta */
+.beta-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.beta-grid .lead{font-size:1.2rem;color:var(--ink2);margin:22px 0 36px;max-width:24em;letter-spacing:-.01em}
+.lists{display:grid;gap:30px}
+.list .mono{display:block;color:var(--ink);padding-bottom:10px;border-bottom:1px solid var(--ink)}
+.list ul{list-style:none}
+.list li{padding:11px 0;border-bottom:1px solid var(--line);font-size:16.5px;line-height:1.35}
+.formcard{position:relative;background:var(--card);border:1px solid var(--line);border-radius:4px;padding:52px 38px 38px;box-shadow:0 22px 40px -22px rgba(18,18,17,.4)}
+.formcard::before,.formcard::after{content:"";position:absolute;top:-8px;width:15px;height:44px;border:2.5px solid #1c1c1b;border-radius:10px;background:transparent}
+.formcard::before{left:22%}.formcard::after{left:68%}
+.formcard h3{font-weight:500;font-size:2rem;letter-spacing:-.045em;line-height:1.05}
+.fsub{color:var(--ink2);margin:8px 0 28px;font-size:15px}
+.field{margin-bottom:18px}
+.field label{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink2);margin-bottom:7px}
+.field input,.field select{width:100%;background:transparent;border:none;border-bottom:1px solid var(--ink);border-radius:0;padding:9px 0 10px;font:inherit;font-size:16.5px;color:var(--ink);outline:none;transition:border-color .2s;-webkit-appearance:none;appearance:none}
+.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' fill='none' stroke='%23121211' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 2px center;padding-right:28px}
+.field input:focus,.field select:focus{border-color:var(--bordeaux);box-shadow:0 1px 0 var(--bordeaux)}
+.field input::placeholder{color:var(--mute)}
+.fnote{font-size:12.5px;color:var(--mute);margin-top:16px;line-height:1.5}
+#form-msg{font-size:14px;margin-top:12px;min-height:1.4em;color:var(--ink2)}
+
+/* signoff + footer */
+.signoff{text-align:center;padding:60px 22px 90px}
+.logo-lg{height:clamp(56px,9vw,100px);width:auto;aspect-ratio:861/317;display:inline-block;color:var(--ink)}
+.so-line{margin-top:22px;color:var(--ink2)}
+footer{padding:0 22px 34px}
+.foot{max-width:1160px;margin:0 auto;border-top:1px solid var(--ink);padding-top:16px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;color:var(--ink2)}
+.foot a:hover{color:var(--ink)}
+
+/* korean */
+html[lang="ko"]{word-break:keep-all}
+html[lang="ko"] body{font-family:var(--ko)}
+html[lang="ko"] .h1,html[lang="ko"] .h2,html[lang="ko"] .dk h2,html[lang="ko"] .how h3,html[lang="ko"] .side h3,html[lang="ko"] .fq,html[lang="ko"] .formcard h3,html[lang="ko"] .stat-n{font-family:var(--ko);font-weight:700;letter-spacing:-.04em}
+html[lang="ko"] .h1{line-height:1.14;font-size:clamp(2.4rem,7vw,5.4rem)}
+html[lang="ko"] .h2,html[lang="ko"] .dk h2{line-height:1.2}
+html[lang="ko"] .fq,html[lang="ko"] .how h3{line-height:1.25}
+html[lang="ko"] .mono,html[lang="ko"] .nl,html[lang="ko"] .lang,html[lang="ko"] .field label,html[lang="ko"] .lb,html[lang="ko"] .q small,html[lang="ko"] .qs h5{font-family:var(--ko);letter-spacing:.02em;text-transform:none}
+html[lang="ko"] .brief{font-family:var(--mono)}
+html[lang="ko"] .btn{font-family:var(--ko)}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .js .rise,.js .pol,.js #sphere{animation:none;opacity:1}
+  .js .reveal,.js .lb{opacity:1;transform:none;transition:none}
+  .pol,.pol:hover{transition:none}
 }
-.scroll-hint:hover { opacity:0.6; }
-.scroll-hint span { font-size:0.52rem; letter-spacing:0.24em; color:#fff; }
-.scroll-line { width:0.5px; height:28px; background:linear-gradient(to bottom,transparent,rgba(255,255,255,0.6)); animation:pulse 2.2s infinite; }
-@keyframes pulse { 0%,100%{opacity:0.2}50%{opacity:1} }
-
-footer.hero-footer {
-  display:flex; justify-content:space-between;
-  padding:0 2.8rem 1.8rem;
-  font-size:0.62rem; letter-spacing:0.16em; color:rgba(255,255,255,0.22);
-  position:relative; z-index:1;
-}
-
-/* ══════════════════════════════
-   SECTIONS CLAIRES
-══════════════════════════════ */
-#beta, #about { position:relative; z-index:2; }
-
-/* ── BETA ── */
-#beta { background:#f8f7f3; color:#1a1a1a; font-family:'Josefin Sans',sans-serif; font-weight:200; }
-
-.beta-hero {
-  max-width:1060px; margin:0 auto;
-  padding:5rem 3rem 4rem;
-  display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center;
-  border-bottom:0.5px solid rgba(0,0,0,0.07);
-}
-.bh-eye { font-size:0.58rem; letter-spacing:0.3em; color:rgba(0,0,0,0.48); display:block; margin-bottom:1.2rem; }
-.bh-h {
-  font-family:'EB Garamond',serif; font-size:clamp(2.4rem,4vw,3.6rem);
-  font-weight:400; line-height:1.1; margin-bottom:1.2rem; color:#1a1a1a;
-}
-.bh-h em { font-style:italic; color:#2f5f8f; }
-.bh-p { font-size:0.82rem; color:rgba(0,0,0,0.62); line-height:1.85; margin-bottom:2.4rem; }
-.bh-stats { display:flex; gap:2.5rem; margin-bottom:2.5rem; }
-.bs-n { font-family:'EB Garamond',serif; font-size:3.2rem; color:#1a1a1a; display:block; line-height:1; }
-.bs-l { font-size:0.55rem; letter-spacing:0.22em; color:rgba(0,0,0,0.45); display:block; margin-top:4px; }
-.bh-btn {
-  background:#1a1a1a; color:#fff; border:none;
-  padding:13px 36px; font-size:0.62rem; letter-spacing:0.24em;
-  cursor:pointer; font-family:'Josefin Sans',sans-serif; font-weight:200;
-  transition:background 0.2s;
-}
-.bh-btn:hover { background:#333; }
-.bh-visual { display:flex; align-items:center; justify-content:center; }
-#beta-canvas { width:260px; height:260px; display:block; }
-
-/* WHO */
-.who-section { padding:3.5rem 3rem; border-bottom:0.5px solid rgba(0,0,0,0.07); background:#fff; }
-.who-inner { max-width:860px; margin:0 auto; }
-.sec-eye { font-size:0.58rem; letter-spacing:0.26em; color:rgba(0,0,0,0.48); display:block; margin-bottom:2.2rem; font-weight:300; }
-.profiles-grid { display:grid; grid-template-columns:1fr 1fr; }
-.prof-col { padding-right:2.5rem; }
-.prof-col:last-child { padding-right:0; padding-left:2.5rem; border-left:0.5px solid rgba(0,0,0,0.07); }
-.prof-tag { font-size:0.55rem; letter-spacing:0.22em; color:rgba(0,0,0,0.68); display:block; margin-bottom:0.8rem; }
-.prof-col h3 { font-family:'EB Garamond',serif; font-size:1.55rem; font-weight:400; line-height:1.25; margin-bottom:0.8rem; color:#1a1a1a; }
-.prof-col p { font-size:0.8rem; color:rgba(0,0,0,0.48); line-height:1.8; margin-bottom:1.2rem; }
-.prof-list { list-style:none; }
-.prof-list li { font-size:0.8rem; color:#242424; padding:5px 0; border-bottom:0.5px solid rgba(0,0,0,0.05); display:flex; gap:10px; line-height:1.55; }
-.prof-list li::before { content:'—'; color:rgba(0,0,0,0.3); flex-shrink:0; }
-
-/* FORM */
-.form-section { padding:5rem 3rem; background:#f8f7f3; }
-.form-inner { max-width:500px; margin:0 auto; }
-.form-inner h2 { font-family:'EB Garamond',serif; font-size:2.6rem; font-weight:400; text-align:center; color:#1a1a1a; margin-bottom:0.4rem; }
-.form-sub { font-size:0.55rem; letter-spacing:0.22em; color:rgba(0,0,0,0.42); text-align:center; display:block; margin-bottom:3rem; }
-.fg { margin-bottom:1.6rem; }
-.fg label { display:block; font-size:0.52rem; letter-spacing:0.2em; color:rgba(0,0,0,0.5); margin-bottom:6px; }
-.fg input,.fg select,.fg textarea {
-  width:100%; background:transparent; border:none;
-  border-bottom:0.5px solid rgba(0,0,0,0.15);
-  padding:0.6rem 0; font-size:0.88rem; color:#1a1a1a; outline:none;
-  font-family:'Josefin Sans',sans-serif; font-weight:200;
-  transition:border-color 0.25s; letter-spacing:0.04em;
-  border-radius:0; -webkit-appearance:none;
-}
-.fg input:focus,.fg select:focus,.fg textarea:focus { border-bottom-color:rgba(0,0,0,0.5); }
-.fg textarea { resize:none; height:75px; line-height:1.7; }
-.fg-row { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; }
-.nda-note { font-size:0.62rem; color:rgba(0,0,0,0.45); line-height:1.8; border-top:0.5px solid rgba(0,0,0,0.08); padding-top:1rem; margin-bottom:1.8rem; }
-.submit-wrap { text-align:center; }
-.beta-submit { background:#1a1a1a; color:#fff; border:none; padding:1rem 3.5rem; font-size:0.6rem; letter-spacing:0.26em; cursor:pointer; font-family:'Josefin Sans',sans-serif; font-weight:200; transition:background 0.2s; }
-.beta-submit:hover { background:#333; }
-.beta-submit:disabled { background:#ccc; cursor:default; }
-#beta-msg { text-align:center; font-size:0.65rem; margin-top:1rem; min-height:1rem; }
-
-/* ── ABOUT ── */
-#about { background:#1a1a1a; color:#fff; font-family:'Josefin Sans',sans-serif; font-weight:200; }
-
-.about-inner {
-  max-width:640px; margin:0 auto;
-  padding:6rem 3rem 2rem;
-}
-.about-left .ab-eye { font-size:0.55rem; letter-spacing:0.28em; color:rgba(255,255,255,0.3); display:block; margin-bottom:1.4rem; }
-.about-left h2 { font-family:'EB Garamond',serif; font-size:clamp(2rem,3.5vw,3rem); font-weight:400; line-height:1.15; color:#fff; margin-bottom:1.4rem; }
-.about-left h2 em { font-style:italic; color:#6fa3d8; }
-.about-left p { font-size:0.85rem; color:rgba(255,255,255,0.5); line-height:1.9; margin-bottom:1.2rem; }
-.about-quote {
-  font-family:'EB Garamond',serif; font-style:italic;
-  font-size:1.35rem; color:#8fbde0; line-height:1.5;
-  margin:2.4rem 0; padding-left:1.3rem;
-  border-left:1px solid rgba(111,163,216,0.4);
-}
-.about-contact { color:#8fbde0; text-decoration:none; border-bottom:0.5px solid rgba(143,189,224,0.4); transition:border-color 0.2s; }
-.about-contact:hover { border-color:rgba(143,189,224,0.9); }
-
-.about-bottom {
-  max-width:640px; margin:0 auto;
-  padding:0 3rem 4rem;
-  border-top:0.5px solid rgba(255,255,255,0.06);
-}
-.about-bottom p { font-size:0.78rem; color:rgba(255,255,255,0.35); line-height:1.9; padding-top:2.5rem; }
-.about-bottom strong { color:rgba(255,255,255,0.6); font-weight:200; }
-
-/* ── SITE FOOTER ── */
-#site-footer {
-  background:#111; border-top:0.5px solid rgba(255,255,255,0.06);
-  padding:1.6rem 3rem; display:flex; justify-content:space-between;
-  font-size:0.52rem; letter-spacing:0.18em; color:rgba(255,255,255,0.18);
-  position:relative; z-index:2;
-}
-
-@media(max-width:680px){
-  #header { padding:0 1.4rem; }
-  .beta-hero { grid-template-columns:1fr; gap:2.5rem; padding:4rem 1.5rem 3rem; }
-  .about-inner { padding:4rem 1.5rem 1rem; }
-  .bh-visual { display:none; }
-  .profiles-grid { grid-template-columns:1fr; }
-  .prof-col:last-child { padding-left:0; border-left:none; border-top:0.5px solid rgba(0,0,0,0.07); padding-top:1.5rem; margin-top:1.5rem; }
-  .fg-row { grid-template-columns:1fr; }
-  .bh-stats { gap:1.5rem; }
+@media (max-width:900px){
+  .nl{display:none}
+  .nav-r{gap:14px}
+  #hero{padding-top:92px}
+  .hero-core{padding:56px 0 44px}
+  .sec{padding:92px 22px}
+  .how{grid-template-columns:1fr;gap:12px;padding:30px 0 34px}
+  .pair,.beta-grid,.f-grid{grid-template-columns:1fr;gap:34px}
+  .side,.side+.side{padding:34px 0 36px;border-left:none}
+  .side+.side{border-top:1px solid var(--line)}
+  .stats{grid-template-columns:1fr;gap:20px}
+  .dk{min-height:0}
+  .dk .wrap{min-height:0}
+  .dk-sil{position:relative;right:auto;top:auto;width:100%;margin:20px 0 6px}
+  .dk-note{position:relative;top:auto;margin-top:26px}
+  .lb{display:none}
+  .dk-bot{position:relative;margin-top:36px}
+  .formcard{padding:46px 24px 30px}
+  .meta-row .mono:nth-child(2){display:none}
 }
 </style>
-</head>
-<body>
 
-<!-- HEADER FIXE -->
-<header id="header">
-  <div class="h-logo" onclick="document.getElementById('hero').scrollIntoView({behavior:'smooth'})">NEIRA</div>
-  <nav class="h-nav">
-    <button class="h-link" onclick="document.getElementById('hero').scrollIntoView({behavior:'smooth'})">WAITLIST</button>
-    <button class="h-link" onclick="document.getElementById('beta').scrollIntoView({behavior:'smooth'})">BETA</button>
-    <button class="h-link" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">ABOUT</button>
-  </nav>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="neira-logo" viewBox="0 0 1722 634"><path fill="currentColor" fill-rule="evenodd" d="M614.5,623.0C596.5,620.6 570.6,612.4 558.5,605.3C555.2,603.3 551.1,600.9 549.4,599.9C531.3,589.7 507.1,567.6 496.4,551.7C485.2,534.9 478.0,522.6 478.0,520.1C478.0,519.5 476.3,515.3 474.1,510.8C472.0,506.2 469.7,500.7 469.0,498.5C468.3,496.3 467.4,494.0 466.9,493.5C466.1,492.4 460.7,470.4 459.5,463.0C459.1,460.5 458.1,456.7 457.3,454.5C455.4,449.1 452.5,412.2 452.6,393.5C452.6,374.3 455.5,336.9 457.4,330.9C458.2,328.4 459.4,322.8 460.0,318.5C460.6,314.3 461.8,309.0 462.6,306.8C463.4,304.6 464.0,301.7 464.0,300.4C464.0,297.6 469.7,280.3 474.0,270.0C475.8,265.9 477.8,260.6 478.5,258.3C479.2,256.0 484.7,245.9 490.6,235.9C505.1,211.7 519.2,195.9 541.5,179.2C557.2,167.4 585.1,156.3 608.5,152.6C628.7,149.3 662.3,151.5 678.3,157.0C683.2,158.6 687.6,160.0 688.3,160.0C690.1,160.0 705.0,168.0 713.5,173.5C730.0,184.2 749.4,207.4 757.5,226.0C759.0,229.6 761.4,235.0 762.7,238.0C766.0,245.4 769.7,257.4 770.5,263.5C770.9,266.2 772.0,271.6 773.0,275.5C775.4,284.5 777.3,321.0 776.0,332.7C775.0,342.2 771.5,349.8 766.6,353.3L763.5,355.5L655.8,356.0C554.0,356.5 548.0,356.6 546.3,358.3C543.4,361.1 543.9,426.6 546.8,439.0C547.9,443.7 549.1,450.9 549.5,455.0C549.8,459.1 551.0,465.0 552.0,468.0C553.0,471.0 555.0,477.8 556.5,483.0C563.3,507.3 577.8,533.3 593.2,549.0C606.6,562.6 626.7,573.9 641.5,576.1C644.8,576.6 650.3,577.5 653.6,578.0C664.7,579.8 693.8,577.5 698.7,574.4C699.9,573.7 702.9,572.6 705.3,572.0C711.8,570.6 732.3,558.7 741.5,551.1C755.5,539.4 756.8,538.6 763.0,538.2C768.4,537.8 768.7,537.9 771.8,541.4C776.7,547.0 775.3,553.2 766.3,566.9C761.7,573.8 742.9,592.5 735.9,597.1C722.8,605.7 703.7,615.0 699.2,615.0C698.2,615.0 696.5,615.6 695.4,616.4C694.3,617.2 689.6,618.6 684.9,619.4C680.3,620.2 673.4,621.6 669.5,622.4C661.9,624.1 625.8,624.4 614.5,623.0ZM1324.5,623.4C1322.8,623.1 1319.5,622.3 1317.0,621.5C1314.5,620.8 1309.8,619.6 1306.5,619.0C1303.2,618.4 1298.7,617.1 1296.5,616.0C1294.3,615.0 1290.2,613.1 1287.5,611.9C1253.5,596.7 1233.7,559.5 1237.9,518.8C1239.5,503.7 1247.7,478.0 1253.8,469.2C1254.8,467.7 1257.4,463.4 1259.4,459.7C1272.9,435.3 1305.1,402.2 1334.7,382.3C1337.3,380.5 1343.8,376.2 1349.0,372.6C1354.2,369.1 1360.1,365.4 1362.2,364.4C1364.2,363.3 1371.6,359.3 1378.7,355.4C1392.0,348.0 1397.1,345.6 1418.0,337.0C1424.9,334.2 1432.2,331.1 1434.3,330.3C1438.6,328.4 1443.7,323.1 1444.6,319.5C1444.9,318.1 1445.0,296.2 1444.8,270.7C1444.3,228.3 1444.1,223.7 1442.1,214.6C1437.5,193.1 1426.2,181.1 1409.8,180.2C1386.6,178.8 1365.0,199.2 1343.6,243.0C1329.3,272.1 1325.9,278.3 1321.2,283.8C1293.7,316.5 1250.2,291.5 1263.3,250.6C1268.7,234.0 1283.4,214.0 1301.8,198.2C1310.9,190.4 1331.0,176.1 1337.5,172.8C1339.2,172.0 1341.8,170.6 1343.5,169.7C1374.0,153.2 1412.9,147.2 1448.0,153.6C1461.2,156.0 1481.4,162.6 1485.2,165.8C1486.0,166.4 1487.8,167.4 1489.3,167.9C1494.3,169.8 1503.4,176.7 1509.6,183.1C1519.4,193.4 1522.6,199.0 1529.3,217.5C1530.1,219.6 1530.6,270.6 1531.0,389.0L1531.5,557.5L1533.8,564.0C1538.6,577.7 1545.1,579.6 1561.4,572.1C1569.9,568.3 1573.8,568.1 1577.9,571.6C1583.1,575.9 1581.9,582.7 1574.3,592.4C1560.5,610.2 1526.2,618.4 1497.3,610.7C1482.0,606.6 1468.9,598.4 1459.9,587.2C1451.6,576.8 1449.8,576.9 1437.0,589.0C1426.3,599.1 1424.6,600.2 1406.4,610.1C1400.3,613.3 1381.4,620.0 1378.2,620.0C1376.9,620.0 1374.5,620.7 1372.8,621.6C1369.7,623.2 1332.1,624.6 1324.5,623.4ZM359.5,614.2C352.2,612.8 344.0,606.2 335.1,594.5C331.0,589.1 329.4,586.1 320.0,566.5C313.6,553.3 297.2,519.7 276.0,476.5C269.5,463.3 260.5,444.9 256.0,435.5C251.4,426.1 236.7,396.2 223.2,369.0C200.5,322.9 192.2,306.1 168.8,258.0C161.5,242.9 151.1,222.1 146.9,214.0C146.5,213.2 142.5,204.8 138.0,195.5C113.7,145.0 110.9,140.3 107.2,142.6C104.5,144.3 104.5,152.7 105.0,360.5L105.5,552.5L108.2,558.1C116.0,574.5 127.9,581.7 163.0,591.3C170.2,593.3 173.9,601.4 170.5,608.0C167.1,614.6 163.3,615.1 139.0,612.3C118.4,610.0 65.9,610.0 46.3,612.3C24.7,614.9 18.7,614.7 15.0,611.2C11.5,607.8 10.0,604.3 10.7,600.8C11.3,597.9 17.6,591.0 19.6,591.0C22.6,591.0 41.9,583.7 46.9,580.7C56.6,574.9 63.1,564.2 65.0,551.2C66.2,542.5 66.3,69.9 65.1,65.0C64.6,63.1 63.9,60.3 63.6,58.9C63.3,57.5 61.9,55.1 60.5,53.4C59.1,51.8 58.0,50.2 58.0,49.9C58.0,47.2 44.9,41.5 28.0,36.6C19.1,34.1 16.3,31.9 14.6,25.9C13.1,21.0 13.1,20.5 15.0,17.5C18.8,11.3 15.2,11.7 78.3,11.5C141.5,11.3 139.2,11.1 145.5,16.7C149.9,20.6 160.8,41.3 189.8,101.0C193.6,109.0 203.4,129.0 211.6,145.5C244.7,212.9 271.1,267.0 284.5,294.5C326.5,381.0 354.1,436.1 356.2,437.4C357.4,438.1 358.3,438.0 359.4,437.1C360.9,435.9 361.0,419.4 360.8,253.1L360.5,70.5L357.7,63.5C352.3,49.8 339.1,41.8 312.0,36.0C306.2,34.8 300.3,33.1 298.9,32.2C292.5,28.6 291.1,20.2 295.9,14.8C298.8,11.5 298.9,11.5 307.7,11.5C312.5,11.5 323.2,12.2 331.5,12.9C349.6,14.5 401.8,14.6 421.0,13.0C428.4,12.4 438.6,11.6 443.6,11.3L452.6,10.7L456.3,14.0C459.6,16.8 460.0,17.7 460.0,21.9C460.0,29.8 455.8,33.1 441.4,36.5C422.9,40.8 408.2,51.8 403.3,65.0L400.5,72.5L400.0,332.5L399.5,592.5L396.6,599.0C393.0,607.0 391.2,609.0 385.5,611.9C380.6,614.3 367.0,615.5 359.5,614.2ZM798.8,612.4C795.1,610.4 794.0,608.1 794.0,602.1C794.0,595.7 795.5,594.1 805.1,590.5C827.0,582.3 833.6,576.5 838.4,561.2L841.0,552.9L841.0,398.8L841.0,244.6L837.2,238.4C833.3,231.8 825.4,226.3 817.3,224.6C812.6,223.5 807.7,216.7 808.4,212.1C809.3,206.2 817.9,200.0 825.3,200.0C839.1,200.0 885.3,183.7 899.2,173.8C913.6,163.6 915.2,162.7 918.2,162.7C920.4,162.7 922.0,163.5 923.7,165.4L926.0,168.1L926.0,357.3C926.0,475.3 926.4,549.0 927.0,553.3C929.8,572.4 938.5,582.1 959.5,589.4C967.8,592.3 971.1,594.6 974.0,599.3L975.7,602.0L978.4,598.2C981.5,593.6 982.7,593.0 994.1,589.0C1012.4,582.8 1019.5,576.0 1025.1,559.5C1027.5,552.5 1027.1,238.3 1024.7,231.4C1022.3,224.3 1014.0,217.5 1005.6,215.6C1001.2,214.5 998.1,212.0 995.9,207.9C993.5,203.1 993.5,201.3 995.9,197.4C998.2,193.7 1001.9,192.3 1019.5,188.5C1026.1,187.1 1032.8,185.5 1034.5,185.0C1036.2,184.5 1041.3,182.9 1046.0,181.4C1064.2,175.7 1078.4,168.9 1089.8,160.3C1098.7,153.6 1103.1,151.9 1106.9,154.0C1110.5,155.9 1110.9,158.9 1111.1,184.4C1111.2,211.7 1111.6,213.6 1116.4,211.0C1117.9,210.3 1120.7,206.9 1122.8,203.6C1138.8,177.1 1165.0,157.2 1190.7,152.0C1202.8,149.6 1204.4,149.6 1213.8,151.5C1233.8,155.7 1246.3,165.5 1254.8,183.8C1258.9,192.5 1258.7,214.5 1254.5,223.8C1249.1,235.8 1239.7,241.5 1225.5,241.4C1212.5,241.4 1207.7,238.9 1194.4,225.4C1188.7,219.6 1184.0,214.5 1184.0,214.0C1184.0,213.5 1181.4,211.4 1178.3,209.3C1163.9,199.8 1147.1,207.2 1130.5,230.4C1128.0,233.9 1126.0,237.2 1126.0,237.7C1126.0,238.3 1125.2,239.8 1124.2,241.1C1121.9,244.2 1117.6,255.3 1115.0,265.0C1111.3,278.7 1110.9,298.2 1111.2,429.0L1111.5,553.5L1114.4,560.7C1120.9,576.8 1130.4,582.7 1163.7,591.0C1172.6,593.2 1176.1,599.4 1173.0,607.4C1170.4,614.4 1164.7,615.1 1131.7,612.3C1103.5,609.9 1038.1,609.9 1015.5,612.3C987.9,615.2 983.8,614.7 979.4,608.0C976.1,603.1 975.7,603.1 973.0,607.5C968.7,614.5 961.2,615.5 937.2,612.3C919.0,609.9 851.7,609.9 831.0,612.3C813.1,614.4 802.4,614.4 798.8,612.4ZM1657.4,612.5C1640.7,607.2 1628.3,591.8 1624.5,571.4C1620.8,551.9 1629.3,527.6 1642.8,518.9C1656.3,510.2 1655.4,510.5 1668.0,510.6C1680.6,510.6 1683.5,511.5 1693.2,518.3C1699.3,522.6 1703.3,527.7 1707.8,537.0L1711.5,544.5L1711.5,561.0L1711.5,577.5L1706.8,587.1C1696.5,608.2 1676.4,618.5 1657.4,612.5ZM1401.1,575.8C1423.7,567.4 1442.1,541.6 1444.4,515.0C1445.2,505.9 1445.2,365.7 1444.4,363.7C1442.9,359.8 1439.2,360.5 1425.5,367.5C1398.3,381.3 1374.1,403.3 1357.9,429.0C1351.9,438.6 1343.0,456.2 1341.0,462.5C1340.3,464.7 1339.4,467.0 1338.9,467.6C1337.6,469.2 1333.4,486.0 1331.5,496.8C1324.4,538.2 1338.3,568.9 1368.0,577.1C1377.3,579.7 1392.1,579.1 1401.1,575.8ZM653.0,320.0C655.5,319.4 659.8,318.6 662.5,318.1C672.8,316.4 689.1,306.9 695.5,299.0C700.9,292.4 704.7,283.8 706.5,274.4C708.2,265.2 708.5,248.4 706.9,244.3C706.3,242.8 705.4,239.0 704.8,236.0C699.9,209.2 676.0,188.6 647.4,186.5C613.5,184.0 588.3,200.0 569.1,236.2C566.3,241.5 564.0,246.6 564.0,247.5C564.0,248.4 563.0,251.0 561.8,253.3C560.6,255.6 559.1,260.0 558.4,263.0C557.6,266.0 556.1,272.1 555.0,276.5C551.3,291.3 550.9,293.5 549.5,304.5C547.9,317.1 548.5,319.2 554.3,321.0C558.6,322.3 646.8,321.5 653.0,320.0ZM872.0,113.4C859.7,109.3 846.5,95.8 842.7,83.6C833.6,54.2 844.0,25.4 868.0,14.1C876.0,10.3 891.9,10.4 899.9,14.3C915.2,21.6 924.5,35.0 927.1,53.2C928.5,63.3 927.3,77.3 924.3,85.0C915.8,107.0 891.8,120.0 872.0,113.4Z"/></symbol></svg>
+
+<nav id="nav">
+  <a class="wordmark" href="#hero" aria-label="Neira."><svg class="logo" role="img" aria-hidden="true"><use href="#neira-logo"/></svg></a>
+  <div class="nav-r">
+    <a class="nl" href="#how" data-i18n="nav_how">How it works</a>
+    <a class="nl" href="#why" data-i18n="nav_why">The problem</a>
+    <a class="nl" href="#beta" data-i18n="nav_beta">Beta</a>
+    <div class="lang">
+      <button type="button" class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+      <button type="button" class="lang-btn" data-lang="ko" onclick="setLang('ko')">KR</button>
+    </div>
+    <a class="btn" href="#beta" data-i18n="nav_cta">Join the beta</a>
+  </div>
+</nav>
+
+<header id="hero">
+  <div class="wrap">
+    <div class="meta-row rise r1">
+      <span class="mono" data-i18n="m1">NEIRA / Fashion production, translated</span>
+      <span class="mono" data-i18n="m2">Private beta · Seoul</span>
+      <span class="mono">2026</span>
+    </div>
+
+    <div class="hero-core">
+      <canvas id="sphere" aria-hidden="true"></canvas>
+      <h1 class="h1 rise r2" data-i18n="hero_h">Tell the factory <span class="g">what you mean.</span></h1>
+      <p class="sub rise r3" data-i18n="hero_sub">Describe your garment your way. NEIRA rewrites it in the factory's language, asks what you forgot, and brings back quotes.</p>
+      <div class="rise r3">
+        <form class="capture" id="capture" novalidate>
+          <input type="email" id="hero-email" autocomplete="email" placeholder="Your email" data-i18n-ph="hero_ph" aria-label="Email">
+          <button class="btn" id="hero-btn" type="submit" data-i18n="hero_btn">Get early access</button>
+        </form>
+        <p class="hnote mono" id="hero-msg" role="status" data-i18n="hero_note">Free during the beta · Korea first</p>
+      </div>
+    </div>
+
+    <div class="strip-wrap">
+      <div class="strip">
+        <figure class="pol">
+          <div class="shot paper">
+            <svg viewBox="-230 -30 460 330" role="img" aria-label="Rough sketch of a jacket">
+              <defs><filter id="rough" x="-8%" y="-8%" width="116%" height="116%"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="4"/></filter></defs>
+              <g filter="url(#rough)" stroke="#262624" stroke-linecap="round" stroke-linejoin="round" fill="none" transform="translate(0 6)">
+                <path stroke-width="1.8" stroke-opacity=".85" d="M-34 0 L-120 14 L-196 150 L-158 168 L-112 70 L-104 250 L104 250 L112 70 L158 168 L196 150 L120 14 L34 0 Z"/>
+                <path stroke-width="1.1" stroke-opacity=".38" d="M-36 -2 L-124 12 L-204 154 L-160 174 L-114 74 L-108 252 L100 254 L114 66 L164 170 L202 148 L122 10 L36 -3 Z"/>
+                <path stroke-width="1.2" stroke-opacity=".6" d="M-34 0 Q0 28 34 0"/>
+                <path stroke-width="1" stroke-opacity=".35" d="M-108 90 l12 14 M-104 110 l10 12 M108 92 l-12 14 M104 112 l-10 12"/>
+              </g>
+              <text class="hand" x="-218" y="-8" font-size="21" transform="rotate(-7 -218 -8)" data-i18n="pol_note">wider sleeve?</text>
+            </svg>
+          </div>
+          <figcaption class="cap mono"><span>01</span><span data-i18n="c1">Sketch</span></figcaption>
+        </figure>
+
+        <figure class="pol">
+          <div class="shot paper">
+            <div class="brief"><b data-i18n="c2b">Designer · Brief</b>Boxy jacket, drop shoulders. Sleeves a bit longer than normal, like it's slouching. Two snap pockets, low on the front. Heavy cotton twill.<div class="att">+ sketch.jpg</div></div>
+          </div>
+          <figcaption class="cap mono"><span>02</span><span data-i18n="c2">Your words</span></figcaption>
+        </figure>
+
+        <figure class="pol">
+          <div class="shot">
+            <div class="tk">
+              <h5>재킷 · 작업 지시<span>NEIRA → 공장</span></h5>
+              <div class="r"><em>실루엣</em><b>박시 오버핏</b></div>
+              <div class="r"><em>어깨</em><b>드롭숄더</b></div>
+              <div class="r"><em>소매장</em><b>기본 +3cm</b></div>
+              <div class="r"><em>포켓</em><b>스냅 2개 · 앞판 하단</b></div>
+              <div class="r"><em>원단</em><b>헤비 코튼 트윌</b></div>
+              <div class="fl"><strong>확인 필요 · 포켓 높이?</strong><small data-i18n="fl_gloss">Needs your answer: cm up from the hem?</small></div>
+            </div>
+          </div>
+          <figcaption class="cap mono"><span>03</span><span data-i18n="c3">Factory ticket</span></figcaption>
+        </figure>
+
+        <figure class="pol">
+          <div class="shot dark">
+            <div class="qs">
+              <h5 data-i18n="q_h">Quotes</h5>
+              <div class="q on">Seoul<small data-i18n="q_in">quote in</small></div>
+              <div class="q on">Incheon<small data-i18n="q_in">quote in</small></div>
+              <div class="q">Jeonju<small data-i18n="q_wait">reading brief</small></div>
+            </div>
+          </div>
+          <figcaption class="cap mono"><span>04</span><span data-i18n="c4">Quotes back</span></figcaption>
+        </figure>
+      </div>
+    </div>
+    <p class="strip-note mono" data-i18n="strip_note">One garment, four moments. Illustrative example.</p>
+  </div>
 </header>
 
-<!-- CANVAS HERO -->
-<canvas id="canvas-bg"></canvas>
-<div class="vert-top"></div>
-<div class="vert-bottom"></div>
+<section class="dk sec-dk reveal-dk" id="why">
+  <div class="wrap">
+    <div class="dk-top mono"><span data-i18n="w_a">The problem</span><span data-i18n="w_b">Seoul · 2026</span></div>
+    <h2 data-i18n="w_h">Every season, small brands pay for samples <span class="g">that come back wrong.</span></h2>
 
-<!-- HERO WAITLIST -->
-<section id="hero">
-  <nav class="hero-nav">
-    <div class="logo-h">NEIRA</div>
-    <div class="nav-right">Seoul &nbsp; 2026</div>
-  </nav>
-  <main class="hero-main">
-    <p class="eyebrow">FASHION INFRASTRUCTURE</p>
-    <h1 class="headline">From sketch<br><span class="dim">to factory.</span></h1>
-    <div class="divider"></div>
-    <p class="subline">The technical layer between<br>designers and manufacturers.</p>
-    <div class="waitlist">
-      <input type="email" id="wl-email" placeholder="your@email.com">
-      <button id="wl-btn" onclick="submitWaitlist()">REQUEST ACCESS</button>
-      <p id="wl-msg"></p>
+    <div class="dk-sil" aria-hidden="true">
+      <svg viewBox="-240 -10 480 280" fill="none">
+        <defs><linearGradient id="sg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".16"/><stop offset="1" stop-color="#fff" stop-opacity=".02"/></linearGradient></defs>
+        <path d="M-34 0 L-120 14 L-196 150 L-158 168 L-112 70 L-104 250 L104 250 L112 70 L158 168 L196 150 L120 14 L34 0 Z" fill="url(#sg)" stroke="#fff" stroke-opacity=".28" stroke-width="1.2" stroke-linejoin="round"/>
+        <path d="M-34 0 Q0 28 34 0" stroke="#fff" stroke-opacity=".3" stroke-width="1.2"/>
+        <path d="M0 26 L0 250" stroke="#fff" stroke-opacity=".14" stroke-dasharray="3 5"/>
+      </svg>
     </div>
-  </main>
-  <div class="scroll-hint" onclick="document.getElementById('beta').scrollIntoView({behavior:'smooth'})">
-    <span>BETA PROGRAM</span>
-    <div class="scroll-line"></div>
+    <span class="lb" style="right:402px;top:292px;--d:.2s">drop shoulder <em>드롭숄더</em></span>
+    <span class="lb" style="right:0;top:506px;--d:.5s">sleeve length <em>소매장</em></span>
+    <span class="lb" style="right:400px;top:372px;--d:.8s">chest width <em>가슴단면</em></span>
+    <span class="lb" style="right:70px;top:566px;--d:1.1s">snap button <em>스냅 단추</em></span>
+    <span class="lb" style="right:400px;top:470px;--d:1.4s">lining <em>안감</em></span>
+    <span class="lb" style="right:470px;top:612px;--d:1.7s">seam allowance <em>시접</em></span>
+    <span class="lb" style="right:402px;top:548px;--d:2s">total length <em>총장</em></span>
+    <span class="lb" style="right:210px;top:612px;--d:2.3s">hem <em>밑단</em></span>
+
+    <p class="dk-note mono" data-i18n="w_note">A perfect tech pack does not fix this. The problem is interpretation. Every handoff loses a little more of what the designer meant.</p>
+
+    <div class="dk-bot">
+      <div class="stats">
+        <div><div class="stat-n" data-i18n="s1_n">$300–1,000</div><p class="stat-t" data-i18n="s1_t">per style, paid to freelance technical designers</p></div>
+        <div><div class="stat-n" data-i18n="s2_n">$2K–8K</div><p class="stat-t" data-i18n="s2_t">lost per brand, per season, on a broken process</p></div>
+        <div><div class="stat-n" data-i18n="s3_n">Up to 6 weeks</div><p class="stat-t" data-i18n="s3_t">per sample round. Unclear specs mean more rounds.</p></div>
+      </div>
+      <p class="src mono" data-i18n="w_src">Sources: NEIRA interviews with 15 designers (2026) · AKCN, citing Successful Fashion Designer (2026) · Shanghai Garment</p>
+    </div>
   </div>
-  <footer class="hero-footer">
-    <span>neira.fit</span>
-    <span>fashion &nbsp;·&nbsp; tech &nbsp;·&nbsp; NEIRA</span>
-  </footer>
 </section>
 
-<!-- BETA -->
-<section id="beta">
-  <div class="beta-hero">
+<section class="sec" id="how">
+  <div class="wrap">
+    <p class="eyebrow mono reveal" data-i18n="how_eyebrow">How it works</p>
+    <h2 class="h2 reveal" style="--d:.06s;margin-top:18px" data-i18n="how_h">Three steps. <span class="g">Nothing lost in translation.</span></h2>
+    <div class="how-list">
+      <div class="how reveal"><span class="idx mono">01</span><h3 data-i18n="st1_h">Say it your way.</h3><p data-i18n="st1_p">Words, a rough sketch, or an old tech pack. Whatever you already have.</p></div>
+      <div class="how reveal"><span class="idx mono">02</span><h3 data-i18n="st2_h">Answer what you forgot.</h3><p data-i18n="st2_p">Before anything goes out, NEIRA asks for the missing details. The ones that cause wrong samples.</p></div>
+      <div class="how reveal"><span class="idx mono">03</span><h3 data-i18n="st3_h">Factories quote.</h3><p data-i18n="st3_p">They get your brief in their own words and send a price. You choose.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:0">
+  <div class="wrap pair reveal">
+    <div class="side"><span class="mono" data-i18n="d_tag">Designers</span><h3 data-i18n="d_h">Stop explaining the same sleeve three times.</h3><ul><li data-i18n="d_1">Fewer correction rounds</li><li data-i18n="d_2">No factory jargon to learn</li><li data-i18n="d_3">Know the price before you sample</li></ul></div>
+    <div class="side"><span class="mono" data-i18n="f_tag">Factories</span><h3 data-i18n="f_h">Briefs that arrive complete.</h3><ul><li data-i18n="f_1">In your language, in your shorthand</li><li data-i18n="f_2">Fewer clarification calls</li><li data-i18n="f_3">Quote on a clear brief</li></ul></div>
+  </div>
+</section>
+
+<section class="sec founder">
+  <div class="wrap f-grid">
+    <p class="fq reveal" data-i18n="fq">“I launched my own brand. I lost money on wrong samples. Then I built the solution.”</p>
+    <div class="reveal" style="--d:.1s">
+      <p class="fname">Cloé Silberich</p>
+      <p class="frole mono" data-i18n="frole">Founder &amp; CEO</p>
+      <p class="fp" data-i18n="fp">Nine years in fashion: styling, editorial, production. Textile design and garment construction. LVMH Inside. Between France and Korea since 2022, now building NEIRA in Seoul.</p>
+      <p class="fec mono" data-i18n="fec">NextRise 2026 · French Tech Seoul · Speaker, French Embassy Seoul</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="beta">
+  <div class="wrap beta-grid">
     <div>
-      <span class="bh-eye">FOUNDERS CIRCLE — EARLY ACCESS</span>
-      <h2 class="bh-h">Shape the future of<br><em>fashion production.</em></h2>
-      <p class="bh-p">NEIRA is looking for 10 founding beta testers — designers and factory directors — to help build the technical infrastructure between design and manufacturing.</p>
-      <div class="bh-stats">
-        <div><span class="bs-n">10</span><span class="bs-l">SPOTS TOTAL</span></div>
-        <div><span class="bs-n">∞</span><span class="bs-l">FREE LIFETIME</span></div>
-        <div><span class="bs-n">0</span><span class="bs-l">COST TO JOIN</span></div>
-      </div>
-      <button class="bh-btn" onclick="document.getElementById('beta-form').scrollIntoView({behavior:'smooth'})">APPLY FOR BETA ACCESS</button>
-    </div>
-    <div class="bh-visual"><canvas id="beta-canvas"></canvas></div>
-  </div>
-
-  <div class="who-section">
-    <div class="who-inner">
-      <span class="sec-eye">THE DETAILS</span>
-      <div class="profiles-grid">
-        <div class="prof-col">
-          <span class="prof-tag">WHO IT'S FOR</span>
-          <h3>Designers &amp; factory directors</h3>
-          <ul class="prof-list">
-            <li>Independent designers, 2–50 styles per season</li>
-            <li>Small factories, 10–200 workers</li>
-            <li>Frustrated by tech pack errors and miscommunication</li>
-          </ul>
-        </div>
-        <div class="prof-col">
-          <span class="prof-tag">WHAT YOU GET</span>
-          <h3>Free access, real involvement</h3>
-          <ul class="prof-list">
-            <li>Free lifetime access — no cost, ever</li>
-            <li>Direct monthly line to Cloé</li>
-            <li>In return: 3 tech packs tested, weekly feedback, signed NDA</li>
-          </ul>
-        </div>
+      <p class="eyebrow mono reveal" data-i18n="b_eyebrow">Founders Circle</p>
+      <h2 class="h2 reveal" style="--d:.06s;margin-top:18px" data-i18n="b_h">Ten places. <span class="g">Build it with us.</span></h2>
+      <p class="lead reveal" style="--d:.1s" data-i18n="b_p">For the first designers and factories in Seoul, Incheon and Jeonju. Real garments, honest feedback.</p>
+      <div class="lists reveal" style="--d:.14s">
+        <div class="list"><span class="mono" data-i18n="rec_tag">What you receive</span><ul><li data-i18n="rec1">Factories: the software, free for life</li><li data-i18n="rec2">Designers: free through the beta, founding-member pricing after</li><li data-i18n="rec3">A direct line to the roadmap</li><li data-i18n="rec4">Named as a founding collaborator</li></ul></div>
+        <div class="list"><span class="mono" data-i18n="ask_tag">What we ask</span><ul><li data-i18n="ask1">Three real garments, tested</li><li data-i18n="ask2">Short weekly feedback</li><li data-i18n="ask3">One 30-minute call a month</li><li data-i18n="ask4">A signed mutual NDA</li></ul></div>
       </div>
     </div>
-  </div>
-
-  <div class="form-section" id="beta-form">
-    <div class="form-inner">
-      <h2>Apply to join</h2>
-      <span class="form-sub">10 SPOTS ONLY — REVIEWED PERSONALLY BY CLOÉ</span>
-      <div class="fg"><label>FULL NAME</label><input type="text" id="b-fname" placeholder="Minji Kim"></div>
-      <div class="fg"><label>EMAIL</label><input type="email" id="b-email" placeholder="you@studio.com"></div>
-      <div class="fg">
-        <label>PROFILE</label>
-        <select id="b-profile">
-          <option value="">Select your profile</option>
-          <option value="designer-independent">Independent fashion designer</option>
-          <option value="designer-brand">Creative director / brand manager</option>
-          <option value="factory-director">Factory director / owner</option>
-          <option value="factory-manager">Production manager</option>
-        </select>
-      </div>
-      <div class="fg"><label>COMPANY / STUDIO / FACTORY</label><input type="text" id="b-company" placeholder="Studio Ahn / Textile Factory Seoul"></div>
-      <div class="fg"><label>WHY NEIRA?</label><textarea id="b-why" placeholder="Tell us about your workflow and what you hope NEIRA can solve..."></textarea></div>
-      <div class="nda-note">By applying, you agree to a mutual NDA before accessing the product. Your information is never shared.</div>
-      <div class="submit-wrap">
-        <button class="beta-submit" id="beta-btn" onclick="submitBeta()">APPLY FOR BETA ACCESS</button>
-        <p id="beta-msg"></p>
-      </div>
-    </div>
+    <form class="formcard reveal" id="apply-form" novalidate>
+      <h3 data-i18n="form_h">Apply to join</h3>
+      <p class="fsub" data-i18n="form_sub">Every application is read personally by Cloé.</p>
+      <div class="field"><label for="f-name" data-i18n="lbl_name">Name</label><input type="text" id="f-name" autocomplete="name" placeholder="Minji Kim" data-i18n-ph="ph_name"></div>
+      <div class="field"><label for="f-email" data-i18n="lbl_email">Work email</label><input type="email" id="f-email" autocomplete="email" placeholder="you@studio.com"></div>
+      <div class="field"><label for="f-role" data-i18n="lbl_role">Role</label>
+        <select id="f-role"><option value="" data-i18n="opt_role">Select</option><option value="designer" data-i18n="opt_designer">Designer</option><option value="brand" data-i18n="opt_brand">Brand</option><option value="factory" data-i18n="opt_factory">Factory</option></select></div>
+      <div class="field"><label for="f-company" data-i18n="lbl_company">Company / studio</label><input type="text" id="f-company" autocomplete="organization" placeholder="Studio Ahn" data-i18n-ph="ph_company"></div>
+      <div class="field"><label for="f-method" data-i18n="lbl_method">How do you develop garments today? (optional)</label><input type="text" id="f-method" placeholder="Excel, freelance pattern maker, KakaoTalk…" data-i18n-ph="ph_method"></div>
+      <div class="field"><label for="f-styles" data-i18n="lbl_styles">Styles per season, approx. (optional)</label><input type="text" id="f-styles" inputmode="numeric" placeholder="e.g. 12" data-i18n-ph="ph_styles"></div>
+      <button class="btn block" id="form-btn" type="submit" data-i18n="form_btn">Request access</button>
+      <p id="form-msg" role="status"></p>
+      <p class="fnote" data-i18n="form_note">A mutual NDA is signed before anything is shared. Your details stay with us.</p>
+    </form>
   </div>
 </section>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="about-inner">
-    <div class="about-left">
-      <span class="ab-eye">ABOUT NEIRA</span>
-      <h2>Fashion meets<br><em>infrastructure.</em></h2>
-      <p>NEIRA was born from a simple frustration: the gap between what a designer imagines and what a factory receives — miscommunication, failed samples, endless back-and-forth.</p>
-      <p>We built NEIRA to close that gap. Not another design tool, not another PLM — the missing infrastructure between creative intent and factory execution.</p>
-      <div class="about-quote">"Your vision. Their language."</div>
-      <p>NEIRA is built by Cloé Silberich, a fashion professional since 2018 — textile design &amp; construction graduate, LVMH certificate — based in Seoul, Korea.</p>
-    </div>
-  </div>
-  <div class="about-bottom">
-    <p>Built in private beta with fashion designers and factory directors. If that's you, <strong>we'd like to hear from you</strong> — <a class="about-contact" href="mailto:cloe@neira.fit">cloe@neira.fit</a></p>
-  </div>
+<section class="signoff">
+  <div role="img" aria-label="Neira."><svg class="logo-lg" aria-hidden="true"><use href="#neira-logo"/></svg></div>
+  <p class="so-line mono" data-i18n="so_line">Your vision. Their language.</p>
 </section>
 
-<footer id="site-footer">
-  <span>NEIRA · neira.fit · Seoul 2026</span>
-  <span>Fashion · Tech · Infrastructure</span>
+<footer>
+  <div class="foot mono">
+    <span>Neira · Seoul · 2026</span>
+    <a href="mailto:cloe@neira.fit">cloe@neira.fit</a>
+  </div>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-/* HEADER color switch */
-const hdr = document.getElementById('header');
-const betaSec = document.getElementById('beta');
-window.addEventListener('scroll',()=>{
-  const bTop = betaSec.getBoundingClientRect().top;
-  if(bTop <= 52){ hdr.classList.add('light'); } else { hdr.classList.remove('light'); }
-});
-
-/* HERO 3D */
-const canvas = document.getElementById('canvas-bg');
-const renderer = new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
-renderer.setPixelRatio(window.devicePixelRatio);
-renderer.setSize(window.innerWidth,window.innerHeight);
-renderer.setClearColor(0x000000,1);
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(45,window.innerWidth/window.innerHeight,0.1,100);
-camera.position.set(0,0,6);
-
-const sphereMat = new THREE.MeshBasicMaterial({color:0xffffff,wireframe:true,opacity:0.18,transparent:true});
-const sphere = new THREE.Mesh(new THREE.SphereGeometry(1.8,14,10),sphereMat);
-const jMat = new THREE.LineBasicMaterial({color:0xffffff,linewidth:1,opacity:0.18,transparent:true});
-
-function pts(...c){const v=[];for(let i=0;i<c.length;i+=3)v.push(new THREE.Vector3(c[i],c[i+1],c[i+2]));return v;}
-function mkLine(...c){return new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts(...c)),jMat);}
-function mkLoop(...c){const p=pts(...c);p.push(p[0].clone());return new THREE.Line(new THREE.BufferGeometry().setFromPoints(p),jMat);}
-
-const jk = new THREE.Group();
-jk.add(mkLoop(-0.12,1.08,0,-0.42,1.04,0,-0.60,0.98,0,-0.64,0.82,0,-0.58,-0.02,0,-0.60,-0.50,0,-0.50,-0.62,0,-0.18,-0.70,0,0,-0.60,0,0.18,-0.70,0,0.50,-0.62,0,0.60,-0.50,0,0.58,-0.02,0,0.64,0.82,0,0.60,0.98,0,0.42,1.04,0,0.12,1.08,0));
-jk.add(mkLoop(-0.12,1.08,0,-0.42,1.04,0,-0.50,0.96,0,-0.35,0.84,0,-0.08,0.90,0,0,0.88,0));
-jk.add(mkLoop(0.12,1.08,0,0.42,1.04,0,0.50,0.96,0,0.35,0.84,0,0.08,0.90,0,0,0.88,0));
-jk.add(mkLoop(-0.12,1.08,0,-0.28,1.06,0,-0.30,0.96,0,0,0.88,0.01,0.30,0.96,0,0.28,1.06,0,0.12,1.08,0));
-jk.add(mkLine(0,1.08,0.01,0.02,0.92,0.01,0.06,0.70,0.01,0.12,0.42,0.01,0.24,0.10,0.01,0.38,-0.22,0.01,0.46,-0.52,0.01,0.50,-0.62,0.01));
-jk.add(mkLine(-0.50,0.60,0.01,-0.46,0.30,0.01,-0.38,0.00,0.01,-0.34,-0.30,0.01,-0.36,-0.58,0.01));
-jk.add(mkLoop(-0.60,0.98,0,-0.64,0.82,0,-0.96,0.52,0.06,-1.28,0,0.10,-1.48,-0.38,0.12,-1.42,-0.58,0.12,-1.08,-0.64,0.08,-0.86,-0.36,0.05,-0.68,0,0.02,-0.58,0.62,0));
-jk.add(mkLine(-0.82,0.68,0.04,-1.10,0.18,0.08,-1.40,-0.30,0.12));
-jk.add(mkLine(-0.64,0.82,0,-0.74,0.32,0.03,-0.82,-0.30,0.05,-1.08,-0.64,0.08));
-jk.add(mkLoop(-1.42,-0.56,0.12,-1.10,-0.62,0.08,-1.08,-0.72,0.08,-1.40,-0.66,0.12));
-jk.add(mkLoop(0.60,0.98,0,0.64,0.82,0,0.96,0.52,0.06,1.28,0,0.10,1.48,-0.38,0.12,1.42,-0.58,0.12,1.08,-0.64,0.08,0.86,-0.36,0.05,0.68,0,0.02,0.58,0.62,0));
-jk.add(mkLine(0.82,0.68,0.04,1.10,0.18,0.08,1.40,-0.30,0.12));
-jk.add(mkLine(0.64,0.82,0,0.74,0.32,0.03,0.82,-0.30,0.05,1.08,-0.64,0.08));
-jk.add(mkLoop(1.42,-0.56,0.12,1.10,-0.62,0.08,1.08,-0.72,0.08,1.40,-0.66,0.12));
-jk.add(mkLine(-0.42,1.04,0,-0.60,0.98,0));
-jk.add(mkLine(0.42,1.04,0,0.60,0.98,0));
-jk.add(mkLine(-0.60,0.88,-0.02,0,0.92,-0.03,0.60,0.88,-0.02));
-jk.add(mkLine(-0.58,-0.02,0,-0.60,-0.50,0));
-jk.add(mkLine(0.58,-0.02,0,0.60,-0.50,0));
-jk.add(mkLine(-0.50,-0.30,0.01,-0.18,-0.28,0.01));
-jk.add(mkLine(-0.50,-0.30,0.01,-0.50,-0.38,0.01,-0.18,-0.36,0.01,-0.18,-0.28,0.01));
-jk.add(mkLine(0.20,-0.28,0.01,0.48,-0.30,0.01));
-jk.add(mkLine(0.20,-0.28,0.01,0.20,-0.36,0.01,0.48,-0.38,0.01,0.48,-0.30,0.01));
-jk.add(mkLine(0,0.92,-0.03,0,-0.60,-0.03));
-
-const world = new THREE.Group();
-world.add(sphere); world.add(jk); scene.add(world);
-
-window.addEventListener('resize',()=>{
-  camera.aspect=window.innerWidth/window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth,window.innerHeight);
-});
-
-/* BETA 3D */
-const bc = document.getElementById('beta-canvas');
-const br = new THREE.WebGLRenderer({canvas:bc,antialias:true,alpha:true});
-br.setClearColor(0,0);
-const bs = new THREE.Scene();
-const bcam = new THREE.PerspectiveCamera(42,1,0.1,100);
-bcam.position.set(0,0,5);
-function rbeta(){const p=bc.parentElement;br.setSize(p.clientWidth,p.clientHeight);bcam.aspect=p.clientWidth/p.clientHeight;bcam.updateProjectionMatrix();}
-rbeta(); window.addEventListener('resize',rbeta);
-
-const bsm=new THREE.MeshBasicMaterial({color:0x2f5f8f,wireframe:true,opacity:0.08,transparent:true});
-const bsp=new THREE.Mesh(new THREE.SphereGeometry(1.8,14,10),bsm);
-const bjm=new THREE.LineBasicMaterial({color:0x1a1a1a,opacity:0.18,transparent:true});
-const bam=new THREE.LineBasicMaterial({color:0x4a90c4,opacity:0.5,transparent:true});
-function bp(...c){const v=[];for(let i=0;i<c.length;i+=3)v.push(new THREE.Vector3(c[i],c[i+1],c[i+2]));return v;}
-function bl(m,...c){return new THREE.Line(new THREE.BufferGeometry().setFromPoints(bp(...c)),m);}
-function blo(m,...c){const p=bp(...c);p.push(p[0].clone());return new THREE.Line(new THREE.BufferGeometry().setFromPoints(p),m);}
-const bj=new THREE.Group();
-bj.add(blo(bam,-0.12,1.08,0,-0.42,1.04,0,-0.60,0.98,0,-0.64,0.82,0,-0.58,-0.02,0,-0.60,-0.50,0,-0.50,-0.62,0,-0.18,-0.70,0,0,-0.60,0,0.18,-0.70,0,0.50,-0.62,0,0.60,-0.50,0,0.58,-0.02,0,0.64,0.82,0,0.60,0.98,0,0.42,1.04,0,0.12,1.08,0));
-bj.add(blo(bam,-0.12,1.08,0,-0.42,1.04,0,-0.50,0.96,0,-0.35,0.84,0,-0.08,0.90,0,0,0.88,0));
-bj.add(blo(bam,0.12,1.08,0,0.42,1.04,0,0.50,0.96,0,0.35,0.84,0,0.08,0.90,0,0,0.88,0));
-bj.add(bl(bam,0,1.08,0.01,0.06,0.70,0.01,0.24,0.10,0.01,0.46,-0.52,0.01,0.50,-0.62,0.01));
-bj.add(blo(bjm,-0.60,0.98,0,-0.64,0.82,0,-0.96,0.52,0.06,-1.28,0,0.10,-1.48,-0.38,0.12,-1.42,-0.58,0.12,-1.08,-0.64,0.08,-0.86,-0.36,0.05,-0.68,0,0.02,-0.58,0.62,0));
-bj.add(blo(bjm,0.60,0.98,0,0.64,0.82,0,0.96,0.52,0.06,1.28,0,0.10,1.48,-0.38,0.12,1.42,-0.58,0.12,1.08,-0.64,0.08,0.86,-0.36,0.05,0.68,0,0.02,0.58,0.62,0));
-bj.add(bl(bam,-0.50,-0.30,0.01,-0.18,-0.28,0.01));
-bj.add(bl(bam,-0.50,-0.30,0.01,-0.50,-0.38,0.01,-0.18,-0.36,0.01,-0.18,-0.28,0.01));
-bj.add(bl(bam,0.20,-0.28,0.01,0.48,-0.30,0.01));
-bj.add(bl(bam,0.20,-0.28,0.01,0.20,-0.36,0.01,0.48,-0.38,0.01,0.48,-0.30,0.01));
-const bw=new THREE.Group(); bw.add(bsp); bw.add(bj); bs.add(bw);
-
-/* ANIMATION */
-let t=0;
-(function animate(){
-  requestAnimationFrame(animate); t+=0.003;
-  world.rotation.y=-t; world.rotation.x=Math.sin(t*0.18)*0.10;
-  renderer.render(scene,camera);
-  bw.rotation.y=-t*0.7; bw.rotation.x=Math.sin(t*0.15)*0.06;
-  br.render(bs,bcam);
+const T = {
+en:{
+  nav_how:"How it works", nav_why:"The problem", nav_beta:"Beta", nav_cta:"Join the beta",
+  m1:"NEIRA / Fashion production, translated", m2:"Private beta · Seoul",
+  hero_h:"Tell the factory <span class=\"g\">what you mean.</span>",
+  hero_sub:"Describe your garment your way. NEIRA rewrites it in the factory's language, asks what you forgot, and brings back quotes.",
+  hero_ph:"Your email", hero_btn:"Get early access", hero_note:"Free during the beta · Korea first",
+  pol_note:"wider sleeve?", c1:"Sketch", c2:"Your words", c2b:"Designer · Brief", c3:"Factory ticket", c4:"Quotes back",
+  fl_gloss:"Needs your answer: cm up from the hem?", q_h:"Quotes", q_in:"quote in", q_wait:"reading brief",
+  strip_note:"One garment, four moments. Illustrative example.",
+  w_a:"The problem", w_b:"Seoul · 2026",
+  w_h:"Every season, small brands pay for samples <span class=\"g\">that come back wrong.</span>",
+  w_note:"A perfect tech pack does not fix this. The problem is interpretation. Every handoff loses a little more of what the designer meant.",
+  s1_n:"$300–1,000", s1_t:"per style, paid to freelance technical designers",
+  s2_n:"$2K–8K", s2_t:"lost per brand, per season, on a broken process",
+  s3_n:"Up to 6 weeks", s3_t:"per sample round. Unclear specs mean more rounds.",
+  w_src:"Sources: NEIRA interviews with 15 designers (2026) · AKCN, citing Successful Fashion Designer (2026) · Shanghai Garment",
+  how_eyebrow:"How it works", how_h:"Three steps. <span class=\"g\">Nothing lost in translation.</span>",
+  st1_h:"Say it your way.", st1_p:"Words, a rough sketch, or an old tech pack. Whatever you already have.",
+  st2_h:"Answer what you forgot.", st2_p:"Before anything goes out, NEIRA asks for the missing details. The ones that cause wrong samples.",
+  st3_h:"Factories quote.", st3_p:"They get your brief in their own words and send a price. You choose.",
+  d_tag:"Designers", d_h:"Stop explaining the same sleeve three times.", d_1:"Fewer correction rounds", d_2:"No factory jargon to learn", d_3:"Know the price before you sample",
+  f_tag:"Factories", f_h:"Briefs that arrive complete.", f_1:"In your language, in your shorthand", f_2:"Fewer clarification calls", f_3:"Quote on a clear brief",
+  fq:"“I launched my own brand. I lost money on wrong samples. Then I built the solution.”",
+  frole:"Founder &amp; CEO",
+  fp:"Nine years in fashion: styling, editorial, production. Textile design and garment construction. LVMH Inside. Between France and Korea since 2022, now building NEIRA in Seoul.",
+  fec:"NextRise 2026 · French Tech Seoul · Speaker, French Embassy Seoul",
+  b_eyebrow:"Founders Circle", b_h:"Ten places. <span class=\"g\">Build it with us.</span>",
+  b_p:"For the first designers and factories in Seoul, Incheon and Jeonju. Real garments, honest feedback.",
+  rec_tag:"What you receive", rec1:"Factories: the software, free for life", rec2:"Designers: free through the beta, founding-member pricing after", rec3:"A direct line to the roadmap", rec4:"Named as a founding collaborator",
+  ask_tag:"What we ask", ask1:"Three real garments, tested", ask2:"Short weekly feedback", ask3:"One 30-minute call a month", ask4:"A signed mutual NDA",
+  form_h:"Apply to join", form_sub:"Every application is read personally by Cloé.",
+  lbl_name:"Name", ph_name:"Minji Kim", lbl_email:"Work email",
+  lbl_role:"Role", opt_role:"Select", opt_designer:"Designer", opt_brand:"Brand", opt_factory:"Factory",
+  lbl_company:"Company / studio", ph_company:"Studio Ahn",
+  lbl_method:"How do you develop garments today? (optional)", ph_method:"Excel, freelance pattern maker, KakaoTalk…",
+  lbl_styles:"Styles per season, approx. (optional)", ph_styles:"e.g. 12",
+  form_btn:"Request access", form_note:"A mutual NDA is signed before anything is shared. Your details stay with us.",
+  so_line:"Your vision. Their language."
+},
+ko:{
+  nav_how:"작동 방식", nav_why:"문제", nav_beta:"베타", nav_cta:"베타 참여",
+  m1:"NEIRA / 번역되는 패션 생산", m2:"프라이빗 베타 · 서울",
+  hero_h:"만들고 싶은 그대로, <span class=\"g\">공장이 알아듣게.</span>",
+  hero_sub:"옷을 편하게 설명하세요. NEIRA가 공장의 언어로 바꿔 쓰고, 빠진 정보를 물어보고, 견적까지 받아옵니다.",
+  hero_ph:"이메일 주소", hero_btn:"얼리 액세스 신청", hero_note:"베타 기간 무료 · 한국 우선",
+  pol_note:"소매 더 넓게?", c1:"스케치", c2:"디자이너의 말", c2b:"디자이너 · 브리프", c3:"공장 작업 지시", c4:"도착한 견적",
+  fl_gloss:"답변 필요: 밑단에서 몇 cm 위?", q_h:"견적", q_in:"견적 도착", q_wait:"브리프 확인 중",
+  strip_note:"하나의 옷, 네 장면. 예시입니다.",
+  w_a:"문제", w_b:"서울 · 2026",
+  w_h:"매 시즌, 소규모 브랜드는 <span class=\"g\">잘못 나온 샘플 값을 치릅니다.</span>",
+  w_note:"완벽한 작업지시서도 이 문제를 해결하지 못합니다. 문제는 해석입니다. 넘겨질 때마다 디자이너가 의도한 것이 조금씩 사라집니다.",
+  s1_n:"$300–1,000", s1_t:"스타일당, 프리랜서 테크니컬 디자이너에게 지불하는 비용",
+  s2_n:"$2K–8K", s2_t:"잘못된 프로세스 때문에 브랜드당, 시즌당 잃는 비용",
+  s3_n:"최대 6주", s3_t:"샘플 1회당. 사양이 불분명하면 횟수는 더 늘어납니다.",
+  w_src:"출처: NEIRA 디자이너 15인 인터뷰(2026) · AKCN, Successful Fashion Designer 인용(2026) · Shanghai Garment",
+  how_eyebrow:"작동 방식", how_h:"세 단계. <span class=\"g\">번역 과정에서 잃는 것 없이.</span>",
+  st1_h:"말하는 대로.", st1_p:"글, 대충 그린 스케치, 예전 작업지시서. 가지고 있는 걸 그대로.",
+  st2_h:"빠진 건 물어봅니다.", st2_p:"보내기 전에 NEIRA가 빠진 정보를 먼저 묻습니다. 샘플이 잘못 나오는 바로 그 부분들입니다.",
+  st3_h:"공장이 견적을 냅니다.", st3_p:"공장은 자기들의 언어로 된 브리프를 받고 가격을 보냅니다. 선택은 디자이너 몫.",
+  d_tag:"디자이너", d_h:"같은 소매를 세 번 설명하지 않아도 됩니다.", d_1:"수정 라운드 감소", d_2:"공장 용어를 배울 필요 없음", d_3:"샘플 전에 가격 확인",
+  f_tag:"공장", f_h:"빠짐없이 도착하는 지시서.", f_1:"공장의 언어, 공장의 용어로", f_2:"확인 전화 감소", f_3:"명확한 브리프 기반 견적",
+  fq:"“직접 브랜드를 만들었고, 잘못 나온 샘플 때문에 돈을 잃었습니다. 그래서 해결책을 만들었습니다.”",
+  frole:"Founder &amp; CEO",
+  fp:"패션 업계 9년: 스타일링, 에디토리얼, 프로덕션. 텍스타일 디자인과 의류 구성. LVMH Inside. 2022년부터 프랑스와 한국을 오가며, 지금은 서울에서 NEIRA를 만들고 있습니다.",
+  fec:"NextRise 2026 · 프렌치테크 서울 · 주한프랑스대사관 패널 연사",
+  b_eyebrow:"파운더스 서클", b_h:"단 10자리. <span class=\"g\">함께 만들어 주세요.</span>",
+  b_p:"서울, 인천, 전주에서 함께할 첫 디자이너와 공장을 모십니다. 실제 의류, 솔직한 피드백.",
+  rec_tag:"제공 혜택", rec1:"공장: 소프트웨어 평생 무료", rec2:"디자이너: 베타 기간 무료, 이후 파운딩 멤버 가격", rec3:"로드맵에 직접 의견을 낼 수 있는 창구", rec4:"파운딩 컬래버레이터로 이름 게재",
+  ask_tag:"요청 사항", ask1:"실제 의류 3건 테스트", ask2:"짧은 주간 피드백", ask3:"월 1회 30분 통화", ask4:"상호 NDA 서명",
+  form_h:"참여 신청", form_sub:"모든 신청서는 Cloé가 직접 읽습니다.",
+  lbl_name:"이름", ph_name:"김민지", lbl_email:"업무 이메일",
+  lbl_role:"직군", opt_role:"선택하세요", opt_designer:"디자이너", opt_brand:"브랜드", opt_factory:"공장",
+  lbl_company:"회사 / 스튜디오 / 공장명", ph_company:"스튜디오 안",
+  lbl_method:"지금은 어떻게 의류를 개발하고 계신가요? (선택)", ph_method:"엑셀, 프리랜서 패턴사, 카카오톡 등…",
+  lbl_styles:"시즌당 스타일 수, 대략 (선택)", ph_styles:"예: 12",
+  form_btn:"신청하기", form_note:"정보를 공유하기 전에 상호 NDA를 체결합니다. 입력하신 정보는 외부에 공유되지 않습니다.",
+  so_line:"당신의 비전을, 그들의 언어로."
+}
+};
+const MSG = {
+en:{ invalid_email:"Please enter a valid email.", ok:"You're on the list.", err:"Something went wrong. Please try again.", missing:"Please fill in the required fields.", applied:"Application received. Cloé will be in touch within 48 hours.", apply_err:"Something went wrong. Email cloe@neira.fit." },
+ko:{ invalid_email:"올바른 이메일을 입력해주세요.", ok:"명단에 등록되었습니다.", err:"문제가 발생했습니다. 다시 시도해주세요.", missing:"필수 항목을 모두 입력해주세요.", applied:"신청이 접수되었습니다. 48시간 이내에 Cloé가 연락드립니다.", apply_err:"문제가 발생했습니다. cloe@neira.fit 으로 메일 주세요." }
+};
+let currentLang='en';
+function setLang(lang){
+  currentLang=lang;
+  document.documentElement.lang = lang==='ko' ? 'ko' : 'en';
+  document.querySelectorAll('[data-i18n]').forEach(el=>{ const v=T[lang][el.dataset.i18n]; if(v!==undefined) el.innerHTML=v; });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el=>{ const v=T[lang][el.dataset.i18nPh]; if(v!==undefined) el.placeholder=v; });
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active', b.dataset.lang===lang));
+  try{ localStorage.setItem('neira_lang',lang); }catch(e){}
+}
+(function(){
+  let saved=null; try{ saved=localStorage.getItem('neira_lang'); }catch(e){}
+  const nav=(navigator.language||'').toLowerCase();
+  setLang(saved || (nav.startsWith('ko') ? 'ko' : 'en'));
 })();
 
-/* WAITLIST */
-async function submitWaitlist(){
-  const email=document.getElementById('wl-email').value.trim();
-  const btn=document.getElementById('wl-btn'); const msg=document.getElementById('wl-msg');
-  if(!email||!email.includes('@')){msg.textContent='Please enter a valid email.';return;}
-  btn.textContent='...'; btn.disabled=true; msg.textContent='';
-  try{
-    const res=await fetch('https://formspree.io/f/xqegjqdw',{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify({email,type:'waitlist'})});
-    if(res.ok){msg.textContent="You're on the list.";document.getElementById('wl-email').value='';}
-    else throw new Error();
-  }catch{msg.textContent='Something went wrong.';}
-  btn.textContent='REQUEST ACCESS'; btn.disabled=false;
-}
-document.getElementById('wl-email').addEventListener('keydown',e=>{if(e.key==='Enter')submitWaitlist();});
+const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }),{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+const dk=document.querySelector('.dk');
+new IntersectionObserver((es,o)=>{ if(es[0].isIntersecting){ dk.classList.add('in'); o.disconnect(); } },{threshold:.2}).observe(dk);
 
-/* BETA FORM */
-async function submitBeta(){
-  const fname=document.getElementById('b-fname').value.trim();
-  const email=document.getElementById('b-email').value.trim();
-  const profile=document.getElementById('b-profile').value;
-  const company=document.getElementById('b-company').value.trim();
-  const why=document.getElementById('b-why').value.trim();
-  const btn=document.getElementById('beta-btn'); const msg=document.getElementById('beta-msg');
-  if(!fname||!email||!profile||!company){msg.textContent='Please fill in all required fields.';msg.style.color='#999';return;}
-  btn.disabled=true; btn.textContent='...'; msg.textContent='';
+/* NEIRA sphere: wireframe sphere with a wireframe jacket inside, slowly turning behind the headline */
+(function(){
+  const cv=document.getElementById('sphere');
+  if(!cv||!window.THREE) return;
+  let renderer;
+  try{ renderer=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true}); }catch(e){ cv.style.display='none'; return; }
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+  renderer.setClearColor(0x000000,0);
+  const scene=new THREE.Scene();
+  const camera=new THREE.PerspectiveCamera(45,1,0.1,100); camera.position.set(0,0,6);
+  const INK=0x121211;
+  const sMat=new THREE.MeshBasicMaterial({color:INK,wireframe:true,opacity:0.11,transparent:true});
+  const sphere=new THREE.Mesh(new THREE.SphereGeometry(1.8,14,10),sMat);
+  const jMat=new THREE.LineBasicMaterial({color:0x7b1e2f,opacity:0.42,transparent:true});
+  function pts(c){const v=[];for(let i=0;i<c.length;i+=3)v.push(new THREE.Vector3(c[i],c[i+1],c[i+2]));return v;}
+  function line(...c){return new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts(c)),jMat);}
+  function loop(...c){const p=pts(c);p.push(p[0].clone());return new THREE.Line(new THREE.BufferGeometry().setFromPoints(p),jMat);}
+  const jk=new THREE.Group();
+  jk.add(loop(-0.12,1.08,0,-0.42,1.04,0,-0.60,0.98,0,-0.64,0.82,0,-0.58,-0.02,0,-0.60,-0.50,0,-0.50,-0.62,0,-0.18,-0.70,0,0,-0.60,0,0.18,-0.70,0,0.50,-0.62,0,0.60,-0.50,0,0.58,-0.02,0,0.64,0.82,0,0.60,0.98,0,0.42,1.04,0,0.12,1.08,0));
+  jk.add(loop(-0.12,1.08,0,-0.42,1.04,0,-0.50,0.96,0,-0.35,0.84,0,-0.08,0.90,0,0,0.88,0));
+  jk.add(loop(0.12,1.08,0,0.42,1.04,0,0.50,0.96,0,0.35,0.84,0,0.08,0.90,0,0,0.88,0));
+  jk.add(loop(-0.12,1.08,0,-0.28,1.06,0,-0.30,0.96,0,0,0.88,0.01,0.30,0.96,0,0.28,1.06,0,0.12,1.08,0));
+  jk.add(line(0,1.08,0.01,0.02,0.92,0.01,0.06,0.70,0.01,0.12,0.42,0.01,0.24,0.10,0.01,0.38,-0.22,0.01,0.46,-0.52,0.01,0.50,-0.62,0.01));
+  jk.add(line(-0.50,0.60,0.01,-0.46,0.30,0.01,-0.38,0.00,0.01,-0.34,-0.30,0.01,-0.36,-0.58,0.01));
+  jk.add(loop(-0.60,0.98,0,-0.64,0.82,0,-0.96,0.52,0.06,-1.28,0,0.10,-1.48,-0.38,0.12,-1.42,-0.58,0.12,-1.08,-0.64,0.08,-0.86,-0.36,0.05,-0.68,0,0.02,-0.58,0.62,0));
+  jk.add(line(-0.82,0.68,0.04,-1.10,0.18,0.08,-1.40,-0.30,0.12));
+  jk.add(line(-0.64,0.82,0,-0.74,0.32,0.03,-0.82,-0.30,0.05,-1.08,-0.64,0.08));
+  jk.add(loop(-1.42,-0.56,0.12,-1.10,-0.62,0.08,-1.08,-0.72,0.08,-1.40,-0.66,0.12));
+  jk.add(loop(0.60,0.98,0,0.64,0.82,0,0.96,0.52,0.06,1.28,0,0.10,1.48,-0.38,0.12,1.42,-0.58,0.12,1.08,-0.64,0.08,0.86,-0.36,0.05,0.68,0,0.02,0.58,0.62,0));
+  jk.add(line(0.82,0.68,0.04,1.10,0.18,0.08,1.40,-0.30,0.12));
+  jk.add(line(0.64,0.82,0,0.74,0.32,0.03,0.82,-0.30,0.05,1.08,-0.64,0.08));
+  jk.add(loop(1.42,-0.56,0.12,1.10,-0.62,0.08,1.08,-0.72,0.08,1.40,-0.66,0.12));
+  jk.add(line(-0.42,1.04,0,-0.60,0.98,0));
+  jk.add(line(0.42,1.04,0,0.60,0.98,0));
+  jk.add(line(-0.60,0.88,-0.02,0,0.92,-0.03,0.60,0.88,-0.02));
+  jk.add(line(-0.58,-0.02,0,-0.60,-0.50,0));
+  jk.add(line(0.58,-0.02,0,0.60,-0.50,0));
+  jk.add(line(-0.50,-0.30,0.01,-0.18,-0.28,0.01));
+  jk.add(line(-0.50,-0.30,0.01,-0.50,-0.38,0.01,-0.18,-0.36,0.01,-0.18,-0.28,0.01));
+  jk.add(line(0.20,-0.28,0.01,0.48,-0.30,0.01));
+  jk.add(line(0.20,-0.28,0.01,0.20,-0.36,0.01,0.48,-0.38,0.01,0.48,-0.30,0.01));
+  jk.add(line(0,0.92,-0.03,0,-0.60,-0.03));
+  const world=new THREE.Group(); world.add(sphere); world.add(jk); scene.add(world);
+
+  function size(){ const w=cv.clientWidth, h=cv.clientHeight; if(!w||!h) return; renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix(); }
+  size(); window.addEventListener('resize',size);
+
+  let t=0.55, running=true;
+  const reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function frame(){ world.rotation.y=-t; world.rotation.x=Math.sin(t*0.18)*0.10; renderer.render(scene,camera); }
+  frame();
+  if(reduce) return;
+  (function loopAnim(){ requestAnimationFrame(loopAnim); if(!running) return; t+=0.003; frame(); })();
+  new IntersectionObserver(es=>{ running=es[0].isIntersecting; }).observe(cv);
+})();
+
+const ENDPOINT='https://formspree.io/f/xqegjqdw';
+const PREVIEW=true;
+const PV={en:'Preview only. The forms send on neira.fit.',ko:'미리보기입니다. 양식은 neira.fit에서 전송됩니다.'};
+const validEmail=v=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+
+document.getElementById('capture').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const email=document.getElementById('hero-email').value.trim();
+  const btn=document.getElementById('hero-btn'), msg=document.getElementById('hero-msg');
+  if(!validEmail(email)){ msg.textContent=MSG[currentLang].invalid_email; return; }
+  if(PREVIEW){ msg.textContent=PV[currentLang]; return; }
+  btn.disabled=true; btn.textContent='…'; msg.textContent='';
   try{
-    const res=await fetch('https://formspree.io/f/xqegjqdw',{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify({name:fname,email,profile,company,message:why,type:'beta',_subject:'NEIRA Beta — '+profile})});
-    if(res.ok){
-      msg.textContent='Application received. Cloé will be in touch within 48h.';
-      msg.style.color='#2f5f8f';
-      ['b-fname','b-email','b-company','b-why'].forEach(id=>document.getElementById(id).value='');
-      document.getElementById('b-profile').value='';
-    }else throw new Error();
-  }catch{msg.textContent='Something went wrong. Email: cloe@neira.fit';msg.style.color='#999';}
-  btn.disabled=false; btn.textContent='APPLY FOR BETA ACCESS';
-}
+    const res=await fetch(ENDPOINT,{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify({email,type:'waitlist',lang:currentLang})});
+    if(!res.ok) throw new Error();
+    msg.textContent=MSG[currentLang].ok; document.getElementById('hero-email').value='';
+  }catch{ msg.textContent=MSG[currentLang].err; }
+  btn.disabled=false; btn.textContent=T[currentLang].hero_btn;
+});
+
+document.getElementById('apply-form').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const v=id=>document.getElementById(id).value.trim();
+  const name=v('f-name'), email=v('f-email'), role=v('f-role'), company=v('f-company'), method=v('f-method'), styles=v('f-styles');
+  const btn=document.getElementById('form-btn'), msg=document.getElementById('form-msg');
+  if(!name||!role||!company||!validEmail(email)){ msg.textContent=MSG[currentLang].missing; return; }
+  if(PREVIEW){ msg.textContent=PV[currentLang]; return; }
+  btn.disabled=true; btn.textContent='…'; msg.textContent='';
+  try{
+    const res=await fetch(ENDPOINT,{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify({name,email,role,company,method,styles,type:'beta',lang:currentLang,_subject:'NEIRA Beta — '+role})});
+    if(!res.ok) throw new Error();
+    msg.textContent=MSG[currentLang].applied;
+    ['f-name','f-email','f-company','f-method','f-styles'].forEach(id=>document.getElementById(id).value='');
+    document.getElementById('f-role').value='';
+  }catch{ msg.textContent=MSG[currentLang].apply_err; }
+  btn.disabled=false; btn.textContent=T[currentLang].form_btn;
+});
 </script>
-</body>
-</html>
+
+
+
+</body></html>
