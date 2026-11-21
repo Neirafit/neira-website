@@ -1,21 +1,27 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>NEIRA Beta</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEIRA — Tell the factory what you mean</title>
 <meta name="description" content="Describe your garment your way. NEIRA rewrites it in the factory's language, asks what you forgot, and brings back quotes. Private beta, Seoul.">
+<meta name="theme-color" content="#efeeea">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23111'/%3E%3Ctext x='32' y='47' font-family='Georgia,serif' font-size='40' font-weight='700' fill='%23efeeea' text-anchor='middle'%3EN%3C/text%3E%3C/svg%3E">
 <script>document.documentElement.className='js';</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css">
 <style>
 :root{
   --paper:#efeeea; --paper2:#e6e5e0; --card:#fbfaf7; --ink:#121211; --ink2:#53524e; --mute:#8d8c86;
   --dark:#161615; --cobalt:#2f5f8f; --bordeaux:#7b1e2f; --bordeaux-lt:#c0495f; --line:rgba(18,18,17,.14);
   --sans:"Geist",-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;
   --mono:"Geist Mono","SF Mono",ui-monospace,Menlo,Consolas,monospace;
-  --ko:"Pretendard Variable",Pretendard,"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --ko:"Pretendard Variable",Pretendard,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:68px;-webkit-text-size-adjust:100%}
-html{background:var(--paper)}
 body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 body::before{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;opacity:.05;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 ::selection{background:var(--bordeaux);color:var(--paper)}
@@ -222,8 +228,8 @@ html[lang="ko"] .btn{font-family:var(--ko)}
   .meta-row .mono:nth-child(2){display:none}
 }
 </style>
-
-
+</head>
+<body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="neira-logo" viewBox="0 0 1722 634"><path fill="currentColor" fill-rule="evenodd" d="M614.5,623.0C596.5,620.6 570.6,612.4 558.5,605.3C555.2,603.3 551.1,600.9 549.4,599.9C531.3,589.7 507.1,567.6 496.4,551.7C485.2,534.9 478.0,522.6 478.0,520.1C478.0,519.5 476.3,515.3 474.1,510.8C472.0,506.2 469.7,500.7 469.0,498.5C468.3,496.3 467.4,494.0 466.9,493.5C466.1,492.4 460.7,470.4 459.5,463.0C459.1,460.5 458.1,456.7 457.3,454.5C455.4,449.1 452.5,412.2 452.6,393.5C452.6,374.3 455.5,336.9 457.4,330.9C458.2,328.4 459.4,322.8 460.0,318.5C460.6,314.3 461.8,309.0 462.6,306.8C463.4,304.6 464.0,301.7 464.0,300.4C464.0,297.6 469.7,280.3 474.0,270.0C475.8,265.9 477.8,260.6 478.5,258.3C479.2,256.0 484.7,245.9 490.6,235.9C505.1,211.7 519.2,195.9 541.5,179.2C557.2,167.4 585.1,156.3 608.5,152.6C628.7,149.3 662.3,151.5 678.3,157.0C683.2,158.6 687.6,160.0 688.3,160.0C690.1,160.0 705.0,168.0 713.5,173.5C730.0,184.2 749.4,207.4 757.5,226.0C759.0,229.6 761.4,235.0 762.7,238.0C766.0,245.4 769.7,257.4 770.5,263.5C770.9,266.2 772.0,271.6 773.0,275.5C775.4,284.5 777.3,321.0 776.0,332.7C775.0,342.2 771.5,349.8 766.6,353.3L763.5,355.5L655.8,356.0C554.0,356.5 548.0,356.6 546.3,358.3C543.4,361.1 543.9,426.6 546.8,439.0C547.9,443.7 549.1,450.9 549.5,455.0C549.8,459.1 551.0,465.0 552.0,468.0C553.0,471.0 555.0,477.8 556.5,483.0C563.3,507.3 577.8,533.3 593.2,549.0C606.6,562.6 626.7,573.9 641.5,576.1C644.8,576.6 650.3,577.5 653.6,578.0C664.7,579.8 693.8,577.5 698.7,574.4C699.9,573.7 702.9,572.6 705.3,572.0C711.8,570.6 732.3,558.7 741.5,551.1C755.5,539.4 756.8,538.6 763.0,538.2C768.4,537.8 768.7,537.9 771.8,541.4C776.7,547.0 775.3,553.2 766.3,566.9C761.7,573.8 742.9,592.5 735.9,597.1C722.8,605.7 703.7,615.0 699.2,615.0C698.2,615.0 696.5,615.6 695.4,616.4C694.3,617.2 689.6,618.6 684.9,619.4C680.3,620.2 673.4,621.6 669.5,622.4C661.9,624.1 625.8,624.4 614.5,623.0ZM1324.5,623.4C1322.8,623.1 1319.5,622.3 1317.0,621.5C1314.5,620.8 1309.8,619.6 1306.5,619.0C1303.2,618.4 1298.7,617.1 1296.5,616.0C1294.3,615.0 1290.2,613.1 1287.5,611.9C1253.5,596.7 1233.7,559.5 1237.9,518.8C1239.5,503.7 1247.7,478.0 1253.8,469.2C1254.8,467.7 1257.4,463.4 1259.4,459.7C1272.9,435.3 1305.1,402.2 1334.7,382.3C1337.3,380.5 1343.8,376.2 1349.0,372.6C1354.2,369.1 1360.1,365.4 1362.2,364.4C1364.2,363.3 1371.6,359.3 1378.7,355.4C1392.0,348.0 1397.1,345.6 1418.0,337.0C1424.9,334.2 1432.2,331.1 1434.3,330.3C1438.6,328.4 1443.7,323.1 1444.6,319.5C1444.9,318.1 1445.0,296.2 1444.8,270.7C1444.3,228.3 1444.1,223.7 1442.1,214.6C1437.5,193.1 1426.2,181.1 1409.8,180.2C1386.6,178.8 1365.0,199.2 1343.6,243.0C1329.3,272.1 1325.9,278.3 1321.2,283.8C1293.7,316.5 1250.2,291.5 1263.3,250.6C1268.7,234.0 1283.4,214.0 1301.8,198.2C1310.9,190.4 1331.0,176.1 1337.5,172.8C1339.2,172.0 1341.8,170.6 1343.5,169.7C1374.0,153.2 1412.9,147.2 1448.0,153.6C1461.2,156.0 1481.4,162.6 1485.2,165.8C1486.0,166.4 1487.8,167.4 1489.3,167.9C1494.3,169.8 1503.4,176.7 1509.6,183.1C1519.4,193.4 1522.6,199.0 1529.3,217.5C1530.1,219.6 1530.6,270.6 1531.0,389.0L1531.5,557.5L1533.8,564.0C1538.6,577.7 1545.1,579.6 1561.4,572.1C1569.9,568.3 1573.8,568.1 1577.9,571.6C1583.1,575.9 1581.9,582.7 1574.3,592.4C1560.5,610.2 1526.2,618.4 1497.3,610.7C1482.0,606.6 1468.9,598.4 1459.9,587.2C1451.6,576.8 1449.8,576.9 1437.0,589.0C1426.3,599.1 1424.6,600.2 1406.4,610.1C1400.3,613.3 1381.4,620.0 1378.2,620.0C1376.9,620.0 1374.5,620.7 1372.8,621.6C1369.7,623.2 1332.1,624.6 1324.5,623.4ZM359.5,614.2C352.2,612.8 344.0,606.2 335.1,594.5C331.0,589.1 329.4,586.1 320.0,566.5C313.6,553.3 297.2,519.7 276.0,476.5C269.5,463.3 260.5,444.9 256.0,435.5C251.4,426.1 236.7,396.2 223.2,369.0C200.5,322.9 192.2,306.1 168.8,258.0C161.5,242.9 151.1,222.1 146.9,214.0C146.5,213.2 142.5,204.8 138.0,195.5C113.7,145.0 110.9,140.3 107.2,142.6C104.5,144.3 104.5,152.7 105.0,360.5L105.5,552.5L108.2,558.1C116.0,574.5 127.9,581.7 163.0,591.3C170.2,593.3 173.9,601.4 170.5,608.0C167.1,614.6 163.3,615.1 139.0,612.3C118.4,610.0 65.9,610.0 46.3,612.3C24.7,614.9 18.7,614.7 15.0,611.2C11.5,607.8 10.0,604.3 10.7,600.8C11.3,597.9 17.6,591.0 19.6,591.0C22.6,591.0 41.9,583.7 46.9,580.7C56.6,574.9 63.1,564.2 65.0,551.2C66.2,542.5 66.3,69.9 65.1,65.0C64.6,63.1 63.9,60.3 63.6,58.9C63.3,57.5 61.9,55.1 60.5,53.4C59.1,51.8 58.0,50.2 58.0,49.9C58.0,47.2 44.9,41.5 28.0,36.6C19.1,34.1 16.3,31.9 14.6,25.9C13.1,21.0 13.1,20.5 15.0,17.5C18.8,11.3 15.2,11.7 78.3,11.5C141.5,11.3 139.2,11.1 145.5,16.7C149.9,20.6 160.8,41.3 189.8,101.0C193.6,109.0 203.4,129.0 211.6,145.5C244.7,212.9 271.1,267.0 284.5,294.5C326.5,381.0 354.1,436.1 356.2,437.4C357.4,438.1 358.3,438.0 359.4,437.1C360.9,435.9 361.0,419.4 360.8,253.1L360.5,70.5L357.7,63.5C352.3,49.8 339.1,41.8 312.0,36.0C306.2,34.8 300.3,33.1 298.9,32.2C292.5,28.6 291.1,20.2 295.9,14.8C298.8,11.5 298.9,11.5 307.7,11.5C312.5,11.5 323.2,12.2 331.5,12.9C349.6,14.5 401.8,14.6 421.0,13.0C428.4,12.4 438.6,11.6 443.6,11.3L452.6,10.7L456.3,14.0C459.6,16.8 460.0,17.7 460.0,21.9C460.0,29.8 455.8,33.1 441.4,36.5C422.9,40.8 408.2,51.8 403.3,65.0L400.5,72.5L400.0,332.5L399.5,592.5L396.6,599.0C393.0,607.0 391.2,609.0 385.5,611.9C380.6,614.3 367.0,615.5 359.5,614.2ZM798.8,612.4C795.1,610.4 794.0,608.1 794.0,602.1C794.0,595.7 795.5,594.1 805.1,590.5C827.0,582.3 833.6,576.5 838.4,561.2L841.0,552.9L841.0,398.8L841.0,244.6L837.2,238.4C833.3,231.8 825.4,226.3 817.3,224.6C812.6,223.5 807.7,216.7 808.4,212.1C809.3,206.2 817.9,200.0 825.3,200.0C839.1,200.0 885.3,183.7 899.2,173.8C913.6,163.6 915.2,162.7 918.2,162.7C920.4,162.7 922.0,163.5 923.7,165.4L926.0,168.1L926.0,357.3C926.0,475.3 926.4,549.0 927.0,553.3C929.8,572.4 938.5,582.1 959.5,589.4C967.8,592.3 971.1,594.6 974.0,599.3L975.7,602.0L978.4,598.2C981.5,593.6 982.7,593.0 994.1,589.0C1012.4,582.8 1019.5,576.0 1025.1,559.5C1027.5,552.5 1027.1,238.3 1024.7,231.4C1022.3,224.3 1014.0,217.5 1005.6,215.6C1001.2,214.5 998.1,212.0 995.9,207.9C993.5,203.1 993.5,201.3 995.9,197.4C998.2,193.7 1001.9,192.3 1019.5,188.5C1026.1,187.1 1032.8,185.5 1034.5,185.0C1036.2,184.5 1041.3,182.9 1046.0,181.4C1064.2,175.7 1078.4,168.9 1089.8,160.3C1098.7,153.6 1103.1,151.9 1106.9,154.0C1110.5,155.9 1110.9,158.9 1111.1,184.4C1111.2,211.7 1111.6,213.6 1116.4,211.0C1117.9,210.3 1120.7,206.9 1122.8,203.6C1138.8,177.1 1165.0,157.2 1190.7,152.0C1202.8,149.6 1204.4,149.6 1213.8,151.5C1233.8,155.7 1246.3,165.5 1254.8,183.8C1258.9,192.5 1258.7,214.5 1254.5,223.8C1249.1,235.8 1239.7,241.5 1225.5,241.4C1212.5,241.4 1207.7,238.9 1194.4,225.4C1188.7,219.6 1184.0,214.5 1184.0,214.0C1184.0,213.5 1181.4,211.4 1178.3,209.3C1163.9,199.8 1147.1,207.2 1130.5,230.4C1128.0,233.9 1126.0,237.2 1126.0,237.7C1126.0,238.3 1125.2,239.8 1124.2,241.1C1121.9,244.2 1117.6,255.3 1115.0,265.0C1111.3,278.7 1110.9,298.2 1111.2,429.0L1111.5,553.5L1114.4,560.7C1120.9,576.8 1130.4,582.7 1163.7,591.0C1172.6,593.2 1176.1,599.4 1173.0,607.4C1170.4,614.4 1164.7,615.1 1131.7,612.3C1103.5,609.9 1038.1,609.9 1015.5,612.3C987.9,615.2 983.8,614.7 979.4,608.0C976.1,603.1 975.7,603.1 973.0,607.5C968.7,614.5 961.2,615.5 937.2,612.3C919.0,609.9 851.7,609.9 831.0,612.3C813.1,614.4 802.4,614.4 798.8,612.4ZM1657.4,612.5C1640.7,607.2 1628.3,591.8 1624.5,571.4C1620.8,551.9 1629.3,527.6 1642.8,518.9C1656.3,510.2 1655.4,510.5 1668.0,510.6C1680.6,510.6 1683.5,511.5 1693.2,518.3C1699.3,522.6 1703.3,527.7 1707.8,537.0L1711.5,544.5L1711.5,561.0L1711.5,577.5L1706.8,587.1C1696.5,608.2 1676.4,618.5 1657.4,612.5ZM1401.1,575.8C1423.7,567.4 1442.1,541.6 1444.4,515.0C1445.2,505.9 1445.2,365.7 1444.4,363.7C1442.9,359.8 1439.2,360.5 1425.5,367.5C1398.3,381.3 1374.1,403.3 1357.9,429.0C1351.9,438.6 1343.0,456.2 1341.0,462.5C1340.3,464.7 1339.4,467.0 1338.9,467.6C1337.6,469.2 1333.4,486.0 1331.5,496.8C1324.4,538.2 1338.3,568.9 1368.0,577.1C1377.3,579.7 1392.1,579.1 1401.1,575.8ZM653.0,320.0C655.5,319.4 659.8,318.6 662.5,318.1C672.8,316.4 689.1,306.9 695.5,299.0C700.9,292.4 704.7,283.8 706.5,274.4C708.2,265.2 708.5,248.4 706.9,244.3C706.3,242.8 705.4,239.0 704.8,236.0C699.9,209.2 676.0,188.6 647.4,186.5C613.5,184.0 588.3,200.0 569.1,236.2C566.3,241.5 564.0,246.6 564.0,247.5C564.0,248.4 563.0,251.0 561.8,253.3C560.6,255.6 559.1,260.0 558.4,263.0C557.6,266.0 556.1,272.1 555.0,276.5C551.3,291.3 550.9,293.5 549.5,304.5C547.9,317.1 548.5,319.2 554.3,321.0C558.6,322.3 646.8,321.5 653.0,320.0ZM872.0,113.4C859.7,109.3 846.5,95.8 842.7,83.6C833.6,54.2 844.0,25.4 868.0,14.1C876.0,10.3 891.9,10.4 899.9,14.3C915.2,21.6 924.5,35.0 927.1,53.2C928.5,63.3 927.3,77.3 924.3,85.0C915.8,107.0 891.8,120.0 872.0,113.4Z"/></symbol></svg>
 
 <nav id="nav">
@@ -281,7 +287,7 @@ html[lang="ko"] .btn{font-family:var(--ko)}
 
         <figure class="pol">
           <div class="shot paper">
-            <div class="brief"><b data-i18n="c2b">Designer · Brief</b>Boxy jacket, drop shoulders. Sleeves a bit longer than normal, like it's slouching. Two snap pockets, low on the front. Heavy cotton twill.<div class="att">+ sketch.jpg</div></div>
+            <div class="brief"><b data-i18n="c2b">Designer · Brief</b><span data-i18n="brief_txt">Boxy jacket, drop shoulders. Sleeves a bit longer than normal, like it's slouching. Two snap pockets, low on the front. Heavy cotton twill.</span><div class="att">+ sketch.jpg</div></div>
           </div>
           <figcaption class="cap mono"><span>02</span><span data-i18n="c2">Your words</span></figcaption>
         </figure>
@@ -289,11 +295,11 @@ html[lang="ko"] .btn{font-family:var(--ko)}
         <figure class="pol">
           <div class="shot">
             <div class="tk">
-              <h5>재킷 · 작업 지시<span>NEIRA → 공장</span></h5>
+              <h5>재킷 · 작업지시서<span>NEIRA → 공장</span></h5>
               <div class="r"><em>실루엣</em><b>박시 오버핏</b></div>
               <div class="r"><em>어깨</em><b>드롭숄더</b></div>
               <div class="r"><em>소매장</em><b>기본 +3cm</b></div>
-              <div class="r"><em>포켓</em><b>스냅 2개 · 앞판 하단</b></div>
+              <div class="r"><em>포켓</em><b>스냅 포켓 2개 · 앞판 하단</b></div>
               <div class="r"><em>원단</em><b>헤비 코튼 트윌</b></div>
               <div class="fl"><strong>확인 필요 · 포켓 높이?</strong><small data-i18n="fl_gloss">Needs your answer: cm up from the hem?</small></div>
             </div>
@@ -464,51 +470,57 @@ en:{
   lbl_method:"How do you develop garments today? (optional)", ph_method:"Excel, freelance pattern maker, KakaoTalk…",
   lbl_styles:"Styles per season, approx. (optional)", ph_styles:"e.g. 12",
   form_btn:"Request access", form_note:"A mutual NDA is signed before anything is shared. Your details stay with us.",
-  so_line:"Your vision. Their language."
+  so_line:"Your vision. Their language.",
+  brief_txt:"Boxy jacket, drop shoulders. Sleeves a bit longer than normal, like it's slouching. Two snap pockets, low on the front. Heavy cotton twill.",
+  doc_title:"NEIRA — Tell the factory what you mean",
+  doc_desc:"Describe your garment your way. NEIRA rewrites it in the factory's language, asks what you forgot, and brings back quotes. Private beta, Seoul."
 },
 ko:{
-  nav_how:"작동 방식", nav_why:"문제", nav_beta:"베타", nav_cta:"베타 참여",
-  m1:"NEIRA / 번역되는 패션 생산", m2:"프라이빗 베타 · 서울",
-  hero_h:"만들고 싶은 그대로, <span class=\"g\">공장이 알아듣게.</span>",
-  hero_sub:"옷을 편하게 설명하세요. NEIRA가 공장의 언어로 바꿔 쓰고, 빠진 정보를 물어보고, 견적까지 받아옵니다.",
-  hero_ph:"이메일 주소", hero_btn:"얼리 액세스 신청", hero_note:"베타 기간 무료 · 한국 우선",
-  pol_note:"소매 더 넓게?", c1:"스케치", c2:"디자이너의 말", c2b:"디자이너 · 브리프", c3:"공장 작업 지시", c4:"도착한 견적",
-  fl_gloss:"답변 필요: 밑단에서 몇 cm 위?", q_h:"견적", q_in:"견적 도착", q_wait:"브리프 확인 중",
-  strip_note:"하나의 옷, 네 장면. 예시입니다.",
-  w_a:"문제", w_b:"서울 · 2026",
-  w_h:"매 시즌, 소규모 브랜드는 <span class=\"g\">잘못 나온 샘플 값을 치릅니다.</span>",
-  w_note:"완벽한 작업지시서도 이 문제를 해결하지 못합니다. 문제는 해석입니다. 넘겨질 때마다 디자이너가 의도한 것이 조금씩 사라집니다.",
-  s1_n:"$300–1,000", s1_t:"스타일당, 프리랜서 테크니컬 디자이너에게 지불하는 비용",
-  s2_n:"$2K–8K", s2_t:"잘못된 프로세스 때문에 브랜드당, 시즌당 잃는 비용",
-  s3_n:"최대 6주", s3_t:"샘플 1회당. 사양이 불분명하면 횟수는 더 늘어납니다.",
+  nav_how:"이용 방법", nav_why:"해결할 문제", nav_beta:"베타 안내", nav_cta:"베타 참여 신청",
+  m1:"NEIRA / 디자이너와 공장 사이의 소통", m2:"비공개 베타 · 서울",
+  hero_h:"만들고 싶은 그대로, <span class=\"g\">공장에 정확히 전달하세요.</span>",
+  hero_sub:"옷을 평소 쓰는 말로 설명하세요. NEIRA가 공장용 작업지시서로 정리하고, 빠진 정보는 먼저 질문하고, 견적까지 받아 드립니다.",
+  hero_ph:"이메일 주소", hero_btn:"사전 신청", hero_note:"베타 기간 무료 · 한국에서 먼저 시작합니다",
+  pol_note:"소매 더 넓게?", c1:"스케치", c2:"디자이너의 설명", c2b:"디자이너 · 요청 내용", c3:"공장용 작업지시서", c4:"도착한 견적",
+  brief_txt:"박시한 재킷, 어깨는 드롭숄더. 소매는 평소보다 조금 길게, 흘러내리는 느낌으로. 스냅 포켓 두 개, 앞쪽 아래에. 두꺼운 코튼 트윌.",
+  fl_gloss:"답변 필요: 포켓은 밑단에서 몇 cm 위인가요?", q_h:"견적", q_in:"견적 도착", q_wait:"요청 내용 확인 중",
+  strip_note:"옷 한 벌, 네 장면. 예시 화면입니다.",
+  w_a:"문제 상황", w_b:"서울 · 2026",
+  w_h:"매 시즌, 소규모 브랜드는 <span class=\"g\">잘못 나온 샘플 비용을 떠안습니다.</span>",
+  w_note:"작업지시서를 완벽하게 써도 이 문제는 사라지지 않습니다. 원인은 사람마다 다르게 해석하는 데 있습니다. 전달 단계를 거칠 때마다 디자이너의 의도가 조금씩 사라집니다.",
+  s1_n:"$300–1,000", s1_t:"스타일당, 프리랜서 테크니컬 디자이너에게 드는 비용",
+  s2_n:"$2K–8K", s2_t:"잘못된 진행 방식 때문에 브랜드당, 시즌마다 잃는 비용",
+  s3_n:"최대 6주", s3_t:"샘플 1회당. 작업 지시가 불명확하면 샘플 횟수가 늘어납니다.",
   w_src:"출처: NEIRA 디자이너 15인 인터뷰(2026) · AKCN, Successful Fashion Designer 인용(2026) · Shanghai Garment",
-  how_eyebrow:"작동 방식", how_h:"세 단계. <span class=\"g\">번역 과정에서 잃는 것 없이.</span>",
-  st1_h:"말하는 대로.", st1_p:"글, 대충 그린 스케치, 예전 작업지시서. 가지고 있는 걸 그대로.",
-  st2_h:"빠진 건 물어봅니다.", st2_p:"보내기 전에 NEIRA가 빠진 정보를 먼저 묻습니다. 샘플이 잘못 나오는 바로 그 부분들입니다.",
-  st3_h:"공장이 견적을 냅니다.", st3_p:"공장은 자기들의 언어로 된 브리프를 받고 가격을 보냅니다. 선택은 디자이너 몫.",
-  d_tag:"디자이너", d_h:"같은 소매를 세 번 설명하지 않아도 됩니다.", d_1:"수정 라운드 감소", d_2:"공장 용어를 배울 필요 없음", d_3:"샘플 전에 가격 확인",
-  f_tag:"공장", f_h:"빠짐없이 도착하는 지시서.", f_1:"공장의 언어, 공장의 용어로", f_2:"확인 전화 감소", f_3:"명확한 브리프 기반 견적",
-  fq:"“직접 브랜드를 만들었고, 잘못 나온 샘플 때문에 돈을 잃었습니다. 그래서 해결책을 만들었습니다.”",
-  frole:"Founder &amp; CEO",
-  fp:"패션 업계 9년: 스타일링, 에디토리얼, 프로덕션. 텍스타일 디자인과 의류 구성. LVMH Inside. 2022년부터 프랑스와 한국을 오가며, 지금은 서울에서 NEIRA를 만들고 있습니다.",
-  fec:"NextRise 2026 · 프렌치테크 서울 · 주한프랑스대사관 패널 연사",
+  how_eyebrow:"이용 방법", how_h:"세 단계로, <span class=\"g\">전달 과정에서 놓치는 것 없이.</span>",
+  st1_h:"편하게 설명하세요.", st1_p:"글, 러프 스케치, 기존 작업지시서. 가지고 있는 자료면 충분합니다.",
+  st2_h:"빠진 정보를 확인합니다.", st2_p:"공장에 보내기 전에 NEIRA가 빠진 정보를 먼저 질문합니다. 샘플 오류의 원인이 되는 바로 그 부분들입니다.",
+  st3_h:"공장이 견적을 보냅니다.", st3_p:"공장은 바로 작업할 수 있는 작업지시서를 받고 견적을 보냅니다. 선택은 디자이너가 합니다.",
+  d_tag:"디자이너", d_h:"같은 소매를 세 번 설명하지 않아도 됩니다.", d_1:"샘플 수정 횟수 감소", d_2:"공장 용어를 따로 배울 필요 없음", d_3:"샘플 제작 전에 가격 확인",
+  f_tag:"공장", f_h:"빠짐없이 도착하는 작업지시서.", f_1:"공장에서 쓰는 용어와 형식 그대로", f_2:"확인 전화 감소", f_3:"명확한 지시서를 기준으로 견적",
+  fq:"“직접 브랜드를 론칭했고, 잘못 나온 샘플 때문에 손해를 봤습니다. 그래서 직접 해결책을 만들었습니다.”",
+  frole:"창업자 · 대표",
+  fp:"패션 업계 9년: 스타일링, 에디토리얼, 제작 현장. 텍스타일 디자인과 의복 구성을 공부했습니다. LVMH Inside. 2022년부터 프랑스와 한국을 오가며, 지금은 서울에서 NEIRA를 만들고 있습니다.",
+  fec:"NextRise 2026 · 프렌치테크 서울 · 주한프랑스대사관 연사",
   b_eyebrow:"파운더스 서클", b_h:"단 10자리. <span class=\"g\">함께 만들어 주세요.</span>",
-  b_p:"서울, 인천, 전주에서 함께할 첫 디자이너와 공장을 모십니다. 실제 의류, 솔직한 피드백.",
-  rec_tag:"제공 혜택", rec1:"공장: 소프트웨어 평생 무료", rec2:"디자이너: 베타 기간 무료, 이후 파운딩 멤버 가격", rec3:"로드맵에 직접 의견을 낼 수 있는 창구", rec4:"파운딩 컬래버레이터로 이름 게재",
-  ask_tag:"요청 사항", ask1:"실제 의류 3건 테스트", ask2:"짧은 주간 피드백", ask3:"월 1회 30분 통화", ask4:"상호 NDA 서명",
-  form_h:"참여 신청", form_sub:"모든 신청서는 Cloé가 직접 읽습니다.",
+  b_p:"서울, 인천, 전주에서 가장 먼저 함께할 디자이너와 공장을 모십니다. 실제 의류로 테스트하고, 솔직한 피드백을 나눕니다.",
+  rec_tag:"제공 혜택", rec1:"공장: NEIRA 평생 무료 이용", rec2:"디자이너: 베타 기간 무료, 이후 창립 멤버 전용 가격", rec3:"제품 개발 방향에 직접 의견을 낼 수 있는 창구", rec4:"창립 협력자로 이름 게재",
+  ask_tag:"요청 사항", ask1:"실제 의류 3벌 테스트", ask2:"매주 짧은 피드백", ask3:"월 1회 30분 통화", ask4:"상호 비밀유지계약(NDA) 서명",
+  form_h:"베타 참여 신청", form_sub:"모든 신청서는 Cloé가 직접 읽습니다.",
   lbl_name:"이름", ph_name:"김민지", lbl_email:"업무 이메일",
-  lbl_role:"직군", opt_role:"선택하세요", opt_designer:"디자이너", opt_brand:"브랜드", opt_factory:"공장",
-  lbl_company:"회사 / 스튜디오 / 공장명", ph_company:"스튜디오 안",
-  lbl_method:"지금은 어떻게 의류를 개발하고 계신가요? (선택)", ph_method:"엑셀, 프리랜서 패턴사, 카카오톡 등…",
-  lbl_styles:"시즌당 스타일 수, 대략 (선택)", ph_styles:"예: 12",
-  form_btn:"신청하기", form_note:"정보를 공유하기 전에 상호 NDA를 체결합니다. 입력하신 정보는 외부에 공유되지 않습니다.",
-  so_line:"당신의 비전을, 그들의 언어로."
+  lbl_role:"참여 유형", opt_role:"선택하세요", opt_designer:"디자이너", opt_brand:"브랜드", opt_factory:"공장",
+  lbl_company:"회사 / 스튜디오 / 공장명", ph_company:"한결 스튜디오",
+  lbl_method:"현재 의류 개발은 어떻게 진행하고 계신가요? (선택)", ph_method:"엑셀, 프리랜서 패턴사, 카카오톡 등…",
+  lbl_styles:"시즌당 스타일 수 (대략, 선택)", ph_styles:"예: 12",
+  form_btn:"참여 신청하기", form_note:"내용을 공유하기 전에 상호 NDA를 먼저 체결합니다. 입력하신 정보는 NEIRA 외부에 공유되지 않습니다.",
+  so_line:"당신의 의도를, 공장이 이해하는 방식으로.",
+  doc_title:"NEIRA — 만들고 싶은 그대로, 공장에 정확히 전달하세요",
+  doc_desc:"옷을 평소 쓰는 말로 설명하세요. NEIRA가 공장용 작업지시서로 정리하고, 빠진 정보는 먼저 질문하고, 견적까지 받아 드립니다. 비공개 베타, 서울."
 }
 };
 const MSG = {
 en:{ invalid_email:"Please enter a valid email.", ok:"You're on the list.", err:"Something went wrong. Please try again.", missing:"Please fill in the required fields.", applied:"Application received. Cloé will be in touch within 48 hours.", apply_err:"Something went wrong. Email cloe@neira.fit." },
-ko:{ invalid_email:"올바른 이메일을 입력해주세요.", ok:"명단에 등록되었습니다.", err:"문제가 발생했습니다. 다시 시도해주세요.", missing:"필수 항목을 모두 입력해주세요.", applied:"신청이 접수되었습니다. 48시간 이내에 Cloé가 연락드립니다.", apply_err:"문제가 발생했습니다. cloe@neira.fit 으로 메일 주세요." }
+ko:{ invalid_email:"올바른 이메일 주소를 입력해 주세요.", ok:"사전 신청이 완료되었습니다.", err:"문제가 발생했습니다. 다시 시도해 주세요.", missing:"필수 항목을 모두 입력해 주세요.", applied:"신청이 접수되었습니다. 48시간 이내에 Cloé가 연락드립니다.", apply_err:"문제가 발생했습니다. cloe@neira.fit으로 메일을 보내 주세요." }
 };
 let currentLang='en';
 function setLang(lang){
@@ -516,6 +528,8 @@ function setLang(lang){
   document.documentElement.lang = lang==='ko' ? 'ko' : 'en';
   document.querySelectorAll('[data-i18n]').forEach(el=>{ const v=T[lang][el.dataset.i18n]; if(v!==undefined) el.innerHTML=v; });
   document.querySelectorAll('[data-i18n-ph]').forEach(el=>{ const v=T[lang][el.dataset.i18nPh]; if(v!==undefined) el.placeholder=v; });
+  if(T[lang].doc_title) document.title=T[lang].doc_title;
+  const md=document.querySelector('meta[name="description"]'); if(md&&T[lang].doc_desc) md.setAttribute('content',T[lang].doc_desc);
   document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active', b.dataset.lang===lang));
   try{ localStorage.setItem('neira_lang',lang); }catch(e){}
 }
@@ -587,8 +601,6 @@ new IntersectionObserver((es,o)=>{ if(es[0].isIntersecting){ dk.classList.add('i
 })();
 
 const ENDPOINT='https://formspree.io/f/xqegjqdw';
-const PREVIEW=false;
-const PV={en:'Preview only. The forms send on neira.fit.',ko:'미리보기입니다. 양식은 neira.fit에서 전송됩니다.'};
 const validEmail=v=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
 
 document.getElementById('capture').addEventListener('submit',async e=>{
@@ -596,7 +608,6 @@ document.getElementById('capture').addEventListener('submit',async e=>{
   const email=document.getElementById('hero-email').value.trim();
   const btn=document.getElementById('hero-btn'), msg=document.getElementById('hero-msg');
   if(!validEmail(email)){ msg.textContent=MSG[currentLang].invalid_email; return; }
-  if(PREVIEW){ msg.textContent=PV[currentLang]; return; }
   btn.disabled=true; btn.textContent='…'; msg.textContent='';
   try{
     const res=await fetch(ENDPOINT,{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify({email,type:'waitlist',lang:currentLang})});
@@ -612,7 +623,6 @@ document.getElementById('apply-form').addEventListener('submit',async e=>{
   const name=v('f-name'), email=v('f-email'), role=v('f-role'), company=v('f-company'), method=v('f-method'), styles=v('f-styles');
   const btn=document.getElementById('form-btn'), msg=document.getElementById('form-msg');
   if(!name||!role||!company||!validEmail(email)){ msg.textContent=MSG[currentLang].missing; return; }
-  if(PREVIEW){ msg.textContent=PV[currentLang]; return; }
   btn.disabled=true; btn.textContent='…'; msg.textContent='';
   try{
     const res=await fetch(ENDPOINT,{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify({name,email,role,company,method,styles,type:'beta',lang:currentLang,_subject:'NEIRA Beta — '+role})});
@@ -624,7 +634,5 @@ document.getElementById('apply-form').addEventListener('submit',async e=>{
   btn.disabled=false; btn.textContent=T[currentLang].form_btn;
 });
 </script>
-
-
-
-</body></html>
+</body>
+</html>
